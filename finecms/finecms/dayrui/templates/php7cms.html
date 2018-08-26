@@ -1,0 +1,72 @@
+{template nheader.html}
+
+
+<div class="page-bar">
+    <ul class="page-breadcrumb mylink">
+        {$menu.link}
+    </ul>
+    <ul class="page-breadcrumb myname">
+        {$menu.name}
+    </ul>
+    <div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn green btn-sm btn-outline dropdown-toggle" data-toggle="dropdown" aria-expanded="false" data-hover="dropdown"> {fc_lang('操作菜单')}
+                <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                {loop $menu.quick $t}
+                <li>
+                    <a href="{$t.url}">{$t.icon} {$t.name}</a>
+                </li>
+                {/loop}
+                <li class="divider"> </li>
+                <li>
+                    <a href="javascript:window.location.reload();">
+                        <i class="icon-refresh"></i> {fc_lang('刷新页面')}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<h3 class="page-title">
+    <small>FineCMS升级为PHP7CMS免费版，享受PHP7最快的运行环境！</small>
+</h3>
+
+<div class="portlet light bordered">
+    <div class="portlet-body">
+        <div class="table-scrollable v3table">
+            <div style="padding: 10px 10px">
+                <p> {if version_compare(PHP_VERSION, '7.1.0') >= 0}
+                    <font color="green">当前PHP版本满足PHP7CMS免费版的运行环境</font>
+                    {else}
+                    <font color="red">当前PHP版本无法满足PHP7CMS免费版的运行环境，要求PHP版本在7.1以上</font>
+                    {/if}
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="portlet bordered light " style="margin-top:30px;">
+
+    <div class="portlet-title" id="update">
+        <div class="caption">
+            <span class="caption-subject font-green-sharp">升级方法</span>
+        </div>
+    </div>
+    <div class="portlet-body">
+
+        <br>
+        <p>1、下载PHP7CMS免费版源码（<a href="http://www.php7cms.com/free/" target="_blank">http://www.php7cms.com/free/</a>）。</p>
+        <p>2、安装PHP7CMS免费版程序，并卸载默认的全部模块</p>
+        <p>3、将FineCMS目录下的/config/database.php复制到PHP7CMS免费版的cache/config/database.php中（注意路径）</p>
+        <p>4、运行数据转换脚本：http://PHP7CMS网站/admin.php?c=finecms</p>
+        <p>5、按照脚本提示步骤进行下一步操作</p>
+
+
+    </div>
+</div>
+
+{template nfooter.html}

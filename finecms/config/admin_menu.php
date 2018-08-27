@@ -34,16 +34,21 @@ return array(
                         'uri' => 'saler/index',
                         'icon' => 'fa fa-bug',
                     ),
-                    array(
-                        'name' => '客户信息',
-                        'uri' => 'system/index',
-                        'icon' => 'fa fa-calendar',
-                    ),
-                    /*array(
-                        'name' => '升级版本',
-                        'uri' => 'upgrade/index',
-                        'icon' => 'fa fa-cloud',
-                    ),*/
+	                array(
+		                'name' => '客户信息',
+		                'uri' => 'customer/index',
+		                'icon' => 'fa fa-calendar',
+	                ),
+	                /*array(
+						'name' => '客户信息',
+						'uri' => 'system/index',
+						'icon' => 'fa fa-calendar',
+					),
+					array(
+						'name' => '升级版本',
+						'uri' => 'upgrade/index',
+						'icon' => 'fa fa-cloud',
+					),*/
                 )
             ),
 

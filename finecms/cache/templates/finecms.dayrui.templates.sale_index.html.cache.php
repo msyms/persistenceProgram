@@ -8,42 +8,11 @@
 		<?php echo $menu['name']; ?>
 	</ul>
 	<div class="page-toolbar">
-		<div class="btn-group pull-right">
-			<button type="button" class="btn green btn-sm btn-outline dropdown-toggle" data-toggle="dropdown" aria-expanded="false" data-hover="dropdown"> <?php echo fc_lang('操作菜单'); ?>
-				<i class="fa fa-angle-down"></i>
-			</button>
-			<ul class="dropdown-menu pull-right" role="menu">
-				<?php if (is_array($menu['quick'])) { $count=count($menu['quick']);foreach ($menu['quick'] as $t) { ?>
-				<li>
-					<a href="<?php echo $t['url']; ?>"><?php echo $t['icon'];  echo $t['name']; ?></a>
-				</li>
-				<?php } } ?>
-				<li class="divider"> </li>
-				<li>
-					<a href="javascript:window.location.reload();">
-						<i class="icon-refresh"></i> <?php echo fc_lang('刷新页面'); ?></a>
-				</li>
-			</ul>
-		</div>
+
 	</div>
 </div>
 
 
-<div class="mytopsearch">
-	<form method="post" action="" name="searchform" id="searchform">
-
-		<label>
-			<select class="form-control" name="data[field]">
-				<?php if (is_array($field)) { $count=count($field);foreach ($field as $t) { ?>
-				<option value="<?php echo $t['fieldname']; ?>" <?php if ($param['field']==$t['fieldname']) { ?>selected<?php } ?>><?php echo $t['name']; ?></option>
-				<?php } } ?>
-				<option value="uid" <?php if ($param['field']=='uid') { ?>selected<?php } ?>>uid</option>
-			</select>
-		</label>
-		<label><input type="text" class="form-control" value="<?php echo $param['keyword']; ?>" placeholder="<?php echo fc_lang('多个Id可以用“,”分隔'); ?>" name="data[keyword]" /></label>
-		<label><button type="submit" class="btn green btn-sm"> <i class="fa fa-search"></i> <?php echo fc_lang('搜索'); ?></button></label>
-	</form>
-</div>
 
 <form action="" method="post" name="myform" id="myform">
 	<input name="action" id="action" type="hidden" value="del" />
@@ -71,8 +40,8 @@
 			<td><?php echo dr_keyword_highlight($t['name'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['carNo'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['phone'], $param['keyword']); ?></td>
-			<td class="dr_option">
-			<?php if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" <?php if ($t['id']==1) { ?>href="javascript:;"<?php } else { ?>href="<?php echo dr_url('member/edit',array('uid'=>$t['uid'])); ?>"<?php } ?>> <i class="fa fa-edit"></i> <?php echo fc_lang('修改'); ?></a><?php } ?>
+			<td class="dr_option">detail
+			<?php if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/',array('uid'=>$t['uid'])); ?>" target="_blank"> <i class="fa fa-edit"></i> <?php echo fc_lang('详情'); ?></a><?php } ?>
 			</td>
 		</tr> 
 		<?php } } ?>

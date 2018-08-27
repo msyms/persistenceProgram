@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 26, 2018 at 11:45 PM
+-- Generation Time: Aug 27, 2018 at 01:56 PM
 -- Server version: 5.5.53
 -- PHP Version: 5.6.27
 
@@ -571,7 +571,7 @@ CREATE TABLE IF NOT EXISTS `fn_attachment_9` (
 --
 
 CREATE TABLE IF NOT EXISTS `fn_customer` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `cname` varchar(20) NOT NULL,
   `address` varchar(50) NOT NULL,
   `debtBucket` int(11) NOT NULL,
@@ -579,7 +579,21 @@ CREATE TABLE IF NOT EXISTS `fn_customer` (
   `depositBucket` int(11) NOT NULL,
   `remark` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fn_customer_price`
+--
+
+CREATE TABLE IF NOT EXISTS `fn_customer_price` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `unit` varchar(20) NOT NULL COMMENT '单位',
+  `price` decimal(10,2) NOT NULL COMMENT '单价',
+  `customerId` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -854,6 +868,46 @@ CREATE TABLE IF NOT EXISTS `fn_saler` (
 
 INSERT INTO `fn_saler` (`id`, `name`, `remark`, `phone`, `carNo`) VALUES
 (1, '测试人员', '车A', '15111111111', '鲁B-12345');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fn_saler_bill_detail`
+--
+
+CREATE TABLE IF NOT EXISTS `fn_saler_bill_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `billId` int(11) NOT NULL,
+  `customerId` int(11) NOT NULL,
+  `bucketNum` int(11) NOT NULL,
+  `bottleNum` int(11) NOT NULL,
+  `backBucketNum` int(11) NOT NULL,
+  `knot` decimal(10,2) NOT NULL COMMENT '结款',
+  `pledgeBucket` int(11) NOT NULL COMMENT '押桶',
+  `remark` varchar(50) NOT NULL,
+  `debtBucketNum` int(11) NOT NULL COMMENT '欠桶',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fn_sale_bill`
+--
+
+CREATE TABLE IF NOT EXISTS `fn_sale_bill` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `salerId` int(11) NOT NULL,
+  `bucketNum` int(11) NOT NULL,
+  `bottleNum` int(11) NOT NULL,
+  `checker` varchar(20) NOT NULL,
+  `saleTime` date NOT NULL,
+  `remark` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_2` (`id`),
+  KEY `id` (`id`),
+  KEY `id_3` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

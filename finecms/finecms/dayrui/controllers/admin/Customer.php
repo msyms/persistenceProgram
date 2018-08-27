@@ -8,7 +8,7 @@
  * @开发组自愿者  邢鹏程 刘毅 陈锦辉 孙华军
  */
 
-class Saler extends M_Controller {
+class Customer extends M_Controller {
 
     private $userinfo;
 
@@ -18,7 +18,7 @@ class Saler extends M_Controller {
     public function __construct() {
         parent::__construct();
 		$this->template->assign('menu', $this->get_menu_v3(array(
-			fc_lang('添加') => array('admin/saler/add_js', 'plus')
+			fc_lang('添加') => array('admin/customer/add_js', 'plus')
 		)));
 
     }
@@ -67,7 +67,7 @@ class Saler extends M_Controller {
         unset($param['s'], $param['c'], $param['m'], $param['d'], $param['page']);
 		
 		// 数据库中分页查询
-		list($data, $param) = $this->saler_model->limit_page($param, max((int)$_GET['page'], 1), (int)$_GET['total']);
+		list($data, $param) = $this->customer_model->limit_page($param, max((int)$_GET['page'], 1), (int)$_GET['total']);
 
         var_dump($data);
         $field = $this->get_cache('member', 'field');
@@ -87,7 +87,7 @@ class Saler extends M_Controller {
 			'param'	=> $param,
 			'pages'	=> $this->get_pagination(dr_url('member/index', $param), $param['total']),
 		));
-		$this->template->display('sale_index.html');
+		$this->template->display('customer_index.html');
     }
 	
 	/**

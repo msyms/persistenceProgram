@@ -497,7 +497,6 @@ class M_Controller extends CI_Controller {
         $_link = '';
         $_first = ''; // 第一个菜单的名称
         $_quick = array(); // 作为快捷菜单
-
         foreach ($menu as $name => $t) {
             $uri = $t[0];
             $uri = trim($uri, '/'); // 格式菜单uri

@@ -1,6 +1,6 @@
 <?php
 
-class Saler_model extends M_Model {
+class Customer_model extends M_Model {
 
 	public function addSaler($data) {
 		$this->db->insert('saler', $data);
@@ -36,7 +36,7 @@ class Saler_model extends M_Model {
     /**
      * 会员基本信息
      */
-    public function get_base_member($key, $type = 0) {
+    public function get_customer($key, $type = 0) {
 
         if (!$key) {
             return NULL;
@@ -754,7 +754,7 @@ class Saler_model extends M_Model {
         $select = $this->db->limit(SITE_ADMIN_PAGESIZE, SITE_ADMIN_PAGESIZE * ($page - 1));
         $_param = $this->_where($select, $param);
         $order = dr_get_order_string(isset($_GET['order']) && strpos($_GET['order'], "undefined") !== 0 ? $this->input->get('order', TRUE) : 'id desc', 'id desc');
-        $data = $select->order_by($order)->get('saler')->result_array();
+        $data = $select->order_by($order)->get('customer')->result_array();
         $_param['total'] = $total;
         $_param['order'] = $order;
 

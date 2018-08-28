@@ -56,6 +56,24 @@ class Customer_model extends M_Model {
     /**
      * 会员基本信息
      */
+    public function get_customer_detail($key, $type = 0) {
+
+
+        $this->db->where('id', (int)$key);
+
+        $data = $this->db
+            ->select('id,cname,phone,address,remark')
+            ->get('customer')
+            ->row_array();
+        if (!$data) {
+            return NULL;
+        }
+        return $data;
+    }
+
+    /**
+     * 会员基本信息
+     */
     public function get_customer_price($key, $type = 0) {
 
         $this->db->where('customerId', (int)$key);

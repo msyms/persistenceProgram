@@ -19,7 +19,6 @@ class Content_model extends M_Model {
         $this->mdir = $module['dirname'];
         $this->module = $module;
         $this->prefix = $this->db->dbprefix(SITE_ID.'_'.$this->mdir);
-
     }
 
     private function _where(&$select, $data) {

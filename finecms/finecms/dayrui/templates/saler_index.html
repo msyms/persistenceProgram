@@ -41,8 +41,9 @@
 			<td>{dr_keyword_highlight($t.name, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.carNo, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.phone, $param.keyword)}</td>
-			<td class="dr_option">detail
-			{if $this->ci->is_auth('member/admin/home/edit')}<a class="aedit" href="{dr_url('saler/',array('uid'=>$t.uid))}" target="_blank"> <i class="fa fa-edit"></i> {fc_lang('详情')}</a>{/if}
+			<td class="dr_option">
+				{if $this->ci->is_auth('member/admin/home/edit')}<a class="aedit" href="{dr_url('saler/detail',array('uid'=>$t.uid))}" target="_blank"> <i class="fa fa-edit"></i> {fc_lang('详情')}</a>{/if}
+				{if $this->ci->is_auth('member/admin/home/edit')}<a class="aedit" href="{dr_url('saler/edit',array('id'=>$t.id))}" > <i class="fa fa-edit"></i> {fc_lang('修改')}</a>{/if}
 			</td>
 		</tr> 
 		{/loop}

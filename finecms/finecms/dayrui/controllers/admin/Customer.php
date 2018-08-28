@@ -28,37 +28,6 @@ class Customer extends M_Controller {
      */
     public function index() {
 
-		if (IS_POST && $this->input->post('action')) {
-
-            // ID格式判断
-			$ids = $this->input->post('ids');
-            !$ids && exit(dr_json(0, fc_lang('您还没有选择呢')));
-			
-			if ($this->input->post('action') == 'del') {
-                // 删除
-                !$this->is_auth('member/admin/home/del') && exit(dr_json(0, fc_lang('您无权限操作')));
-				$this->member_model->delete($ids);
-                defined('UCSSO_API') && ucsso_delete($ids);
-                $this->system_log('删除会员【#'.@implode(',', $ids).'】'); // 记录日志
-				exit(dr_json(1, fc_lang('操作成功，正在刷新...')));
-			} else {
-                // 修改会员组
-                !$this->is_auth('member/admin/home/edit') && exit(dr_json(0, fc_lang('您无权限操作')));
-				$gid = (int)$this->input->post('groupid');
-				$note = fc_lang('您的会员组由管理员%s改变成：%s', $this->member['username'], $this->get_cache('member', 'group', $gid, 'name'));
-				$this->db->where_in('uid', $ids)->update('member', array('groupid' => $gid));
-
-                foreach ($ids as $uid) {
-                    // 会员组升级挂钩点
-                    $this->hooks->call_hook('member_group_upgrade', array('uid' => $uid, 'groupid' => $gid));
-                    // 表示审核会员
-                    $this->member_model->update_admin_notice('member/admin/home/index/field/uid/keyword/'.$uid, 3);
-                }
-                $this->system_log('修改会员【#'.@implode(',', $ids).'】的会员组'); // 记录日志
-				exit(dr_json(1, fc_lang('操作成功，正在刷新...')));
-			}
-		}
-
         // 重置页数和统计
         IS_POST && $_GET['page'] = $_GET['total'] = 0;
 	
@@ -69,7 +38,6 @@ class Customer extends M_Controller {
 		// 数据库中分页查询
 		list($data, $param) = $this->customer_model->limit_page($param, max((int)$_GET['page'], 1), (int)$_GET['total']);
 
-        var_dump($data);
         $field = $this->get_cache('member', 'field');
         $field = array(
             'username' => array('fieldname' => 'username','name' => fc_lang('会员名称')),
@@ -77,7 +45,6 @@ class Customer extends M_Controller {
             'email' => array('fieldname' => 'email','name' => fc_lang('会员邮箱')),
             'phone' => array('fieldname' => 'phone','name' => fc_lang('手机号码')),
         ) + ($field ? $field : array());
-
         // 存储当前页URL
         $this->_set_back_url('member/index', $param);
 
@@ -95,28 +62,27 @@ class Customer extends M_Controller {
      */
     public function add() {
 
-
-
 		if (IS_POST) {
 
 			$data = $this->input->post( 'data' );
 			$info = $this->input->post( 'info' );
-
 			// 单个添加
-			$uid = $this->saler_model->addSaler( [
-				'name'   => $data['name'],
-				'carNo'  => $data['carNo'],
+			$uid = $this->customer_model->addCustomer( [
+				'cname'   => $data['cname'],
+				'address'  => $data['address'],
 				'phone'  => $data['phone'],
+				'debtBucket'  => $data['debtBucket'],
+				'debtMoney'  => $data['debtMoney'],
+				'depositBucket'  => $data['depositBucket'],
 				'remark' => $info?:'',
 			] );
 
-			$this->system_log( '添加会员【#' . $uid . '】' . $data['name'] ); // 记录日志
 			exit( dr_json( 1, fc_lang( '操作成功，正在刷新...' ) ) );
 
 		}
 
 
-	    $this->template->display('saler_add.html');
+	    $this->template->display('customer_add.html');
     }
 	
 	/**
@@ -126,7 +92,7 @@ class Customer extends M_Controller {
 	
 		$uid = (int)$this->input->get('uid');
 		$page = (int)$this->input->get('page');
-		$data = $this->saler_model->get_member($uid);
+		$data = $this->customer_model->get_customer($uid);
 
         !$data && $this->admin_msg(fc_lang('对不起，数据被删除或者查询不存在'));
 
@@ -135,66 +101,23 @@ class Customer extends M_Controller {
 		if (IS_POST) {
 			$edit = $this->input->post('member');
 			$page = (int)$this->input->post('page');
-			$post = $this->validate_filter($field, $data);
 			if (isset($post['error'])) {
 				$error = $post['msg'];
 			} else {
-				$post[1]['uid'] = $uid;
-				$post[1]['is_auth'] = (int)$data['is_auth'];
-				$post[1]['complete'] = (int)$data['complete'];
-				$this->db->replace('member_data', $post[1]);
-				$this->attachment_handle($uid, $this->db->dbprefix('member').'-'.$uid, $field, $data);
-				$update = array(
-					'name' => $edit['name'],
-					'phone' => $edit['phone'],
-					'groupid' => $edit['groupid'],
-				);
-                // 修改密码
-                $edit['password'] = trim($edit['password']);
-				if ($edit['password']) {
-                    if (defined('UCSSO_API')) {
-                        $rt = ucsso_edit_password($uid, $edit['password']);
-                        // 修改失败
-                        if (!$rt['code']) {
-                            $this->admin_msg(fc_lang($rt['msg']));
-                        }
-                    }
-					$update['password'] = md5(md5($edit['password']).$data['salt'].md5($edit['password']));
-                    $this->member_model->add_notice($uid, 1, fc_lang('您的密码被管理员%s修改了', $this->member['username']));
-                    $this->system_log('修改会员【'.$data['username'].'】密码'); // 记录日志
-				}
-                // 修改邮箱
-                if ($edit['email'] != $data['email']) {
-                    !preg_match('/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/', $edit['email']) && $this->admin_msg(fc_lang('邮箱格式不正确'));
-                    $this->db->where('email', $edit['email'])->where('uid<>', $uid)->count_all_results('member') && $this->admin_msg(fc_lang('该邮箱【%s】已经被注册', $edit['email']));
 
-                    if (defined('UCSSO_API')) {
-                        $rt = ucsso_edit_email($uid, $edit['email']);
-                        // 修改失败
-                        if (!$rt['code']) {
-                            $this->admin_msg(fc_lang($rt['msg']));
-                        }
-                    }
-                    $update['email'] = $edit['email'];
-                    $this->member_model->add_notice($uid, 1, fc_lang('您的注册邮箱被管理员%s修改了', $this->member['username']));
-                    $this->system_log('修改会员【'.$data['username'].'】邮箱'); // 记录日志
-                }
-                // 修改手机
-                if  ($edit['phone'] != $data['phone']) {
-                    if (defined('UCSSO_API')) {
-                        $rt = ucsso_edit_phone($uid, $edit['phone']);
-                        // 修改失败
-                        if (!$rt['code']) {
-                            $this->admin_msg(fc_lang($rt['msg']));
-                        }
-                    }
-                }
-				$this->db->where('uid', $uid)->update('member', $update);
+				$update = array(
+					'cname' => $edit['cname'],
+					'phone' => $edit['phone'],
+					'address' => $edit['address'],
+					'remark' => $edit['remark'],
+				);
+
+				$this->db->where('id', $uid)->update('customer', $update);
 
                 $this->system_log('修改会员【'.$data['username'].'】资料'); // 记录日志
-				$this->admin_msg(fc_lang('操作成功，正在刷新...'), dr_url('member/edit', array('uid' => $uid, 'page' => $page)), 1);
+				$this->admin_msg(fc_lang('操作成功，正在刷新...'), dr_url('customer/edit', array('uid' => $uid, 'page' => $page)), 1);
 			}
-			$this->admin_msg($error, dr_url('member/edit', array('uid' => $uid, 'page' => $page)));
+			$this->admin_msg($error, dr_url('customer/edit', array('uid' => $uid, 'page' => $page)));
 		}
 		
 		$this->template->assign(array(
@@ -202,22 +125,9 @@ class Customer extends M_Controller {
 			'page' => $page,
 			'myfield' => $this->field_input($field, $data, TRUE),
 		));
-		$this->template->display('saler_edit.html');
+		$this->template->display('customer_edit.html');
     }
 
-    public function ajax_email() {
-
-        $uid = (int)$this->input->get('uid');
-        $email = $this->input->get('email');
-
-        if (!$email || !preg_match('/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/', $email)) {
-            exit(fc_lang('邮箱格式不正确'));
-        } elseif ($this->db->where('email', $email)->where('uid<>', $uid)->count_all_results('member')) {
-            exit(fc_lang('该邮箱【%s】已经被注册', $email));
-        }
-
-        exit(0);
-    }
 
 
 }

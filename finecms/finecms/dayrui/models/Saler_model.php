@@ -36,18 +36,15 @@ class Saler_model extends M_Model {
     /**
      * 会员基本信息
      */
-    public function get_base_member($key, $type = 0) {
+    public function get_saler($key, $type = 0) {
 
-        if (!$key) {
-            return NULL;
-        }
 
-        $type ? $this->db->where('username', $key) : $this->db->where('uid', (int)$key);
+        $this->db->where('id', (int)$key);
 
         $data = $this->db
                      ->limit(1)
-                     ->select('uid,username,email,levelid,groupid,score,experience')
-                     ->get('member')
+                     ->select('id,name,remark,phone,carNo')
+                     ->get('saler')
                      ->row_array();
         if (!$data) {
             return NULL;
@@ -56,9 +53,6 @@ class Saler_model extends M_Model {
         return $data;
     }
 
-    public function get_markrule($uid) {
-        return 0;
-    }
 
 
     /**

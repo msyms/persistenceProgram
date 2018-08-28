@@ -7,10 +7,9 @@
 	<ul class="page-breadcrumb myname">
 		<?php echo $menu['name']; ?>
 	</ul>
-	<div class="page-toolbar">
 
-	</div>
 </div>
+
 
 
 
@@ -25,23 +24,32 @@
 		<thead>
 		<tr>
 			<th width="10"></th>
-			<th>Uid</th>
-			<th class="<?php echo ns_sorting('name'); ?>" name="name" ><?php echo fc_lang('姓名'); ?></th>
-			<th class="<?php echo ns_sorting('name'); ?>" name="name" ><?php echo fc_lang('车牌号'); ?></th>
+			<th class="<?php echo ns_sorting('cname'); ?>" name="cname" ><?php echo fc_lang('姓名'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="phone" ><?php echo fc_lang('电话'); ?></th>
+			<th class="<?php echo ns_sorting('address'); ?>" name="address" ><?php echo fc_lang('地址'); ?></th>
+			<th class="<?php echo ns_sorting('debtBucket'); ?>" name="address" ><?php echo fc_lang('欠桶'); ?></th>
+			<th class="<?php echo ns_sorting('debtMoney'); ?>" name="address" ><?php echo fc_lang('欠款'); ?></th>
+			<th class="<?php echo ns_sorting('address'); ?>" name="address" ><?php echo fc_lang('押桶'); ?></th>
+
+			<th class="<?php echo ns_sorting('remark'); ?>" name="remark" ><?php echo fc_lang('备注'); ?></th>
 			<th class="dr_option"><?php echo fc_lang('操作'); ?></th>
 		</tr>
 		</thead>
 		<tbody>
 		<?php if (is_array($list)) { $count=count($list);foreach ($list as $t) { ?>
 		<tr id="dr_row_<?php echo $t['uid']; ?>">
-			<td><input name="ids[]" type="checkbox" class="dr_select toggle md-check" value="<?php echo $t['id']; ?>" /></td>
-			<td><?php echo $t['id']; ?></td>
-			<td><?php echo dr_keyword_highlight($t['name'], $param['keyword']); ?></td>
-			<td><?php echo dr_keyword_highlight($t['carNo'], $param['keyword']); ?></td>
+			<td><input name="ids[]" type="checkbox" class="dr_select toggle md-check" value="<?php echo $t['uid']; ?>" /></td>
+			<td><?php echo dr_keyword_highlight($t['cname'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['phone'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['address'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['debtBucket'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['debtMoney'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['depositBucket'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['remark'], $param['keyword']); ?></td>
+
 			<td class="dr_option">
-			<?php if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/detail',array('uid'=>$t['uid'])); ?>" target="_blank"> <i class="fa fa-edit"></i> <?php echo fc_lang('详情'); ?></a><?php } ?>
+				<a class="aedit" href="<?php echo dr_url('customer/edit',array('uid'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('修改'); ?></a>
+				<a class="aedit" href="<?php echo dr_url('customer/detail',array('uid'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('明细'); ?></a>
 			</td>
 		</tr> 
 		<?php } } ?>

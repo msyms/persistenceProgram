@@ -178,6 +178,8 @@ class M_Controller extends CI_Controller {
 
         $this->load->model('saler_model');
 
+	    $this->load->model('customer_model');
+
         $MEMBER = $this->get_cache('member');
 
         if ($MEMBER['setting']['ucsso'] && is_file(WEBPATH.'api/ucsso/config.php')) {

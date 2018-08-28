@@ -87,15 +87,13 @@ class Saler extends M_Controller {
 			'param'	=> $param,
 			'pages'	=> $this->get_pagination(dr_url('member/index', $param), $param['total']),
 		));
-		$this->template->display('sale_index.html');
+		$this->template->display('saler_index.html');
     }
 	
 	/**
      * 添加
      */
     public function add() {
-
-
 
 		if (IS_POST) {
 
@@ -124,9 +122,9 @@ class Saler extends M_Controller {
      */
     public function edit() {
 	
-		$uid = (int)$this->input->get('uid');
+		$uid = (int)$this->input->get('id');
 		$page = (int)$this->input->get('page');
-		$data = $this->saler_model->get_member($uid);
+		$data = $this->saler_model->get_saler($uid);
 
         !$data && $this->admin_msg(fc_lang('对不起，数据被删除或者查询不存在'));
 
@@ -139,62 +137,19 @@ class Saler extends M_Controller {
 			if (isset($post['error'])) {
 				$error = $post['msg'];
 			} else {
-				$post[1]['uid'] = $uid;
-				$post[1]['is_auth'] = (int)$data['is_auth'];
-				$post[1]['complete'] = (int)$data['complete'];
-				$this->db->replace('member_data', $post[1]);
-				$this->attachment_handle($uid, $this->db->dbprefix('member').'-'.$uid, $field, $data);
 				$update = array(
 					'name' => $edit['name'],
 					'phone' => $edit['phone'],
-					'groupid' => $edit['groupid'],
+					'carNo' => $edit['carNo'],
 				);
-                // 修改密码
-                $edit['password'] = trim($edit['password']);
-				if ($edit['password']) {
-                    if (defined('UCSSO_API')) {
-                        $rt = ucsso_edit_password($uid, $edit['password']);
-                        // 修改失败
-                        if (!$rt['code']) {
-                            $this->admin_msg(fc_lang($rt['msg']));
-                        }
-                    }
-					$update['password'] = md5(md5($edit['password']).$data['salt'].md5($edit['password']));
-                    $this->member_model->add_notice($uid, 1, fc_lang('您的密码被管理员%s修改了', $this->member['username']));
-                    $this->system_log('修改会员【'.$data['username'].'】密码'); // 记录日志
-				}
-                // 修改邮箱
-                if ($edit['email'] != $data['email']) {
-                    !preg_match('/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/', $edit['email']) && $this->admin_msg(fc_lang('邮箱格式不正确'));
-                    $this->db->where('email', $edit['email'])->where('uid<>', $uid)->count_all_results('member') && $this->admin_msg(fc_lang('该邮箱【%s】已经被注册', $edit['email']));
 
-                    if (defined('UCSSO_API')) {
-                        $rt = ucsso_edit_email($uid, $edit['email']);
-                        // 修改失败
-                        if (!$rt['code']) {
-                            $this->admin_msg(fc_lang($rt['msg']));
-                        }
-                    }
-                    $update['email'] = $edit['email'];
-                    $this->member_model->add_notice($uid, 1, fc_lang('您的注册邮箱被管理员%s修改了', $this->member['username']));
-                    $this->system_log('修改会员【'.$data['username'].'】邮箱'); // 记录日志
-                }
-                // 修改手机
-                if  ($edit['phone'] != $data['phone']) {
-                    if (defined('UCSSO_API')) {
-                        $rt = ucsso_edit_phone($uid, $edit['phone']);
-                        // 修改失败
-                        if (!$rt['code']) {
-                            $this->admin_msg(fc_lang($rt['msg']));
-                        }
-                    }
-                }
-				$this->db->where('uid', $uid)->update('member', $update);
 
-                $this->system_log('修改会员【'.$data['username'].'】资料'); // 记录日志
-				$this->admin_msg(fc_lang('操作成功，正在刷新...'), dr_url('member/edit', array('uid' => $uid, 'page' => $page)), 1);
+				var_dump($update);
+				$this->db->where('id', $uid)->update('saler', $update);
+
+				$this->admin_msg(fc_lang('操作成功，正在刷新...'), dr_url('saler/edit', array('id' => $uid, 'page' => $page)), 1);
 			}
-			$this->admin_msg($error, dr_url('member/edit', array('uid' => $uid, 'page' => $page)));
+			$this->admin_msg($error, dr_url('saler/edit', array('id' => $uid, 'page' => $page)));
 		}
 		
 		$this->template->assign(array(

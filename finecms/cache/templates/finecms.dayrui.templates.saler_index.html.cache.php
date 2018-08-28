@@ -41,7 +41,7 @@
 			<td><?php echo dr_keyword_highlight($t['carNo'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['phone'], $param['keyword']); ?></td>
 			<td class="dr_option">
-			<?php if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/detail',array('uid'=>$t['uid'])); ?>" target="_blank"> <i class="fa fa-edit"></i> <?php echo fc_lang('详情'); ?></a><?php } ?>
+				<?php if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/detail',array('uid'=>$t['uid'])); ?>" target="_blank"> <i class="fa fa-edit"></i> <?php echo fc_lang('详情'); ?></a><?php }  if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/edit',array('id'=>$t['id'])); ?>" > <i class="fa fa-edit"></i> <?php echo fc_lang('修改'); ?></a><?php } ?>
 			</td>
 		</tr> 
 		<?php } } ?>

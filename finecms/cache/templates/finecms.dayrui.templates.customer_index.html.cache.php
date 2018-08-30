@@ -50,6 +50,7 @@
 			<td class="dr_option">
 				<a class="aedit" href="<?php echo dr_url('customer/edit',array('uid'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('修改'); ?></a>
 				<a class="aedit" href="<?php echo dr_url('customer/detail',array('uid'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('明细'); ?></a>
+				<a class="aedit" href="<?php echo dr_url('customer/price',array('customerId'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('价格'); ?></a>
 			</td>
 		</tr> 
 		<?php } } ?>

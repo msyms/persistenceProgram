@@ -1,11 +1,11 @@
 <?php if ($fn_include = $this->_include("nheader.html")) include($fn_include);  $_pages=$pages; ?>
 <div class="page-bar">
 	<ul class="page-breadcrumb mylink">
-		<?php echo $menu['link']; ?>
+		<?php echo $menubill['link']; ?>
 
 	</ul>
 	<ul class="page-breadcrumb myname">
-		<?php echo $menu['name']; ?>
+		<?php echo $menubill['name']; ?>
 	</ul>
 	<div class="page-toolbar">
 
@@ -26,9 +26,12 @@
 		<tr>
 			<th width="10"></th>
 			<th>Uid</th>
-			<th class="<?php echo ns_sorting('name'); ?>" name="name" ><?php echo fc_lang('姓名'); ?></th>
-			<th class="<?php echo ns_sorting('name'); ?>" name="name" ><?php echo fc_lang('车牌号'); ?></th>
-			<th class="<?php echo ns_sorting('phone'); ?>" name="phone" ><?php echo fc_lang('电话'); ?></th>
+			<th class="<?php echo ns_sorting('name'); ?>" name="salerName" ><?php echo fc_lang('销售人员'); ?></th>
+			<th class="<?php echo ns_sorting('name'); ?>" name="bucketNum" ><?php echo fc_lang('桶装水'); ?></th>
+			<th class="<?php echo ns_sorting('name'); ?>" name="bottleNum" ><?php echo fc_lang('瓶装水'); ?></th>
+			<th class="<?php echo ns_sorting('phone'); ?>" name="checker" ><?php echo fc_lang('检核人'); ?></th>
+			<th class="<?php echo ns_sorting('phone'); ?>" name="saleTime" ><?php echo fc_lang('时间'); ?></th>
+			<th class="<?php echo ns_sorting('phone'); ?>" name="remark" ><?php echo fc_lang('备注'); ?></th>
 			<th class="dr_option"><?php echo fc_lang('操作'); ?></th>
 		</tr>
 		</thead>
@@ -37,11 +40,14 @@
 		<tr id="dr_row_<?php echo $t['uid']; ?>">
 			<td><input name="ids[]" type="checkbox" class="dr_select toggle md-check" value="<?php echo $t['id']; ?>" /></td>
 			<td><?php echo $t['id']; ?></td>
-			<td><?php echo dr_keyword_highlight($t['name'], $param['keyword']); ?></td>
-			<td><?php echo dr_keyword_highlight($t['carNo'], $param['keyword']); ?></td>
-			<td><?php echo dr_keyword_highlight($t['phone'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['salerName'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['bucketNum'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['bottleNum'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['checker'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['saleTime'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['remark'], $param['keyword']); ?></td>
 			<td class="dr_option">
-				<?php if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/bill',array('salerId'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('详情'); ?></a><?php }  if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/edit',array('id'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('修改'); ?></a><?php } ?>
+				<?php if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/billdetail',array('billId'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('详情'); ?></a><?php }  if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/edit',array('id'=>$t['id'])); ?>" > <i class="fa fa-edit"></i> <?php echo fc_lang('修改'); ?></a><?php } ?>
 			</td>
 		</tr> 
 		<?php } } ?>

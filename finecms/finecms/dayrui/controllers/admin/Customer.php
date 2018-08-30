@@ -128,6 +128,79 @@ class Customer extends M_Controller {
 		$this->template->display('customer_edit.html');
     }
 
+	public function price() {
+
+
+		$customerId = $_GET['customerId'];
+		// 重置页数和统计
+		IS_POST && $_GET['page'] = $_GET['total'] = 0;
+
+		// 根据参数筛选结果
+		$param = $this->input->get(NULL, TRUE);
+		unset($param['s'], $param['c'], $param['m'], $param['d'], $param['page']);
+
+		$billId = $_GET['billId'];
+		// 数据库中分页查询
+		$data = $this->customer_model->get_price($customerId);
+		var_dump($data);
+		$customerInfo = $this->customer_model->get_customer($customerId);
+		$field = $this->get_cache('member', 'field');
+		$field = array(
+				'username' => array('fieldname' => 'username','name' => fc_lang('会员名称')),
+				'name' => array('fieldname' => 'name','name' => fc_lang('姓名')),
+				'email' => array('fieldname' => 'email','name' => fc_lang('会员邮箱')),
+				'phone' => array('fieldname' => 'phone','name' => fc_lang('手机号码')),
+			) + ($field ? $field : array());
+
+		// 存储当前页URL
+		$this->_set_back_url('member/index', $param);
+		$url = 'admin/customer/priceadd/customerId/'.$customerId;
+		// 存储当前页URL
+		$this->template->assign('menu', $this->get_menu_v3(array(
+			fc_lang('返回') => array('admin/customer/index', 'reply'),
+			fc_lang('添加') => array($url.'_js', 'plus')
+
+		)));
+		$cname = $customerInfo['cname'];
+		$this->template->assign(array(
+			'cname' => $cname,
+			'list' => $data,
+			'field' => $field,
+			'param'	=> $param,
+			'pages'	=> $this->get_pagination(dr_url('member/index', $param), $param['total']),
+		));
+		$this->template->display('customerprice_index.html');
+	}
+
+	public function priceadd() {
+		$customerId = $_GET['customerId'];
+
+
+		if (IS_POST) {
+
+			$data = $this->input->post( 'data' );
+
+			// 单个添加
+			$uid = $this->customer_model->addprice( [
+				'customerId'   => $data['customerId'],
+				'unit'   => $data['unit'],
+				'price'  => $data['price'],
+			] );
+
+			exit( dr_json( 1, fc_lang( '操作成功，正在刷新...' ) ) );
+		}
+		$url = 'admin/customer/pirce/customerId/'.$customerId;
+		$this->template->assign('menubill', $this->get_menu_v3(array(
+			fc_lang('返回') => array($url, 'reply')
+		)));
+		$customerInfo = $this->customer_model->get_customer($customerId);
+		$cname = $customerInfo['cname'];
+		$customer = $this->customer_model->get_all_customer();
+		$this->template->assign('cname',$cname);
+		$this->template->assign('customerId', $customerId);
+		$this->template->display('customerprice_add.html');
+	}
+
 
 
 }

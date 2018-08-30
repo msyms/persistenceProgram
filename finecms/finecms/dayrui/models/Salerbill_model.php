@@ -36,7 +36,7 @@ class Salerbill_model extends M_Model {
     /**
      * 会员基本信息
      */
-    public function get_bill_detail($key, $type = 0) {
+    public function get_bill_detail($key) {
 
         $sql = "select detail.*,customer.cname,price.unit,price.price 
                 from fn_saler_bill_detail detail 

@@ -667,6 +667,55 @@ function dr_url($url, $query = array(), $self = SELF) {
 }
 
 /**
+ * url函数
+ *
+ * @param	string	$url		URL规则，如home/index
+ * @param	array	$query		相关参数
+ * @return	string	项目入口文件.php?参数
+ */
+function dr_qxurl($url, $query = array(), $self = SELF) {
+
+	if (!$url) {
+		return $self;
+	}
+
+
+	$url = strpos($url, 'admin') === 0 ? substr($url, 5) : $url;
+	$url = trim($url, '/');
+
+	// 判断是否后台首页
+	if ($self != 'index.php' && ($url == 'home/index' || $url == 'home/home')) {
+		return SELF;
+	}
+
+	$url = explode('/', $url);
+	$uri = array();
+
+	switch (count($url)) {
+		case 1:
+			$uri['c'] = 'home';
+			$uri['m'] = $url[0];
+			break;
+		case 2:
+			$uri['c'] = $url[0];
+			$uri['m'] = $url[1];
+			break;
+		default:
+			$uri['c'] = $url[0];
+			// 非后台且非会员中心的模型地址
+
+			$uri['m'] = $url[1];
+			$uri[$url[2]] = $url[3];
+			break;
+	}
+
+	$query && $uri = @array_merge($uri, $query);
+
+	return $self.'?'.@http_build_query($uri);
+}
+
+
+/**
  * 会员url函数
  *
  * @param	string	$url 	URL规则，如home/index

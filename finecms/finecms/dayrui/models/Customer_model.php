@@ -8,6 +8,12 @@ class Customer_model extends M_Model {
 		return $uid;
 	}
 
+	public function addprice($data) {
+		$this->db->insert('customer_price', $data);
+		$uid = $this->db->insert_id();
+		return $uid;
+	}
+
     /**
      * 会员修改信息
      */
@@ -33,6 +39,18 @@ class Customer_model extends M_Model {
         return TRUE;
     }
 
+    public function get_all_customer()
+    {
+	    $data = $this->db
+		    ->select('id,cname,phone,address,remark')
+		    ->get('customer')
+		    ->result_array();
+	    if (!$data) {
+		    return NULL;
+	    }
+	    return $data;
+    }
+
 	/**
 	 * 会员基本信息
 	 */
@@ -49,7 +67,18 @@ class Customer_model extends M_Model {
 		if (!$data) {
 			return NULL;
 		}
-		var_dump($data);
+		return $data;
+	}
+
+	public function get_price($key, $type = 0) {
+		$this->db->where('customerId', (int)$key);
+		$data = $this->db
+			->select('id,unit,price')
+			->get('customer_price')
+			->result_array();
+		if (!$data) {
+			return NULL;
+		}
 		return $data;
 	}
 

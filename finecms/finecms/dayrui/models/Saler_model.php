@@ -8,6 +8,13 @@ class Saler_model extends M_Model {
 		return $uid;
 	}
 
+	public function addSalerBill($data) {
+		$this->db->insert('saler_bill', $data);
+		$uid = $this->db->insert_id();
+		return $uid;
+	}
+
+
     /**
      * 会员修改信息
      */
@@ -32,6 +39,24 @@ class Saler_model extends M_Model {
 
         return TRUE;
     }
+	/**
+	 * 会员基本信息
+	 */
+	public function get_saler($key, $type = 0) {
+
+
+		$this->db->where('id', (int)$key);
+
+		$data = $this->db
+			->limit(1)
+			->select('id,name,phone,carNo,remark')
+			->get('saler')
+			->row_array();
+		if (!$data) {
+			return NULL;
+		}
+		return $data;
+	}
 
     /**
      * 条件查询
@@ -94,7 +119,6 @@ class Saler_model extends M_Model {
             }
             $page = 1;
         }
-        $select->where('salerId', intval($data['keyword']));
         $select = $this->db->limit(SITE_ADMIN_PAGESIZE, SITE_ADMIN_PAGESIZE * ($page - 1));
         $_param = $this->_where($select, $param);
         $order = dr_get_order_string(isset($_GET['order']) && strpos($_GET['order'], "undefined") !== 0 ? $this->input->get('order', TRUE) : 'id desc', 'id desc');
@@ -103,5 +127,43 @@ class Saler_model extends M_Model {
         $_param['order'] = $order;
         return array($data, $_param);
     }
+
+	public function get_bill_detail($key) {
+
+		$sql = "select detail.*,customer.cname,price.unit,price.price 
+                from fn_saler_bill_detail detail 
+                left join fn_customer customer on detail.customerId = customer.id
+                left join fn_customer_price price on customer.id = price.customerId 
+                where detail.billId = $key";
+		$data = $this->db->query($sql)->result_array();
+		if (!$data) {
+			return NULL;
+		}
+		return $data;
+	}
+
+    public function bill_limit_page($key, $page, $total) {
+	    $countInfo = $this->db->where('salerId',$key)
+		    ->select('count(*) as total')->get('saler_bill')->row_array();
+	    $total = $countInfo['total'];
+	    $select = $this->db->limit(SITE_ADMIN_PAGESIZE, SITE_ADMIN_PAGESIZE * ($page - 1));
+	    $select->where('salerId',$key);
+	    $order = dr_get_order_string(isset($_GET['order']) && strpos($_GET['order'], "undefined") !== 0 ? $this->input->get('order', TRUE) : 'id desc', 'id desc');
+	    $data = $select->order_by($order)->get('saler_bill')->result_array();
+
+	    $_param['total'] = $total;
+	    $_param['order'] = $order;
+	    return array($data, $_param);
+    }
+
+	public function billdetail_limit_page($key, $page, $total) {
+		$select = $this->db->limit(SITE_ADMIN_PAGESIZE, SITE_ADMIN_PAGESIZE * ($page - 1));
+		$select->where('billId',$key);
+		$order = dr_get_order_string(isset($_GET['order']) && strpos($_GET['order'], "undefined") !== 0 ? $this->input->get('order', TRUE) : 'id desc', 'id desc');
+		$data = $select->order_by($order)->get('saler_bill_detail')->result_array();
+		$_param['total'] = $total;
+		$_param['order'] = $order;
+		return array($data, $_param);
+	}
 
 }

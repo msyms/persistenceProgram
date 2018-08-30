@@ -13,3 +13,20 @@ ERROR - 2018-08-30 15:53:18 --> 404 Page Not Found: admin/Customer/detail
 ERROR - 2018-08-30 16:22:50 --> Severity: Parsing Error --> syntax error, unexpected '$customer' (T_VARIABLE) E:\phpStudy\WWW\persistenceProgram\finecms\finecms\dayrui\controllers\admin\Customer.php 198
 ERROR - 2018-08-30 16:27:13 --> Severity: Error --> Call to undefined method Customer_model::addprice() E:\phpStudy\WWW\persistenceProgram\finecms\finecms\dayrui\controllers\admin\Customer.php 183
 ERROR - 2018-08-30 16:27:23 --> Severity: Error --> Call to undefined method Customer_model::addprice() E:\phpStudy\WWW\persistenceProgram\finecms\finecms\dayrui\controllers\admin\Customer.php 183
+ERROR - 2018-08-30 21:53:53 --> Severity: Error --> Call to undefined method Customer_model::get_price_bycustomer() G:\phpStudy\WWW\persistenceProgram\finecms\finecms\dayrui\controllers\admin\Customer.php 178
+ERROR - 2018-08-30 21:54:18 --> Severity: Error --> Call to undefined method Customer_model::get_price_bycustomer() G:\phpStudy\WWW\persistenceProgram\finecms\finecms\dayrui\controllers\admin\Customer.php 178
+ERROR - 2018-08-30 21:56:00 --> Severity: Error --> Call to undefined method Customer_model::get_price_bycustomer() G:\phpStudy\WWW\persistenceProgram\finecms\finecms\dayrui\controllers\admin\Customer.php 178
+ERROR - 2018-08-30 21:57:10 --> Severity: Error --> Call to undefined method Customer_model::get_price_bycustomer() G:\phpStudy\WWW\persistenceProgram\finecms\finecms\dayrui\controllers\admin\Customer.php 178
+ERROR - 2018-08-30 21:57:18 --> Severity: Error --> Call to undefined method Customer_model::get_price_bycustomer() G:\phpStudy\WWW\persistenceProgram\finecms\finecms\dayrui\controllers\admin\Customer.php 178
+ERROR - 2018-08-30 22:02:01 --> Query error: Unknown column 'unit' in 'field list' - Invalid query: SELECT `id`, `unit`, `price`
+FROM `fn_customer`
+WHERE `cname` IS NULL
+ERROR - 2018-08-30 22:02:13 --> Query error: Unknown column 'unit' in 'field list' - Invalid query: SELECT `id`, `unit`, `price`
+FROM `fn_customer`
+WHERE `cname` IS NULL
+ERROR - 2018-08-30 22:04:19 --> Query error: Unknown column 'cname' in 'where clause' - Invalid query: SELECT `id`
+FROM `fn_customer_price`
+WHERE `cname` IS NULL
+ERROR - 2018-08-30 22:05:52 --> Query error: Unknown column 'cname' in 'where clause' - Invalid query: SELECT `id`
+FROM `fn_customer_price`
+WHERE `cname` IS NULL

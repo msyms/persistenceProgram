@@ -172,6 +172,17 @@ class Customer extends M_Controller {
 		$this->template->display('customerprice_index.html');
 	}
 
+	public function getprice()
+	{
+		$customer = $_GET['cname'];
+		if(!$customer){
+			return ;
+		}
+		$data = $this->customer_model->get_price_bycustomer($customer);
+		echo json_encode($data);
+		return ;
+	}
+
 	public function priceadd() {
 		$customerId = $_GET['customerId'];
 

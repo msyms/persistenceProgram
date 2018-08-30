@@ -70,6 +70,21 @@ class Customer_model extends M_Model {
 		return $data;
 	}
 
+    public function get_price_bycustomer($customer)
+    {
+        $this->db->where('cname', $customer);
+        $customer = $this->db->select('id')->get('customer')->row_array();
+        $this->db->where('customerId',$customer['id']);
+        $data = $this->db
+            ->select('id,unit,price')
+            ->get('customer_price')
+            ->result_array();
+        if (!$data) {
+            return NULL;
+        }
+        return $data;
+    }
+
 	public function get_price($key, $type = 0) {
 		$this->db->where('customerId', (int)$key);
 		$data = $this->db

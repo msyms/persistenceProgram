@@ -26,7 +26,6 @@
 		<thead>
 		<tr>
 			<th width="10"></th>
-			<th>Uid</th>
 			<th class="{ns_sorting('name')}" name="name" >{fc_lang('姓名')}</th>
 			<th class="{ns_sorting('name')}" name="name" >{fc_lang('车牌号')}</th>
 			<th class="{ns_sorting('phone')}" name="phone" >{fc_lang('电话')}</th>
@@ -37,7 +36,6 @@
 		{loop $list $t}
 		<tr id="dr_row_{$t.uid}">
 			<td><input name="ids[]" type="checkbox" class="dr_select toggle md-check" value="{$t.id}" /></td>
-			<td>{$t.id}</td>
 			<td>{dr_keyword_highlight($t.name, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.carNo, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.phone, $param.keyword)}</td>

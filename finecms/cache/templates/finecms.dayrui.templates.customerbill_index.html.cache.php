@@ -37,31 +37,31 @@
 			<th class="<?php echo ns_sorting('phone'); ?>" name="remark" ><?php echo fc_lang('备注'); ?></th>
 		</tr>
 		</thead>
-		<tbody>
-		<?php if (is_array($list)) { $count=count($list);foreach ($list as $t) { ?>
-		<tr id="dr_row_<?php echo $t['uid']; ?>">
-			<!--<td><input name="ids[]" type="checkbox" class="dr_select toggle md-check" value="<?php echo $t['id']; ?>" /></td>-->
-			<td><?php echo dr_keyword_highlight($t['cname'], $param['keyword']); ?></td>
-			<td><?php echo dr_keyword_highlight($t['bucketNum'], $param['keyword']); ?></td>
-			<td><?php echo dr_keyword_highlight($t['bottleNum'], $param['keyword']); ?></td>
-			<td><?php echo dr_keyword_highlight($t['backBucketNum'], $param['keyword']); ?></td>
-			<td><?php echo dr_keyword_highlight($t['backBucketNum'], $param['keyword']); ?></td>
-			<td><?php echo dr_keyword_highlight($t['knot'], $param['keyword']); ?></td>
-			<td><?php echo dr_keyword_highlight($t['debt'], $param['keyword']); ?></td>
-			<td><?php echo dr_keyword_highlight($t['debtBucketNum'], $param['keyword']); ?></td>
-			<td><?php echo dr_keyword_highlight($t['depositBucket'], $param['keyword']); ?></td>
-			<td><?php echo dr_keyword_highlight($t['remark'], $param['keyword']); ?></td>
-		</tr>
-		<?php } } ?>
-		<!--<tr class="mtable_bottom">-->
-        	<!--<th width="20"  ><input name="dr_select" class="toggle md-check" id="dr_select" type="checkbox" onClick="dr_selected()" /></th>-->
-			<!--<td colspan="10"  >-->
-            <!--<?php if ($this->ci->is_auth('member/admin/home/del')) { ?>-->
-				<!--<label><button type="button" class="btn red btn-sm" name="option" onClick="$('#action').val('del');dr_confirm_set_all('<?php echo fc_lang('您确定要这样操作吗？'); ?>')"><i class="fa fa-trash"></i> <?php echo fc_lang('删除'); ?></button></label>-->
-            <!--<?php } ?>-->
+			<tbody>
+			<?php if (is_array($list)) { $count=count($list);foreach ($list as $t) { ?>
+			<tr id="dr_row_<?php echo $t['uid']; ?>">
+				<!--<td><input name="ids[]" type="checkbox" class="dr_select toggle md-check" value="<?php echo $t['id']; ?>" /></td>-->
+				<td><?php echo dr_keyword_highlight($t['cname'], $param['keyword']); ?></td>
+				<td><?php echo dr_keyword_highlight($t['bucketNum'], $param['keyword']); ?></td>
+				<td><?php echo dr_keyword_highlight($t['bottleNum'], $param['keyword']); ?></td>
+				<td><?php echo dr_keyword_highlight($t['backBucketNum'], $param['keyword']); ?></td>
+				<td><?php echo dr_keyword_highlight($t['backBucketNum'], $param['keyword']); ?></td>
+				<td><?php echo dr_keyword_highlight($t['knot'], $param['keyword']); ?></td>
+				<td><?php echo dr_keyword_highlight($t['debt'], $param['keyword']); ?></td>
+				<td><?php echo dr_keyword_highlight($t['debtBucketNum'], $param['keyword']); ?></td>
+				<td><?php echo dr_keyword_highlight($t['depositBucket'], $param['keyword']); ?></td>
+				<td><?php echo dr_keyword_highlight($t['remark'], $param['keyword']); ?></td>
+			</tr>
+			<?php } } ?>
+		<tr class="mtable_bottom">
+        	<th width="20"  ><input name="dr_select" class="toggle md-check" id="dr_select" type="checkbox" onClick="dr_selected()" /></th>
+			<td colspan="10"  >
+            <?php if ($this->ci->is_auth('member/admin/home/del')) { ?>
+				<label><button type="button" class="btn red btn-sm" name="option" onClick="$('#action').val('del');dr_confirm_set_all('<?php echo fc_lang('您确定要这样操作吗？'); ?>')"><i class="fa fa-trash"></i> <?php echo fc_lang('删除'); ?></button></label>
+            <?php } ?>
 
-			<!--</td>-->
-		<!--</tr>-->
+			</td>
+		</tr>
 		</tbody>
 		</table>
 		</div>

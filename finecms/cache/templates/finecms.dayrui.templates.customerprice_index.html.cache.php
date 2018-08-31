@@ -24,7 +24,6 @@
 		<thead>
 		<tr>
 			<th width="10"></th>
-			<th>Uid</th>
 			<th class="<?php echo ns_sorting('name'); ?>" name="salerName" ><?php echo fc_lang('客户名'); ?></th>
 			<th class="<?php echo ns_sorting('name'); ?>" name="bucketNum" ><?php echo fc_lang('单位'); ?></th>
 			<th class="<?php echo ns_sorting('name'); ?>" name="bottleNum" ><?php echo fc_lang('价格'); ?></th>
@@ -34,7 +33,6 @@
 					<?php if (is_array($list)) { $count=count($list);foreach ($list as $t) { ?>
 					<tr id="dr_row_<?php echo $t['uid']; ?>">
 						<td><input name="ids[]" type="checkbox" class="dr_select toggle md-check" value="<?php echo $t['id']; ?>" /></td>
-						<td><?php echo $t['id']; ?></td>
 						<td><?php echo dr_keyword_highlight($cname, $param['keyword']); ?></td>
 						<td><?php echo dr_keyword_highlight($t['unit'], $param['keyword']); ?></td>
 						<td><?php echo dr_keyword_highlight($t['price'], $param['keyword']); ?></td>

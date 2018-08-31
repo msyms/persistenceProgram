@@ -38,31 +38,31 @@
 			<th class="{ns_sorting('phone')}" name="remark" >{fc_lang('备注')}</th>
 		</tr>
 		</thead>
-		<tbody>
-		{loop $list $t}
-		<tr id="dr_row_{$t.uid}">
-			<!--<td><input name="ids[]" type="checkbox" class="dr_select toggle md-check" value="{$t.id}" /></td>-->
-			<td>{dr_keyword_highlight($t.cname, $param.keyword)}</td>
-			<td>{dr_keyword_highlight($t.bucketNum, $param.keyword)}</td>
-			<td>{dr_keyword_highlight($t.bottleNum, $param.keyword)}</td>
-			<td>{dr_keyword_highlight($t.backBucketNum, $param.keyword)}</td>
-			<td>{dr_keyword_highlight($t.backBucketNum, $param.keyword)}</td>
-			<td>{dr_keyword_highlight($t.knot, $param.keyword)}</td>
-			<td>{dr_keyword_highlight($t.debt, $param.keyword)}</td>
-			<td>{dr_keyword_highlight($t.debtBucketNum, $param.keyword)}</td>
-			<td>{dr_keyword_highlight($t.depositBucket, $param.keyword)}</td>
-			<td>{dr_keyword_highlight($t.remark, $param.keyword)}</td>
-		</tr>
-		{/loop}
-		<!--<tr class="mtable_bottom">-->
-        	<!--<th width="20"  ><input name="dr_select" class="toggle md-check" id="dr_select" type="checkbox" onClick="dr_selected()" /></th>-->
-			<!--<td colspan="10"  >-->
-            <!--{if $this->ci->is_auth('member/admin/home/del')}-->
-				<!--<label><button type="button" class="btn red btn-sm" name="option" onClick="$('#action').val('del');dr_confirm_set_all('{fc_lang('您确定要这样操作吗？')}')"><i class="fa fa-trash"></i> {fc_lang('删除')}</button></label>-->
-            <!--{/if}-->
+			<tbody>
+			{loop $list $t}
+			<tr id="dr_row_{$t.uid}">
+				<!--<td><input name="ids[]" type="checkbox" class="dr_select toggle md-check" value="{$t.id}" /></td>-->
+				<td>{dr_keyword_highlight($t.cname, $param.keyword)}</td>
+				<td>{dr_keyword_highlight($t.bucketNum, $param.keyword)}</td>
+				<td>{dr_keyword_highlight($t.bottleNum, $param.keyword)}</td>
+				<td>{dr_keyword_highlight($t.backBucketNum, $param.keyword)}</td>
+				<td>{dr_keyword_highlight($t.backBucketNum, $param.keyword)}</td>
+				<td>{dr_keyword_highlight($t.knot, $param.keyword)}</td>
+				<td>{dr_keyword_highlight($t.debt, $param.keyword)}</td>
+				<td>{dr_keyword_highlight($t.debtBucketNum, $param.keyword)}</td>
+				<td>{dr_keyword_highlight($t.depositBucket, $param.keyword)}</td>
+				<td>{dr_keyword_highlight($t.remark, $param.keyword)}</td>
+			</tr>
+			{/loop}
+		<tr class="mtable_bottom">
+        	<th width="20"  ><input name="dr_select" class="toggle md-check" id="dr_select" type="checkbox" onClick="dr_selected()" /></th>
+			<td colspan="10"  >
+            {if $this->ci->is_auth('member/admin/home/del')}
+				<label><button type="button" class="btn red btn-sm" name="option" onClick="$('#action').val('del');dr_confirm_set_all('{fc_lang('您确定要这样操作吗？')}')"><i class="fa fa-trash"></i> {fc_lang('删除')}</button></label>
+            {/if}
 
-			<!--</td>-->
-		<!--</tr>-->
+			</td>
+		</tr>
 		</tbody>
 		</table>
 		</div>

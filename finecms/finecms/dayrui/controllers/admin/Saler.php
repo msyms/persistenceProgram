@@ -136,8 +136,6 @@ class Saler extends M_Controller {
 	 */
 	public function bill() {
 
-
-
 		// 重置页数和统计
 		IS_POST && $_GET['page'] = $_GET['total'] = 0;
 
@@ -159,6 +157,7 @@ class Saler extends M_Controller {
 				'phone' => array('fieldname' => 'phone','name' => fc_lang('手机号码')),
 			) + ($field ? $field : array());
 		$url = "admin/saler/billadd/salerId/{$salerId}";
+		$this->template->assign('salerId',$salerId);
 		// 存储当前页URL
 		$this->_set_back_url('saler/bill/billId/'.$salerId, $param);
 		$this->template->assign('menubill', $this->get_menu_v3(array(
@@ -303,6 +302,8 @@ class Saler extends M_Controller {
 
 
 		$billId = $_GET['billId'];
+		$salerId = $_GET['salerId'];
+
 		// 重置页数和统计
 		IS_POST && $_GET['page'] = $_GET['total'] = 0;
 
@@ -310,31 +311,19 @@ class Saler extends M_Controller {
 		$param = $this->input->get(NULL, TRUE);
 		unset($param['s'], $param['c'], $param['m'], $param['d'], $param['page']);
 
-		$billId = $_GET['billId'];
 		// 数据库中分页查询
-		list($data, $param) = $this->saler_model->get_bill_detail($billId);
+		$data = $this->saler_model->get_bill_detail($billId);
 
-		$field = $this->get_cache('member', 'field');
-		$field = array(
-				'username' => array('fieldname' => 'username','name' => fc_lang('会员名称')),
-				'name' => array('fieldname' => 'name','name' => fc_lang('姓名')),
-				'email' => array('fieldname' => 'email','name' => fc_lang('会员邮箱')),
-				'phone' => array('fieldname' => 'phone','name' => fc_lang('手机号码')),
-			) + ($field ? $field : array());
-
-		// 存储当前页URL
-		$this->_set_back_url('member/index', $param);
 		$url = 'admin/saler/billdetailadd/billId/'.$billId;
 		// 存储当前页URL
 		$this->template->assign('menubill', $this->get_menu_v3(array(
-			fc_lang('返回') => array('admin/saler/index', 'reply'),
+			fc_lang('返回') => array('admin/saler/bill/salerId/'.$salerId, 'reply'),
 			fc_lang('添加') => array($url.'_js', 'plus')
 
 		)));
 
 		$this->template->assign(array(
 			'list' => $data,
-			'field' => $field,
 			'param'	=> $param,
 			'pages'	=> $this->get_pagination(dr_url('member/index', $param), $param['total']),
 		));
@@ -350,24 +339,29 @@ class Saler extends M_Controller {
 
 			$data = $this->input->post( 'data' );
 			$info = $this->input->post( 'info' );
-
+			$customerId = $this->customer_model->get_customer_name($data['cname']);
 			// 单个添加
-			$uid = $this->saler_model->addSalerBill( [
-				'salerId'   => $data['salerId'],
-				'salerName'   => $data['salerName'],
+			$uid = $this->saler_model->addBillDetail( [
+				'billId'   => $data['billId'],
+				'customerId'   => $customerId,
+				'priceId'   => $data['priceId'],
 				'bucketNum'  => $data['bucketNum'],
 				'bottleNum'  => $data['bottleNum'],
-				'checker' => $data['checker'],
-				'saleTime' => $data['saleTime']?:date('Y-m-d'),
+				'backBucketNum'  => $data['backBucketNum'],
+				'knot'  => $data['knot'],
+				'debt'  => $data['debt'],
+				'depositBucket'  => $data['depositBucket'],
+				'debtBucket' => $data['debtBucket'],
 				'remark' => $info?:'',
 			] );
 
-			$this->admin_msg(
-				fc_lang('操作成功，正在刷新...'),
-				$this->_get_back_url('saler/bill', array('id' =>$id)),
-				1,
-				1
-			);
+			exit( dr_json( 1, fc_lang( '操作成功，正在刷新...' ) ) );
+//			$this->admin_msg(
+//				fc_lang('操作成功，正在刷新...'),
+//				$this->_get_back_url('saler/bill', array('id' =>$id)),
+//				1,
+//				1
+//			);
 		}
 		$url = 'admin/saler/billdetail/billId/'.$id;
 		$this->template->assign('menubill', $this->get_menu_v3(array(

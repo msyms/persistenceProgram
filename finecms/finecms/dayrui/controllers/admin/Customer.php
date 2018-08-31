@@ -52,7 +52,7 @@ class Customer extends M_Controller {
 			'list' => $data,
             'field' => $field,
 			'param'	=> $param,
-			'pages'	=> $this->get_pagination(dr_url('member/index', $param), $param['total']),
+			'pages'	=> $this->get_pagination(dr_url('customer/index', $param), $param['total']),
 		));
 		$this->template->display('customer_index.html');
     }
@@ -128,6 +128,41 @@ class Customer extends M_Controller {
 		$this->template->display('customer_edit.html');
     }
 
+    public function bill() {
+	    $customerId = $_GET['customerId'];
+	    // 重置页数和统计
+	    IS_POST && $_GET['page'] = $_GET['total'] = 0;
+
+	    // 根据参数筛选结果
+	    $param = $this->input->get(NULL, TRUE);
+	    unset($param['s'], $param['c'], $param['m'], $param['d'], $param['page']);
+
+	    // 数据库中分页查询
+	    list($data, $param) = $this->customer_model->get_customer_bill($customerId, max((int)$_GET['page'], 1), (int)$_GET['total']);
+
+
+
+	    $field = $this->get_cache('member', 'field');
+	    $field = array(
+			    'username' => array('fieldname' => 'username','name' => fc_lang('会员名称')),
+			    'name' => array('fieldname' => 'name','name' => fc_lang('姓名')),
+			    'email' => array('fieldname' => 'email','name' => fc_lang('会员邮箱')),
+			    'phone' => array('fieldname' => 'phone','name' => fc_lang('手机号码')),
+		    ) + ($field ? $field : array());
+	    // 存储当前页URL
+	    $this->template->assign('menubill', $this->get_menu_v3(array(
+		    fc_lang('返回') => array('admin/customer/index', 'reply')
+
+	    )));
+	    $this->template->assign(array(
+		    'list' => $data,
+		    'field' => $field,
+		    'param'	=> $param,
+		    'pages'	=> $this->get_pagination(dr_qxurl('customer/bill/customer/'.$customerId, $param), $param['total']),
+	    ));
+	    $this->template->display('customerbill_index.html');
+    }
+
 	public function price() {
 
 
@@ -142,7 +177,6 @@ class Customer extends M_Controller {
 		$billId = $_GET['billId'];
 		// 数据库中分页查询
 		$data = $this->customer_model->get_price($customerId);
-		var_dump($data);
 		$customerInfo = $this->customer_model->get_customer($customerId);
 		$field = $this->get_cache('member', 'field');
 		$field = array(

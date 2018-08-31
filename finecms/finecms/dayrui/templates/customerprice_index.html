@@ -25,7 +25,6 @@
 		<thead>
 		<tr>
 			<th width="10"></th>
-			<th>Uid</th>
 			<th class="{ns_sorting('name')}" name="salerName" >{fc_lang('客户名')}</th>
 			<th class="{ns_sorting('name')}" name="bucketNum" >{fc_lang('单位')}</th>
 			<th class="{ns_sorting('name')}" name="bottleNum" >{fc_lang('价格')}</th>
@@ -35,7 +34,6 @@
 					{loop $list $t}
 					<tr id="dr_row_{$t.uid}">
 						<td><input name="ids[]" type="checkbox" class="dr_select toggle md-check" value="{$t.id}" /></td>
-						<td>{$t.id}</td>
 						<td>{dr_keyword_highlight($cname, $param.keyword)}</td>
 						<td>{dr_keyword_highlight($t.unit, $param.keyword)}</td>
 						<td>{dr_keyword_highlight($t.price, $param.keyword)}</td>

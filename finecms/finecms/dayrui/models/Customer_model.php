@@ -70,6 +70,12 @@ class Customer_model extends M_Model {
 		return $data;
 	}
 
+	public function get_customer_name($customer) {
+		$this->db->where('cname', $customer);
+		$customer = $this->db->select('id')->get('customer')->row_array();
+		return $customer['id'];
+	}
+
     public function get_price_bycustomer($customer)
     {
         $this->db->where('cname', $customer);
@@ -131,6 +137,24 @@ class Customer_model extends M_Model {
         }
 
         return $data;
+    }
+
+    public function get_customer_bill($customerId,$page) {
+	    $countInfo = $this->db->where('customerId',$customerId)
+		    ->select('count(*) as total')->get('saler_bill_detail')->row_array();
+	    $total = $countInfo['total'];
+	    $pagenow = SITE_ADMIN_PAGESIZE * ($page - 1);
+	    $sql = "select detail.*,customer.cname,price.unit,price.price 
+                from fn_saler_bill_detail detail 
+                left join fn_customer customer on detail.customerId = customer.id
+                left join fn_customer_price price on detail.priceId = price.id 
+                where customer.id = $customerId limit $pagenow,".SITE_ADMIN_PAGESIZE;
+	    $data = $this->db->query($sql)->result_array();
+	    $order = dr_get_order_string(isset($_GET['order']) && strpos($_GET['order'], "undefined") !== 0 ? $this->input->get('order', TRUE) : 'id desc', 'id desc');
+
+	    $_param['total'] = $total;
+	    $_param['order'] = $order;
+	    return array($data, $_param);
     }
 
     public function get_markrule($uid) {

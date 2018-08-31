@@ -25,7 +25,6 @@
 		<thead>
 		<tr>
 			<th width="10"></th>
-			<th>Uid</th>
 			<th class="<?php echo ns_sorting('name'); ?>" name="salerName" ><?php echo fc_lang('销售人员'); ?></th>
 			<th class="<?php echo ns_sorting('name'); ?>" name="bucketNum" ><?php echo fc_lang('桶装水'); ?></th>
 			<th class="<?php echo ns_sorting('name'); ?>" name="bottleNum" ><?php echo fc_lang('瓶装水'); ?></th>
@@ -39,7 +38,6 @@
 		<?php if (is_array($list)) { $count=count($list);foreach ($list as $t) { ?>
 		<tr id="dr_row_<?php echo $t['uid']; ?>">
 			<td><input name="ids[]" type="checkbox" class="dr_select toggle md-check" value="<?php echo $t['id']; ?>" /></td>
-			<td><?php echo $t['id']; ?></td>
 			<td><?php echo dr_keyword_highlight($t['salerName'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['bucketNum'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['bottleNum'], $param['keyword']); ?></td>
@@ -47,7 +45,7 @@
 			<td><?php echo dr_keyword_highlight($t['saleTime'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['remark'], $param['keyword']); ?></td>
 			<td class="dr_option">
-				<?php if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/billdetail',array('billId'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('详情'); ?></a><?php }  if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/edit',array('id'=>$t['id'])); ?>" > <i class="fa fa-edit"></i> <?php echo fc_lang('修改'); ?></a><?php } ?>
+				<?php if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/billdetail',array('billId'=>$t['id'],'salerId'=>$salerId)); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('详情'); ?></a><?php }  if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/edit',array('id'=>$t['id'])); ?>" > <i class="fa fa-edit"></i> <?php echo fc_lang('修改'); ?></a><?php } ?>
 			</td>
 		</tr> 
 		<?php } } ?>

@@ -22,7 +22,6 @@ $(function(){
   $("input#dr_cname").blur(function(){
     $.getJSON("/admin.php?c=customer&m=getprice",{cname: $(this).val()}, function(j){
       var options = '';
-      console.log(j);
       for (var i = 0; i < j.length; i++) {
 
         options += '<option value="' + j[i].id + '">' + j[i].unit+'：￥'+j[i].price + '</option>';
@@ -93,12 +92,12 @@ function getPriceList(){
 <form style="width:450px;" class="form-horizontal" action="" method="post" id="myform" name="myform" onsubmit="return dr_form_check()">
 <input name="mark" id="mark" type="hidden" value="0">
 <div class="form-body">
-    <input class="form-control" type="hidden" name="data[salerId]" value="<?php echo $salerId; ?>" >
+    <input class="form-control" type="hidden" name="data[billId]" value="<?php echo $billId; ?>" >
 
     <div class="form-group dr_one">
         <label class="col-md-3 control-label"><?php echo fc_lang('姓名'); ?>：</label>
         <div class="col-md-7">
-            <input class="form-control" type="text" name="data[cname]" id="dr_cname"  name="data[customerId]" id="txt_ide" list="customer" />
+            <input class="form-control" type="text" id="dr_cname"  name="data[cname]" id="txt_ide" list="customer" />
             <datalist id="customer">
                 <?php if (is_array($customer)) { $count=count($customer);foreach ($customer as $t) { ?>
                 <option value="<?php echo $t['cname']; ?>" />
@@ -110,7 +109,7 @@ function getPriceList(){
     <div class="form-group dr_one">
         <label class="col-md-3 control-label"><?php echo fc_lang('价格'); ?>：</label>
         <div class="col-md-7">
-            <select name="price" id="price"></select>
+            <select name="data[priceId]" id="price"></select>
 
         </div>
     </div>
@@ -127,6 +126,12 @@ function getPriceList(){
         </div>
     </div>
     <div class="form-group dr_one">
+        <label class="col-md-3 control-label"><?php echo fc_lang('回桶'); ?>：</label>
+        <div class="col-md-7">
+            <input class="form-control" type="text" name="data[backBucketNum]" id="dr_backBucketNum" value="<?php echo $data['backBucketNum']; ?>" >
+        </div>
+    </div>
+    <div class="form-group dr_one">
         <label class="col-md-3 control-label"><?php echo fc_lang('结款'); ?>：</label>
         <div class="col-md-7">
             <input class="form-control" type="text" name="data[knot]" id="dr_debtMoney" value="<?php echo $data['knot']; ?>" >
@@ -138,12 +143,7 @@ function getPriceList(){
             <input class="form-control" type="text" name="data[debt]" id="dr_debt" value="<?php echo $data['debt']; ?>" >
         </div>
     </div>
-    <div class="form-group dr_one">
-        <label class="col-md-3 control-label"><?php echo fc_lang('回桶'); ?>：</label>
-        <div class="col-md-7">
-            <input class="form-control" type="text" name="data[backBucketNum]" id="dr_backBucketNum" value="<?php echo $data['backBucketNum']; ?>" >
-        </div>
-    </div>
+
     <div class="form-group dr_one">
         <label class="col-md-3 control-label"><?php echo fc_lang('欠桶'); ?>：</label>
         <div class="col-md-7">

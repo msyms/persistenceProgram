@@ -24,28 +24,38 @@
       <file leaf-file-name="Saler.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/finecms/dayrui/controllers/admin/Saler.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="238" column="24" selection-start-line="238" selection-start-column="24" selection-end-line="238" selection-end-column="24" />
+            <state relative-caret-position="28">
+              <caret line="153" column="44" selection-start-line="153" selection-start-column="44" selection-end-line="153" selection-end-column="44" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Customer.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/finecms/dayrui/controllers/admin/Customer.php">
+      <file leaf-file-name="database.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/database.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="364">
-              <caret line="159" column="44" selection-start-line="159" selection-start-column="44" selection-end-line="159" selection-end-column="44" />
+              <caret line="13" column="27" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="customerprice_add.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/customerprice_add.html">
+      <file leaf-file-name="system.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/system.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="23" column="35" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+            <state relative-caret-position="504">
+              <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Customer.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/finecms/dayrui/controllers/admin/Customer.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="154" column="0" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -54,61 +64,13 @@
       <file leaf-file-name="Customer_model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/finecms/dayrui/models/Customer_model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="79" column="24" selection-start-line="79" selection-start-column="24" selection-end-line="79" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="billdetail_index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/billdetail_index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="39" column="15" selection-start-line="39" selection-start-column="15" selection-end-line="39" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="customerprice_index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/customerprice_index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="760">
-              <caret line="42" column="27" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="billdetail_add.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/billdetail_add.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="55" column="30" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
+            <state relative-caret-position="588">
+              <caret line="153" column="0" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
               <folding>
-                <element signature="n#style#0;n#textarea#0;n#div#0;n#div#8;n#div#0;n#form#0;n#!!top" expanded="true" />
+                <marker date="1535706281089" expanded="true" signature="3305:3608" ph="select detai... fn_saler_bill_detail" />
+                <marker date="1535706281089" expanded="true" signature="3305:3625" ph="select detai... fn_saler_bill_detail" />
+                <marker date="1535706281089" expanded="true" signature="3305:3635" ph="select detai... fn_saler_bill_detail" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="salerbill_add.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/salerbill_add.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="34" column="107" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="107" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="content_index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/content_index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1278">
-              <caret line="184" column="22" selection-start-line="184" selection-start-column="22" selection-end-line="184" selection-end-column="22" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -116,8 +78,53 @@
       <file leaf-file-name="customer_index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/customer_index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
-              <caret line="53" column="134" selection-start-line="53" selection-start-column="134" selection-end-line="53" selection-end-column="134" />
+            <state relative-caret-position="508">
+              <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Saler_model.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/finecms/dayrui/models/Saler_model.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="224">
+              <caret line="119" column="55" selection-start-line="119" selection-start-column="8" selection-end-line="119" selection-end-column="55" />
+              <folding>
+                <marker date="1535704461967" expanded="true" signature="3449:3754" ph="select detai... fn_saler_bill_detail" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="billdetail_add.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/billdetail_add.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="280">
+              <caret line="98" column="30" selection-start-line="98" selection-start-column="30" selection-end-line="98" selection-end-column="30" />
+              <folding>
+                <element signature="n#style#0;n#form#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#textarea#0;n#div#0;n#div#9;n#div#0;n#form#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="billdetail_index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/billdetail_index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="39" column="16" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="customerbill_index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/customerbill_index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="494">
+              <caret line="39" column="16" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -150,21 +157,22 @@
         <option value="$PROJECT_DIR$/finecms/dayrui/templates/customer_edit.html" />
         <option value="$PROJECT_DIR$/finecms/dayrui/templates/salerbill_add.html" />
         <option value="$PROJECT_DIR$/finecms/dayrui/core/M_Controller.php" />
-        <option value="$PROJECT_DIR$/config/system.php" />
         <option value="$PROJECT_DIR$/finecms/dayrui/helpers/durl_helper.php" />
-        <option value="$PROJECT_DIR$/finecms/dayrui/templates/saler_index.html" />
         <option value="$PROJECT_DIR$/finecms/dayrui/models/Salerbill_model.php" />
-        <option value="$PROJECT_DIR$/finecms/dayrui/models/Saler_model.php" />
-        <option value="$PROJECT_DIR$/finecms/dayrui/templates/billdetail_index.html" />
-        <option value="$PROJECT_DIR$/finecms/dayrui/templates/salerbill_index.html" />
-        <option value="$PROJECT_DIR$/finecms/dayrui/controllers/admin/Saler.php" />
-        <option value="$PROJECT_DIR$/finecms/dayrui/templates/customer_index.html" />
         <option value="$PROJECT_DIR$/finecms/dayrui/templates/customer_index - 副本.html" />
         <option value="$PROJECT_DIR$/finecms/dayrui/templates/customerprice_add.html" />
-        <option value="$PROJECT_DIR$/finecms/dayrui/controllers/admin/Customer.php" />
-        <option value="$PROJECT_DIR$/finecms/dayrui/models/Customer_model.php" />
-        <option value="$PROJECT_DIR$/finecms/dayrui/templates/customerprice_index.html" />
         <option value="$PROJECT_DIR$/finecms/dayrui/templates/billdetail_add.html" />
+        <option value="$PROJECT_DIR$/finecms/dayrui/templates/customerprice_index.html" />
+        <option value="$PROJECT_DIR$/finecms/dayrui/templates/saler_index.html" />
+        <option value="$PROJECT_DIR$/finecms/dayrui/templates/salerbill_index.html" />
+        <option value="$PROJECT_DIR$/finecms/dayrui/templates/billdetail_index.html" />
+        <option value="$PROJECT_DIR$/finecms/dayrui/models/Saler_model.php" />
+        <option value="$PROJECT_DIR$/config/system.php" />
+        <option value="$PROJECT_DIR$/finecms/dayrui/controllers/admin/Saler.php" />
+        <option value="$PROJECT_DIR$/finecms/dayrui/models/Customer_model.php" />
+        <option value="$PROJECT_DIR$/finecms/dayrui/templates/customer_index.html" />
+        <option value="$PROJECT_DIR$/finecms/dayrui/templates/customerbill_index.html" />
+        <option value="$PROJECT_DIR$/finecms/dayrui/controllers/admin/Customer.php" />
       </list>
     </option>
   </component>
@@ -350,6 +358,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="finecms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="finecms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="finecms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dayrui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -830,12 +864,12 @@
       <updated>1535091435722</updated>
       <workItem from="1535091437210" duration="2424000" />
       <workItem from="1535336915639" duration="6795000" />
-      <workItem from="1535361287840" duration="48197000" />
+      <workItem from="1535361287840" duration="59223000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57416000" />
+    <option name="totallyTimeSpent" value="68442000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="0" />
@@ -886,14 +920,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/finecms/dayrui/controllers/admin/Home.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="891">
-          <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/admin_menu.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1485">
@@ -986,14 +1012,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2268">
           <caret line="81" column="20" selection-start-line="81" selection-start-column="20" selection-end-line="81" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="13" column="27" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -1148,14 +1166,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/system.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -1188,36 +1198,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/saler_index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="49" column="34" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/finecms/dayrui/helpers/durl_helper.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="942">
           <caret line="617" column="1" selection-start-line="617" selection-start-column="1" selection-end-line="617" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/finecms/dayrui/models/Saler_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
-          <folding>
-            <marker date="1535597149523" expanded="true" signature="3867:4177" ph="select detai... fn_saler_bill_detail" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/salerbill_index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1512">
-          <caret line="54" column="15" selection-start-line="54" selection-start-column="15" selection-end-line="54" selection-end-column="15" />
           <folding />
         </state>
       </provider>
@@ -1232,22 +1216,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/content_index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1278">
-          <caret line="184" column="22" selection-start-line="184" selection-start-column="22" selection-end-line="184" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/customer_index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="53" column="134" selection-start-line="53" selection-start-column="134" selection-end-line="53" selection-end-column="134" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/customer_index - 副本.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -1256,69 +1224,140 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/salerbill_add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="34" column="107" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="107" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/billdetail_index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="39" column="15" selection-start-line="39" selection-start-column="15" selection-end-line="39" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/finecms/dayrui/models/Customer_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="79" column="24" selection-start-line="79" selection-start-column="24" selection-end-line="79" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/finecms/dayrui/controllers/admin/Customer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="159" column="44" selection-start-line="159" selection-start-column="44" selection-end-line="159" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/customerprice_add.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="23" column="35" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+        <state relative-caret-position="364">
+          <caret line="22" column="67" selection-start-line="22" selection-start-column="57" selection-end-line="22" selection-end-column="67" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/finecms/dayrui/controllers/admin/Saler.php">
+    <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/content_index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="238" column="24" selection-start-line="238" selection-start-column="24" selection-end-line="238" selection-end-column="24" />
+        <state relative-caret-position="1278">
+          <caret line="184" column="22" selection-start-line="184" selection-start-column="22" selection-end-line="184" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/salerbill_add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="37" column="41" selection-start-line="37" selection-start-column="41" selection-end-line="37" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/saler_index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/salerbill_index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="531">
+          <caret line="50" column="17" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/customerprice_index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="42" column="27" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
+        <state relative-caret-position="172">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/finecms/dayrui/models/Saler_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="119" column="55" selection-start-line="119" selection-start-column="8" selection-end-line="119" selection-end-column="55" />
+          <folding>
+            <marker date="1535704461967" expanded="true" signature="3449:3754" ph="select detai... fn_saler_bill_detail" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/system.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="13" column="27" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/finecms/dayrui/controllers/admin/Saler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="153" column="44" selection-start-line="153" selection-start-column="44" selection-end-line="153" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/finecms/dayrui/models/Customer_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="588">
+          <caret line="153" column="0" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
+          <folding>
+            <marker date="1535706281089" expanded="true" signature="3305:3608" ph="select detai... fn_saler_bill_detail" />
+            <marker date="1535706281089" expanded="true" signature="3305:3625" ph="select detai... fn_saler_bill_detail" />
+            <marker date="1535706281089" expanded="true" signature="3305:3635" ph="select detai... fn_saler_bill_detail" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/customer_index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="508">
+          <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/billdetail_add.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="55" column="30" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
+        <state relative-caret-position="280">
+          <caret line="98" column="30" selection-start-line="98" selection-start-column="30" selection-end-line="98" selection-end-column="30" />
           <folding>
-            <element signature="n#style#0;n#textarea#0;n#div#0;n#div#8;n#div#0;n#form#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#form#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#textarea#0;n#div#0;n#div#9;n#div#0;n#form#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/customerbill_index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="39" column="16" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/billdetail_index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="39" column="16" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/finecms/dayrui/controllers/admin/Customer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="154" column="0" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

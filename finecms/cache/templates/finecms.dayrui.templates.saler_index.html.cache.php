@@ -25,7 +25,6 @@
 		<thead>
 		<tr>
 			<th width="10"></th>
-			<th>Uid</th>
 			<th class="<?php echo ns_sorting('name'); ?>" name="name" ><?php echo fc_lang('姓名'); ?></th>
 			<th class="<?php echo ns_sorting('name'); ?>" name="name" ><?php echo fc_lang('车牌号'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="phone" ><?php echo fc_lang('电话'); ?></th>
@@ -36,7 +35,6 @@
 		<?php if (is_array($list)) { $count=count($list);foreach ($list as $t) { ?>
 		<tr id="dr_row_<?php echo $t['uid']; ?>">
 			<td><input name="ids[]" type="checkbox" class="dr_select toggle md-check" value="<?php echo $t['id']; ?>" /></td>
-			<td><?php echo $t['id']; ?></td>
 			<td><?php echo dr_keyword_highlight($t['name'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['carNo'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['phone'], $param['keyword']); ?></td>

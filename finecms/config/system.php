@@ -17,7 +17,7 @@ return array (
     'SYS_EMAIL' => 'cms@dayrui.ocm',
     'SYS_AUTO_CACHE' => 1,
     'SITE_ADMIN_CODE' => 0,
-    'SITE_ADMIN_PAGESIZE' => '8',
+    'SITE_ADMIN_PAGESIZE' => '4',
     'SYS_CACHE_INDEX' => 3600,
     'SYS_CACHE_MSHOW' => 3600,
     'SYS_CACHE_MSEARCH' => 3600,

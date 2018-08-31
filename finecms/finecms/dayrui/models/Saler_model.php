@@ -14,31 +14,13 @@ class Saler_model extends M_Model {
 		return $uid;
 	}
 
+	public function addBillDetail($data) {
+		$this->db->insert('saler_bill_detail', $data);
+		$uid = $this->db->insert_id();
+		return $uid;
+	}
 
-    /**
-     * 会员修改信息
-     */
-    public function edit($main, $data) {
 
-        if (isset($main['check']) && $main['check']) {
-            $main['ismobile'] = 1;
-            $main['randcode'] = '';
-            unset($main['check'], $main['phone']);
-        }
-
-        if (isset($main['check'])) {
-            unset($main['check']);
-        }
-
-        $this->db->where('uid', $this->uid)->update('member', $main);
-
-        $data['uid'] = $this->uid;
-        $data['complete'] = 1;
-
-        $this->db->replace('member_data', $data);
-
-        return TRUE;
-    }
 	/**
 	 * 会员基本信息
 	 */
@@ -133,7 +115,7 @@ class Saler_model extends M_Model {
 		$sql = "select detail.*,customer.cname,price.unit,price.price 
                 from fn_saler_bill_detail detail 
                 left join fn_customer customer on detail.customerId = customer.id
-                left join fn_customer_price price on customer.id = price.customerId 
+                left join fn_customer_price price on detail.priceId = price.id 
                 where detail.billId = $key";
 		$data = $this->db->query($sql)->result_array();
 		if (!$data) {

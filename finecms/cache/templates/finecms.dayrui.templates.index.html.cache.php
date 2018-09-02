@@ -303,11 +303,7 @@
 
             <ul class="nav navbar-nav pull-right">
 
-                <li class="dropdown dropdown-dark">
-                    <a href="<?php echo SITE_URL; ?>" target="_blank" class="dropdown-toggle popovers top-link" data-container="body" data-trigger="hover" data-placement="bottom" data-content="<?php echo fc_lang('网站首页'); ?>">
-                        <i class="fa fa-home" style="font-size: 21px;"></i>
-                    </a>
-                </li>
+          
 
                 <?php if (count($mysite)>1) { ?>
                 <li id="dr_select_site" class=" dropdown dropdown-extended dropdown-notification ">
@@ -336,30 +332,16 @@
                 </li>
                 <?php } ?>
 
-
-
-
-
-                <li class="dropdown dropdown-dark">
-                    <a class="dropdown-toggle popovers top-link" data-container="body" data-trigger="hover" data-placement="bottom" data-content="<?php echo fc_lang('更新全站缓存'); ?>" href="<?php echo dr_url('home/cache'); ?>" target="right"><i class="fa fa-refresh"></i></a>
-                </li>
-
                 <li class="dropdown dropdown-user">
                     <a href="javascript:;" style=" height: 70px;" class="dropdown-toggle top-link" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                         <img alt="<?php echo $admin['username']; ?>" class="img-circle" src="<?php echo dr_avatar($admin['uid']); ?>" />
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
-                        <li><a href="<?php echo SITE_URL; ?>" target="_blank"><i class="fa fa-home"></i> <?php echo fc_lang('网站首页'); ?> </a></li>
+
                         <li><a href="javascript:;" onClick="logout();"><i class="fa fa-sign-in"></i> <?php echo fc_lang('退出系统'); ?></a></li>
                         <li class="divider"> </li>
 
-                        <li><a href="<?php echo dr_url('home/clear'); ?>" target="right"><i class="fa fa-trash"></i> <?php echo fc_lang('更新数据'); ?></a></li>
-
-                        <li><a href="<?php echo dr_url('home/dbcache'); ?>" target="right"><i class="fa fa-database"></i> <?php echo fc_lang('更新表结构'); ?></a></li>
-                        <li><a href="<?php echo dr_url('home/cache'); ?>" target="right"><i class="fa fa-refresh"></i> <?php echo fc_lang('更新全站缓存'); ?></a></li>
-                        <li class="divider"> </li>
-                        <li><a href="http://www.finecms.net" target="_blank"><i class="fa fa-user"></i> <?php echo fc_lang('官方网站'); ?></a></li>
                     </ul>
                 </li>
             </ul>

@@ -20,9 +20,6 @@ class Saler extends M_Controller {
 		$this->template->assign('menu', $this->get_menu_v3(array(
 			fc_lang('添加') => array('admin/saler/add_js', 'plus')
 		)));
-
-
-
     }
 
     /**
@@ -131,6 +128,77 @@ class Saler extends M_Controller {
 		$this->template->display('saler_edit.html');
 	}
 
+
+	public function fuel() {
+		$salerId = $_GET['salerId'];
+	    // 重置页数和统计
+	    IS_POST && $_GET['page'] = $_GET['total'] = 0;
+
+	    // 根据参数筛选结果
+	    $param = $this->input->get(NULL, TRUE);
+	    unset($param['s'], $param['c'], $param['m'], $param['d'], $param['page']);
+
+	    // 数据库中分页查询
+	    list($data, $param) = $this->saler_model->get_saler_fuel($salerId, max((int)$_GET['page'], 1), (int)$_GET['total']);
+
+	    $field = $this->get_cache('member', 'field');
+	    $field = array(
+			    'username' => array('fieldname' => 'username','name' => fc_lang('会员名称')),
+			    'name' => array('fieldname' => 'name','name' => fc_lang('姓名')),
+			    'email' => array('fieldname' => 'email','name' => fc_lang('会员邮箱')),
+			    'phone' => array('fieldname' => 'phone','name' => fc_lang('手机号码')),
+		    ) + ($field ? $field : array());
+	    // 存储当前页URL
+		$url = 'admin/saler/fueladd/salerId/'.$salerId;
+	    $this->template->assign('menubill', $this->get_menu_v3(array(
+		    fc_lang('返回') => array('admin/saler/index', 'reply'),
+			fc_lang('添加') => array($url, 'plus')
+
+	    )));
+	    $salerInfo = $this->saler_model->get_saler($salerId);
+	    $this->template->assign('salerId',$salerId);
+	    $this->template->assign('salerInfo',$salerInfo);
+	    $this->template->assign(array(
+		    'list' => $data,
+		    'field' => $field,
+		    'param'	=> $param,
+		    'pages'	=> $this->get_pagination(dr_qxurl('saler/fuel/salerId/'.$salerId, $param), $param['total']),
+	    ));
+	    $this->template->display('salerfuel_index.html');
+	}
+
+	public function fueladd() {
+		$salerId = $_GET['salerId'];
+		if (IS_POST) {
+
+			$data = $this->input->post( 'data' );
+			$info = $this->input->post( 'info' );
+			$id = $data['salerId'];
+			// 单个添加
+			$uid = $this->saler_model->addSalerFuel( [
+				'salerId'   => $data['salerId'],
+				'rise'   => $data['rise'],
+				'money'  => $data['money'],
+				'date'  => date('Y-m-d',$data['time'])
+			] );
+
+			$this->admin_msg(
+				fc_lang('操作成功，正在刷新...'),
+				$this->_get_back_url('saler/fuel', array('salerId' =>$id)),
+				1,
+				1
+			);
+		}
+
+		$this->template->assign('menubill', $this->get_menu_v3(array(
+			fc_lang('返回') => array($url, 'reply'),
+		)));
+		$data = $this->saler_model->get_saler($salerId);
+		$this->template->assign('salerId', $salerId);
+		$this->template->assign('data', $data);
+		$this->template->assign('time', time());
+		$this->template->display('salerfuel_add.html');
+	}
 	/**
 	 * 首页
 	 */
@@ -183,7 +251,6 @@ class Saler extends M_Controller {
 
 			$data = $this->input->post( 'data' );
 			$info = $this->input->post( 'info' );
-
 			// 单个添加
 			$uid = $this->saler_model->addSalerBill( [
 				'salerId'   => $data['salerId'],
@@ -197,7 +264,7 @@ class Saler extends M_Controller {
 
 			$this->admin_msg(
 				fc_lang('操作成功，正在刷新...'),
-				$this->_get_back_url('saler/bill', array('id' =>$id)),
+				$this->_get_back_url('saler/bill', array('salerId' =>$id)),
 				1,
 				1
 			);
@@ -376,19 +443,69 @@ class Saler extends M_Controller {
 	}
 
 
-	public function ajax_email() {
+	public function exportFuel() {
+		$salerId = $_GET['salerId'];
+    	$date = date('Y-m-d');
+    	$filename = $date.'加油信息.xls';
+    	header('content-type:application/vnd.ms-excel;charset=UTF-8');
+        header('content-disposition:attachment;filename='.$filename);
+        header('Content-Transfer-Encoding: binary');
+        header('Pragma:no-cache');
+        header('Expires:0');
+        header("Pragma: public");
+        header("Cache-Control:must-revalidate, post-check=0, pre-check=0");
+        header("Content-Type:application/force-download");
+        header("Content-Type:application/octet-stream");
+        header("Content-Type:application/download");
 
-        $uid = (int)$this->input->get('uid');
-        $email = $this->input->get('email');
+        $title = array(
+            '销售人员',
+            '车牌号',
+            '加油量',
+            '金额',
+            '时间',
+            '备注',
+            
+        );
+        echo iconv('utf-8', 'gbk', implode("\t", $title)) . "\n";
 
-        if (!$email || !preg_match('/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/', $email)) {
-            exit(fc_lang('邮箱格式不正确'));
-        } elseif ($this->db->where('email', $email)->where('uid<>', $uid)->count_all_results('member')) {
-            exit(fc_lang('该邮箱【%s】已经被注册', $email));
+        $list = $this->saler_model->get_fuel_exp($salerId);
+        foreach ($list as $key => $value) {
+            echo iconv('utf-8', 'gbk', implode("\t", $value)) . "\n";
         }
+        return false;
+	}
 
-        exit(0);
-    }
+	public function exportBill() {
+		$salerId = $_GET['salerId'];
+    	$date = date('Y-m-d');
+    	$filename = $date.'销售账单.xls';
+    	header('content-type:application/vnd.ms-excel;charset=UTF-8');
+        header('content-disposition:attachment;filename='.$filename);
+        header('Content-Transfer-Encoding: binary');
+        header('Pragma:no-cache');
+        header('Expires:0');
+        header("Pragma: public");
+        header("Cache-Control:must-revalidate, post-check=0, pre-check=0");
+        header("Content-Type:application/force-download");
+        header("Content-Type:application/octet-stream");
+        header("Content-Type:application/download");
+
+        $title = array(
+            '销售人员',
+            '桶装水',
+            '瓶装水',
+            '检核人',
+            '时间',
+            '备注'
+        );
+        echo iconv('utf-8', 'gbk', implode("\t", $title)) . "\n";
+        $list = $this->saler_model->get_saler_bill_exp($salerId);
+        foreach ($list as $key => $value) {
+            echo iconv('utf-8', 'gbk', implode("\t", $value)) . "\n";
+        }
+        return false;
+	}
 
 
 }

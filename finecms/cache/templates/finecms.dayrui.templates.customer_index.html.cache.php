@@ -11,7 +11,24 @@
 </div>
 
 
+<div class="mytopsearch">
+	<form method="post" class="row" action="" name="searchform" id="searchform">
+		<div class="col-md-12">
+			<label style="padding-right: 5px;"><?php echo $select2; ?></label>
+			<label style="padding-right: 10px;"><i class="fa"></i></label>
+			<label>
+				<select name="search" class="form-control">
+					<option value="" >请选择</option>
+					<option value="debtBucket" <?php if ($search=='debtBucket') { ?>selected<?php } ?> >欠桶</option>
+					<option value="debtMoney" <?php if ($search=='debtMoney') { ?>selected<?php } ?> >欠款</option>
+				</select>
+			</label>
+			<label><button type="submit" class="btn green btn-sm" name="submit" > <i class="fa fa-search"></i> <?php echo fc_lang('搜索'); ?></button></label>
 
+		</div>
+	</form>
+
+</div>
 
 <form action="" method="post" name="myform" id="myform">
 	<input name="action" id="action" type="hidden" value="del" />
@@ -48,7 +65,7 @@
 			<td><?php echo dr_keyword_highlight($t['remark'], $param['keyword']); ?></td>
 
 			<td class="dr_option">
-				<a class="aedit" href="<?php echo dr_url('customer/edit',array('uid'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('修改'); ?></a>
+				<!-- <a class="aedit" href="<?php echo dr_url('customer/edit',array('uid'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('修改'); ?></a> -->
 				<a class="aedit" href="<?php echo dr_url('customer/bill',array('customerId'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('明细'); ?></a>
 				<a class="aedit" href="<?php echo dr_url('customer/price',array('customerId'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('价格'); ?></a>
 			</td>
@@ -65,9 +82,11 @@
 		<!--</tr>-->
 		</tbody>
 		</table>
+
 		</div>
 	</div>
 </div>
 </form>
 <div id="pages"><a><?php echo fc_lang('共%s条', $param['total']); ?></a><?php echo $_pages; ?></div>
+<label><a href="<?php echo dr_url('customer/exportCustomer'); ?>"><button type="submit" class="btn green btn-sm" > <i class="fa fa-search"></i> <?php echo fc_lang('导出'); ?></button></a></label>
 <?php if ($fn_include = $this->_include("nfooter.html")) include($fn_include); ?>

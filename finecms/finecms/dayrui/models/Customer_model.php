@@ -42,7 +42,7 @@ class Customer_model extends M_Model {
     public function get_all_customer()
     {
 	    $data = $this->db
-		    ->select('id,cname,phone,address,remark')
+		    ->select('cname,phone,address,debtBucket,debtMoney,depositBucket')
 		    ->get('customer')
 		    ->result_array();
 	    if (!$data) {
@@ -144,8 +144,9 @@ class Customer_model extends M_Model {
 		    ->select('count(*) as total')->get('saler_bill_detail')->row_array();
 	    $total = $countInfo['total'];
 	    $pagenow = SITE_ADMIN_PAGESIZE * ($page - 1);
-	    $sql = "select detail.*,customer.cname,price.unit,price.price 
+	    $sql = "select detail.*,customer.cname,price.unit,price.price,bill.saleTime 
                 from fn_saler_bill_detail detail 
+                left join fn_saler_bill bill on detail.billId = bill.id 
                 left join fn_customer customer on detail.customerId = customer.id
                 left join fn_customer_price price on detail.priceId = price.id 
                 where customer.id = $customerId limit $pagenow,".SITE_ADMIN_PAGESIZE;
@@ -155,6 +156,21 @@ class Customer_model extends M_Model {
 	    $_param['total'] = $total;
 	    $_param['order'] = $order;
 	    return array($data, $_param);
+    }
+
+    public function get_customer_bill_exp($customerId) {
+        $sql = "select customer.cname,detail.bucketNum,detail.bottleNum,
+                CONCAT(price.unit,price.price) as unitpirce,detail.backBucketNum,detail.knot,
+                detail.debt,detail.debtBucket,detail.depositBucket,
+                bill.saleTime,detail.remark 
+                from fn_saler_bill_detail detail 
+                left join fn_saler_bill bill on detail.billId = bill.id 
+                left join fn_customer customer on detail.customerId = customer.id
+                left join fn_customer_price price on detail.priceId = price.id 
+                where customer.id = $customerId ";
+        $data = $this->db->query($sql)->result_array();
+        
+        return $data;
     }
 
     public function get_markrule($uid) {
@@ -174,38 +190,20 @@ class Customer_model extends M_Model {
     private function _where(&$select, $data) {
 
 
-        // 存在POST提交时，重新生成缓存文件
-        if (IS_POST) {
-            $data = $this->input->post('data');
-            foreach ($data as $i => $t) {
-                if ($t == '') {
-                    unset($data[$i]);
-                }
-            }
-        }
-
+        
         // 存在search参数时，读取缓存文件
         if ($data) {
-            if (isset($data['keyword']) && $data['keyword'] != '' && $data['field']) {
-                if ($data['field'] == 'uid') {
-                    // 按id查询
-                    $id = array();
-                    $ids = explode(',', $data['keyword']);
-                    foreach ($ids as $i) {
-                        $id[] = (int)$i;
-                    }
-                    $select->where_in('uid', $id);
-                } elseif ($data['field'] == 'ismobile') {
-                    $select->where($data['field'], intval($data['keyword']));
-                } elseif (in_array($data['field'], array('complete', 'is_auth'))) {
-                    $select->where('uid IN (select uid from `'.$this->db->dbprefix('member_data').'` where `'.$data['field'].'` = '.intval($data['keyword']).')');
-                } elseif (in_array($data['field'], array('phone', 'name', 'email', 'username'))) {
-                    $select->like($data['field'], urldecode($data['keyword']));
-                } else {
-                    // 查询附表字段
-                    $select->where('uid IN (select uid from `'.$this->db->dbprefix('member_data').'` where `'.$data['field'].'` LIKE "%'.urldecode($data['keyword']).'%")');
+            $search = $data['search'];
+            if($search) {
+                if($search == 'debtBucket') {
+                    //欠桶
+                    $select->where('debtBucket > 0 ');
+                }
+                if($search == 'debtMoney') {
+                    $select->where('debtMoney > 0 ');
                 }
             }
+            
         }
 
 

@@ -2,11 +2,11 @@
 {php $_pages=$pages;}
 <div class="page-bar">
 	<ul class="page-breadcrumb mylink">
-		{$menu.link}
+		{$menubill.link}
 
 	</ul>
 	<ul class="page-breadcrumb myname">
-		{$menu.name}
+		{$menubill.name}
 	</ul>
 	<div class="page-toolbar">
 
@@ -26,26 +26,27 @@
 		<thead>
 		<tr>
 			<!-- <th width="10"></th> -->
-			<th class="{ns_sorting('name')}" name="name" >{fc_lang('姓名')}</th>
-			<th class="{ns_sorting('name')}" name="name" >{fc_lang('车牌号')}</th>
-			<th class="{ns_sorting('phone')}" name="phone" >{fc_lang('电话')}</th>
-			<th class="dr_option">{fc_lang('操作')}</th>
+			<th class="{ns_sorting('name')}" name="salerName" >{fc_lang('销售人员')}</th>
+			<th class="{ns_sorting('name')}" name="salerName" >{fc_lang('车牌号')}</th>
+			<th class="{ns_sorting('name')}" name="bucketNum" >{fc_lang('加油量')}</th>
+			<th class="{ns_sorting('name')}" name="bottleNum" >{fc_lang('金额')}</th>
+			<th class="{ns_sorting('phone')}" name="saleTime" >{fc_lang('时间')}</th>
+			<th class="{ns_sorting('phone')}" name="remark" >{fc_lang('备注')}</th>
 		</tr>
 		</thead>
 		<tbody>
 		{loop $list $t}
 		<tr id="dr_row_{$t.uid}">
 			<!-- <td><input name="ids[]" type="checkbox" class="dr_select toggle md-check" value="{$t.id}" /></td> -->
-			<td>{dr_keyword_highlight($t.name, $param.keyword)}</td>
-			<td>{dr_keyword_highlight($t.carNo, $param.keyword)}</td>
-			<td>{dr_keyword_highlight($t.phone, $param.keyword)}</td>
-			<td class="dr_option">
-				{if $this->ci->is_auth('member/admin/home/edit')}<a class="aedit" href="{dr_url('saler/bill',array('salerId'=>$t.id))}"> <i class="fa fa-edit"></i> {fc_lang('详情')}</a>{/if}
-				{if $this->ci->is_auth('member/admin/home/edit')}<a class="aedit" href="{dr_url('saler/fuel',array('salerId'=>$t.id))}"> <i class="fa fa-edit"></i> {fc_lang('加油信息')}</a>{/if}
-			</td>
+			<td>{dr_keyword_highlight($salerInfo.name, $param.keyword)}</td>
+			<td>{dr_keyword_highlight($salerInfo.carNo, $param.keyword)}</td>
+			<td>{dr_keyword_highlight($t.rise, $param.keyword)}</td>
+			<td>{dr_keyword_highlight($t.money, $param.keyword)}</td>
+			<td>{dr_keyword_highlight($t.date, $param.keyword)}</td>
+			<td>{dr_keyword_highlight($t.remark, $param.keyword)}</td>
 		</tr> 
 		{/loop}
-<!-- 		<tr class="mtable_bottom">
+		<!-- <tr class="mtable_bottom">
         	<th width="20"  ><input name="dr_select" class="toggle md-check" id="dr_select" type="checkbox" onClick="dr_selected()" /></th>
 			<td colspan="10"  >
             {if $this->ci->is_auth('member/admin/home/del')}
@@ -61,4 +62,5 @@
 </div>
 </form>
 <div id="pages"><a>{fc_lang('共%s条', $param['total'])}</a>{$_pages}</div>
+<label><a href="{dr_url('saler/exportFuel',array('salerId'=>$salerId))}"><button type="submit" class="btn green btn-sm" > <i class="fa fa-search"></i> {fc_lang('导出')}</button></a></label>
 {template nfooter.html}

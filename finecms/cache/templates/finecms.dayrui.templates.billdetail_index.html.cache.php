@@ -34,6 +34,7 @@
 			<th class="<?php echo ns_sorting('phone'); ?>" name="checker" ><?php echo fc_lang('欠款'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="saleTime" ><?php echo fc_lang('欠桶'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="remark" ><?php echo fc_lang('押桶'); ?></th>
+			<th class="<?php echo ns_sorting('phone'); ?>" name="remark" ><?php echo fc_lang('时间'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="remark" ><?php echo fc_lang('备注'); ?></th>
 		</tr>
 		</thead>
@@ -44,12 +45,13 @@
 			<td><?php echo dr_keyword_highlight($t['cname'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['bucketNum'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['bottleNum'], $param['keyword']); ?></td>
-			<td><?php echo dr_keyword_highlight($t['backBucketNum'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['unit'].$t['price'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['backBucketNum'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['knot'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['debt'], $param['keyword']); ?></td>
-			<td><?php echo dr_keyword_highlight($t['debtBucketNum'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['debtBucket'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['depositBucket'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['saleTime'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['remark'], $param['keyword']); ?></td>
 		</tr>
 		<?php } } ?>

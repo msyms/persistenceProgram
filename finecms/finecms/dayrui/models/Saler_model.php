@@ -14,7 +14,25 @@ class Saler_model extends M_Model {
 		return $uid;
 	}
 
+    public function addSalerFuel($data) {
+        $this->db->insert('saler_fuel', $data);
+        $uid = $this->db->insert_id();
+        return $uid;
+    }
+
 	public function addBillDetail($data) {
+        $customerId = $data['customerId'];//客户id
+        $knot = $data['knot']?:0;//回款
+        $debt = $data['debt']?:0;//欠款
+        $depositBucket = $data['depositBucket']?:0;//押桶
+        $debtBucket = $data['debtBucket']?:0;//欠桶
+        $sql = "update fn_customer 
+                set knot = knot + $knot,
+                debtMoney = debtMoney + $debt,
+                depositBucket = depositBucket + $depositBucket,
+                debtBucket = debtBucket + $debtBucket
+                where id = $customerId";
+        $this->db->query($sql);
 		$this->db->insert('saler_bill_detail', $data);
 		$uid = $this->db->insert_id();
 		return $uid;
@@ -39,6 +57,35 @@ class Saler_model extends M_Model {
 		}
 		return $data;
 	}
+
+    public function get_saler_fuel($key, $page, $total) {
+        $countInfo = $this->db->where('salerId',$key)
+            ->select('count(*) as total')->get('saler_fuel')->row_array();
+        $total = $countInfo['total'];
+        $select = $this->db->limit(SITE_ADMIN_PAGESIZE, SITE_ADMIN_PAGESIZE * ($page - 1));
+        $select->where('salerId',$key);
+        $order = dr_get_order_string(isset($_GET['order']) && strpos($_GET['order'], "undefined") !== 0 ? $this->input->get('order', TRUE) : 'id desc', 'id desc');
+        $data = $select->order_by($order)->get('saler_fuel')->result_array();
+        $_param['total'] = $total;
+        $_param['order'] = $order;
+        return array($data, $_param);
+    }
+
+    public function get_fuel_exp($salerId) {
+        $sql = "select saler.name,saler.carNo,fuel.rise,fuel.money,fuel.date
+                from fn_saler_fuel fuel 
+                left join fn_saler saler on saler.id = fuel.salerId 
+                where fuel.salerId = $salerId";
+        $result = $this->db->query($sql)->result_array();
+        return $result;
+    }
+
+    public function get_saler_bill_exp($salerId) {
+        $sql = "select salerName,bucketNum,bottleNum,checker,saleTime,remark 
+                from fn_saler_bill where salerId = $salerId ";
+        $result = $this->db->query($sql)->result_array();
+        return $result;
+    }
 
     /**
      * 条件查询
@@ -112,11 +159,12 @@ class Saler_model extends M_Model {
 
 	public function get_bill_detail($key) {
 
-		$sql = "select detail.*,customer.cname,price.unit,price.price 
+		$sql = "select detail.*,customer.cname,price.unit,price.price,bill.saleTime  
                 from fn_saler_bill_detail detail 
+                left join fn_saler_bill bill on detail.billId = bill.id 
                 left join fn_customer customer on detail.customerId = customer.id
                 left join fn_customer_price price on detail.priceId = price.id 
-                where detail.billId = $key";
+                where detail.billId = $key order by detail.id desc ";
 		$data = $this->db->query($sql)->result_array();
 		if (!$data) {
 			return NULL;

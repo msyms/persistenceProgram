@@ -34,6 +34,7 @@
 			<th class="<?php echo ns_sorting('phone'); ?>" name="checker" ><?php echo fc_lang('欠款'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="saleTime" ><?php echo fc_lang('欠桶'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="remark" ><?php echo fc_lang('押桶'); ?></th>
+			<th class="<?php echo ns_sorting('phone'); ?>" name="remark" ><?php echo fc_lang('时间'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="remark" ><?php echo fc_lang('备注'); ?></th>
 		</tr>
 		</thead>
@@ -50,10 +51,11 @@
 				<td><?php echo dr_keyword_highlight($t['debt'], $param['keyword']); ?></td>
 				<td><?php echo dr_keyword_highlight($t['debtBucketNum'], $param['keyword']); ?></td>
 				<td><?php echo dr_keyword_highlight($t['depositBucket'], $param['keyword']); ?></td>
+				<td><?php echo dr_keyword_highlight($t['saleTime'], $param['keyword']); ?></td>
 				<td><?php echo dr_keyword_highlight($t['remark'], $param['keyword']); ?></td>
 			</tr>
 			<?php } } ?>
-		<tr class="mtable_bottom">
+<!-- 		<tr class="mtable_bottom">
         	<th width="20"  ><input name="dr_select" class="toggle md-check" id="dr_select" type="checkbox" onClick="dr_selected()" /></th>
 			<td colspan="10"  >
             <?php if ($this->ci->is_auth('member/admin/home/del')) { ?>
@@ -61,7 +63,7 @@
             <?php } ?>
 
 			</td>
-		</tr>
+		</tr> -->
 		</tbody>
 		</table>
 		</div>
@@ -69,4 +71,5 @@
 </div>
 </form>
 <div id="pages"><a><?php echo fc_lang('共%s条', $param['total']); ?></a><?php echo $_pages; ?></div>
+<label><a href="<?php echo dr_url('customer/exportCustomerBill',array('customerId'=>$customerId)); ?>"><button type="submit" class="btn green btn-sm" > <i class="fa fa-search"></i> <?php echo fc_lang('导出'); ?></button></a></label>
 <?php if ($fn_include = $this->_include("nfooter.html")) include($fn_include); ?>

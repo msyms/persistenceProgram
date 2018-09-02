@@ -37,29 +37,29 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label"><?php echo fc_lang('姓名'); ?>：</label>
                             <div class="col-md-9">
-                                <label><input class="form-control" type="text" name="data[salerName]" value="<?php echo $data['salerName']; ?>" ></label>
+                                <label><input class="form-control" type="text" name="data[name]" readonly value="<?php echo $data['name']; ?>" ></label>
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label"><?php echo fc_lang('桶装水'); ?>：</label>
+                            <label class="col-md-2 control-label"><?php echo fc_lang('车牌号'); ?>：</label>
                             <div class="col-md-9">
-                                <label><input class="form-control" type="text" name="data[bucketNum]" value="<?php echo $data['bucketNum']; ?>" ></label>
+                                <label><input class="form-control" type="text" name="data[carNo]" readonly value="<?php echo $data['carNo']; ?>" ></label>
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label"><?php echo fc_lang('瓶装水'); ?>：</label>
+                            <label class="col-md-2 control-label"><?php echo fc_lang('加油量'); ?>：</label>
                             <div class="col-md-9">
-                                <label><input class="form-control"  type="text" name="data[bottleNum]" value="<?php echo $data['bottleNum']; ?>" ></label>
+                                <label><input class="form-control" type="text" name="data[rise]" value="<?php echo $data['rise']; ?>" ></label>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"><?php echo fc_lang('金额'); ?>：</label>
+                            <div class="col-md-9">
+                                <label><input class="form-control"  type="text" name="data[money]" value="<?php echo $data['money']; ?>" ></label>
                                 <span class="help-block" id="dr_email_tips"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label"><?php echo fc_lang('检核人'); ?>：</label>
-                            <div class="col-md-9">
-                                <label><input class="form-control"  type="text" name="data[checker]" value="<?php echo $data['checker']; ?>" ></label>
-                                <span class="help-block" id="remark"></span>
                             </div>
                         </div>
 

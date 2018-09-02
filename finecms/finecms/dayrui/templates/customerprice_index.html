@@ -24,7 +24,7 @@
 
 		<thead>
 		<tr>
-			<th width="10"></th>
+			<!-- <th width="10"></th> -->
 			<th class="{ns_sorting('name')}" name="salerName" >{fc_lang('客户名')}</th>
 			<th class="{ns_sorting('name')}" name="bucketNum" >{fc_lang('单位')}</th>
 			<th class="{ns_sorting('name')}" name="bottleNum" >{fc_lang('价格')}</th>
@@ -33,13 +33,13 @@
 					<tbody>
 					{loop $list $t}
 					<tr id="dr_row_{$t.uid}">
-						<td><input name="ids[]" type="checkbox" class="dr_select toggle md-check" value="{$t.id}" /></td>
+					<!-- 	<td><input name="ids[]" type="checkbox" class="dr_select toggle md-check" value="{$t.id}" /></td> -->
 						<td>{dr_keyword_highlight($cname, $param.keyword)}</td>
 						<td>{dr_keyword_highlight($t.unit, $param.keyword)}</td>
 						<td>{dr_keyword_highlight($t.price, $param.keyword)}</td>
 					</tr>
 					{/loop}
-		<tr class="mtable_bottom">
+		<!-- <tr class="mtable_bottom">
         	<th width="20"  ><input name="dr_select" class="toggle md-check" id="dr_select" type="checkbox" onClick="dr_selected()" /></th>
 			<td colspan="10"  >
             {if $this->ci->is_auth('member/admin/home/del')}
@@ -47,7 +47,7 @@
             {/if}
 
 			</td>
-		</tr>
+		</tr> -->
 		</tbody>
 		</table>
 		</div>

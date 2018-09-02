@@ -27,14 +27,13 @@ class Customer extends M_Controller {
      * 首页
      */
     public function index() {
-
         // 重置页数和统计
         IS_POST && $_GET['page'] = $_GET['total'] = 0;
-	
+		$search = $_POST['search'];
 		// 根据参数筛选结果
         $param = $this->input->get(NULL, TRUE);
         unset($param['s'], $param['c'], $param['m'], $param['d'], $param['page']);
-		
+		$param['search'] = $search;
 		// 数据库中分页查询
 		list($data, $param) = $this->customer_model->limit_page($param, max((int)$_GET['page'], 1), (int)$_GET['total']);
 
@@ -47,7 +46,7 @@ class Customer extends M_Controller {
         ) + ($field ? $field : array());
         // 存储当前页URL
         $this->_set_back_url('member/index', $param);
-
+        $this->template->assign('search',$search);
 		$this->template->assign(array(
 			'list' => $data,
             'field' => $field,
@@ -83,6 +82,77 @@ class Customer extends M_Controller {
 
 
 	    $this->template->display('customer_add.html');
+    }
+
+    public function exportCustomer() {
+    	ob_end_clean();
+		ob_start();
+    	$date = date('Y-m-d');
+    	$filename = $date.'客户信息.xls';
+    	header('content-type:application/vnd.ms-excel;charset=UTF-8');
+        header('content-disposition:attachment;filename='.$filename);
+        header('Content-Transfer-Encoding: binary');
+        header('Pragma:no-cache');
+        header('Expires:0');
+        header("Pragma: public");
+        header("Cache-Control:must-revalidate, post-check=0, pre-check=0");
+        header("Content-Type:application/force-download");
+        header("Content-Type:application/octet-stream");
+        header("Content-Type:application/download");
+
+        $title = array(
+            '姓名',
+            '电话',
+            '地址',
+            '欠桶',
+            '欠款',
+            '押桶',
+            '备注'
+        );
+        echo iconv('utf-8', 'gbk', implode("\t", $title)) . "\n";
+
+        $list = $this->customer_model->get_all_customer();
+
+        foreach ($list as $key => $value) {
+            echo iconv('utf-8', 'gbk', implode("\t", $value)) . "\n";
+        }
+    }
+
+    public function exportCustomerBill() {
+    	$customerId = $_GET['customerId'];
+    	$date = date('Y-m-d');
+    	$filename = $date.'客户账单.xls';
+    	header('content-type:application/vnd.ms-excel;charset=UTF-8');
+        header('content-disposition:attachment;filename='.$filename);
+        header('Content-Transfer-Encoding: binary');
+        header('Pragma:no-cache');
+        header('Expires:0');
+        header("Pragma: public");
+        header("Cache-Control:must-revalidate, post-check=0, pre-check=0");
+        header("Content-Type:application/force-download");
+        header("Content-Type:application/octet-stream");
+        header("Content-Type:application/download");
+
+        $title = array(
+            '姓名',
+            '桶装水',
+            '瓶装水',
+            '价格',
+            '回桶',
+            '结款',
+            '欠款',
+            '欠桶',
+            '押桶',
+            '时间',
+            '备注'
+        );
+        echo iconv('utf-8', 'gbk', implode("\t", $title)) . "\n";
+
+        $list = $this->customer_model->get_customer_bill_exp($customerId);
+        foreach ($list as $key => $value) {
+            echo iconv('utf-8', 'gbk', implode("\t", $value)) . "\n";
+        }
+        return false;
     }
 	
 	/**
@@ -141,7 +211,6 @@ class Customer extends M_Controller {
 	    list($data, $param) = $this->customer_model->get_customer_bill($customerId, max((int)$_GET['page'], 1), (int)$_GET['total']);
 
 
-
 	    $field = $this->get_cache('member', 'field');
 	    $field = array(
 			    'username' => array('fieldname' => 'username','name' => fc_lang('会员名称')),
@@ -154,6 +223,7 @@ class Customer extends M_Controller {
 		    fc_lang('返回') => array('admin/customer/index', 'reply')
 
 	    )));
+	    $this->template->assign('customerId',$customerId);
 	    $this->template->assign(array(
 		    'list' => $data,
 		    'field' => $field,

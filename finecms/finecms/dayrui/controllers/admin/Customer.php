@@ -160,10 +160,9 @@ class Customer extends M_Controller {
      */
     public function edit() {
 	
-		$uid = (int)$this->input->get('uid');
+		$customerId = (int)$this->input->get('customerId');
 		$page = (int)$this->input->get('page');
-		$data = $this->customer_model->get_customer($uid);
-
+		$data = $this->customer_model->get_customer($customerId);
         !$data && $this->admin_msg(fc_lang('对不起，数据被删除或者查询不存在'));
 
 		$field = array();
@@ -181,13 +180,9 @@ class Customer extends M_Controller {
 					'address' => $edit['address'],
 					'remark' => $edit['remark'],
 				);
-
-				$this->db->where('id', $uid)->update('customer', $update);
-
-                $this->system_log('修改会员【'.$data['username'].'】资料'); // 记录日志
+				$this->db->where('id', $customerId)->update('customer', $update);
 				$this->admin_msg(fc_lang('操作成功，正在刷新...'), dr_url('customer/edit', array('uid' => $uid, 'page' => $page)), 1);
 			}
-			$this->admin_msg($error, dr_url('customer/edit', array('uid' => $uid, 'page' => $page)));
 		}
 		
 		$this->template->assign(array(
@@ -231,6 +226,11 @@ class Customer extends M_Controller {
 		    'pages'	=> $this->get_pagination(dr_qxurl('customer/bill/customer/'.$customerId, $param), $param['total']),
 	    ));
 	    $this->template->display('customerbill_index.html');
+    }
+
+    public function billDel() {
+	    $billId = $this->_GET['billId'];
+	    $this->customer_model->deletebill($billId);
     }
 
 	public function price() {

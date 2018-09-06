@@ -29,6 +29,8 @@
 			<th class="<?php echo ns_sorting('name'); ?>" name="bucketNum" ><?php echo fc_lang('桶装水'); ?></th>
 			<th class="<?php echo ns_sorting('name'); ?>" name="bottleNum" ><?php echo fc_lang('瓶装水'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="checker" ><?php echo fc_lang('检核人'); ?></th>
+			<th class="<?php echo ns_sorting('phone'); ?>" name="saleTime" ><?php echo fc_lang('剩余桶装水'); ?></th>
+			<th class="<?php echo ns_sorting('phone'); ?>" name="saleTime" ><?php echo fc_lang('剩余瓶装水'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="saleTime" ><?php echo fc_lang('时间'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="remark" ><?php echo fc_lang('备注'); ?></th>
 			<th class="dr_option"><?php echo fc_lang('操作'); ?></th>
@@ -42,11 +44,12 @@
 			<td><?php echo dr_keyword_highlight($t['bucketNum'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['bottleNum'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['checker'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['bucketNum'] - $t['bucketTotal'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['bottleNum'] - $t['bottleTotal'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['saleTime'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['remark'], $param['keyword']); ?></td>
 			<td class="dr_option">
-				<?php if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/billdetail',array('billId'=>$t['id'],'salerId'=>$salerId)); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('详情'); ?></a><?php } ?>
-				<!-- <?php if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/edit',array('id'=>$t['id'])); ?>" > <i class="fa fa-edit"></i> <?php echo fc_lang('修改'); ?></a><?php } ?> -->
+				<?php if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/billdetail',array('billId'=>$t['id'],'salerId'=>$salerId)); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('详情'); ?></a><?php }  if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/billedit',array('billId'=>$t['id'],'salerId'=>$salerId)); ?>" > <i class="fa fa-edit"></i> <?php echo fc_lang('修改'); ?></a><?php } ?>
 			</td>
 		</tr> 
 		<?php } } ?>

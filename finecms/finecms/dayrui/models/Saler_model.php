@@ -38,6 +38,29 @@ class Saler_model extends M_Model {
 		return $uid;
 	}
 
+	public function editBillDetail($id,$edit) {
+		$this->db->where('id',$id);
+		$data = $this->db
+			->limit(1)
+			->select('id,name,phone,carNo,remark')
+			->get('saler')
+			->row_array();
+		$customerId = $data['customerId'];
+		$knot = $edit['knot']?:0 - $data['knot']?:0;//回款
+		$debt = $edit['debt']?:0 - $data['debt']?:0;//欠款
+		$depositBucket = $edit['depositBucket']?:0 - $data['depositBucket']?:0;//押桶
+		$debtBucket = $edit['debtBucket']?:0 - $data['debtBucket']?:0;//欠桶
+		$sql = "update fn_customer 
+                set knot = knot + $knot,
+                debtMoney = debtMoney + $debt,
+                depositBucket = depositBucket + $depositBucket,
+                debtBucket = debtBucket + $debtBucket
+                where id = $customerId";
+		$this->db->query($sql);
+		$this->db->where('id', $customerId)->update('customer', $edit);
+		return $uid;
+	}
+
 
 	/**
 	 * 会员基本信息
@@ -57,6 +80,35 @@ class Saler_model extends M_Model {
 		}
 		return $data;
 	}
+
+	public function get_fuel_detail($fuelId) {
+		$this->db->where('id', (int)$fuelId);
+
+		$data = $this->db
+			->limit(1)
+			->select('id,name,phone,carNo,remark')
+			->get('saler')
+			->row_array();
+		if (!$data) {
+			return NULL;
+		}
+		return $data;
+	}
+
+	public function get_saler_bill($key) {
+		$this->db->where('id', (int)$key);
+
+		$data = $this->db
+			->limit(1)
+			->select('id,salerName,bucketNum,bottleNum,checker,saleTime,remark')
+			->get('saler_bill')
+			->row_array();
+		if (!$data) {
+			return NULL;
+		}
+		return $data;
+	}
+
 
     public function get_saler_fuel($key, $page, $total) {
         $countInfo = $this->db->where('salerId',$key)
@@ -180,7 +232,12 @@ class Saler_model extends M_Model {
 	    $select->where('salerId',$key);
 	    $order = dr_get_order_string(isset($_GET['order']) && strpos($_GET['order'], "undefined") !== 0 ? $this->input->get('order', TRUE) : 'id desc', 'id desc');
 	    $data = $select->order_by($order)->get('saler_bill')->result_array();
-
+	    $sql = "select bill.*,detail.bucketTotal,detail.bottleTotal from fn_saler_bill bill
+				left join (select billId, sum(bucketNum) as bucketTotal,sum(bottleNum) as bottleTotal
+				 			from fn_saler_bill_detail GROUP BY billId ) detail 
+				on bill.id = detail.billId
+				where bill.salerId = $key ";
+	    $data = $this->db->query($sql)->result_array();
 	    $_param['total'] = $total;
 	    $_param['order'] = $order;
 	    return array($data, $_param);

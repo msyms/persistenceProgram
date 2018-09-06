@@ -30,6 +30,8 @@
 			<th class="{ns_sorting('name')}" name="bucketNum" >{fc_lang('桶装水')}</th>
 			<th class="{ns_sorting('name')}" name="bottleNum" >{fc_lang('瓶装水')}</th>
 			<th class="{ns_sorting('phone')}" name="checker" >{fc_lang('检核人')}</th>
+			<th class="{ns_sorting('phone')}" name="saleTime" >{fc_lang('剩余桶装水')}</th>
+			<th class="{ns_sorting('phone')}" name="saleTime" >{fc_lang('剩余瓶装水')}</th>
 			<th class="{ns_sorting('phone')}" name="saleTime" >{fc_lang('时间')}</th>
 			<th class="{ns_sorting('phone')}" name="remark" >{fc_lang('备注')}</th>
 			<th class="dr_option">{fc_lang('操作')}</th>
@@ -43,11 +45,13 @@
 			<td>{dr_keyword_highlight($t.bucketNum, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.bottleNum, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.checker, $param.keyword)}</td>
+			<td>{dr_keyword_highlight($t.bucketNum - $t.bucketTotal, $param.keyword)}</td>
+			<td>{dr_keyword_highlight($t.bottleNum - $t.bottleTotal, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.saleTime, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.remark, $param.keyword)}</td>
 			<td class="dr_option">
 				{if $this->ci->is_auth('member/admin/home/edit')}<a class="aedit" href="{dr_url('saler/billdetail',array('billId'=>$t.id,'salerId'=>$salerId))}"> <i class="fa fa-edit"></i> {fc_lang('详情')}</a>{/if}
-				<!-- {if $this->ci->is_auth('member/admin/home/edit')}<a class="aedit" href="{dr_url('saler/edit',array('id'=>$t.id))}" > <i class="fa fa-edit"></i> {fc_lang('修改')}</a>{/if} -->
+				 {if $this->ci->is_auth('member/admin/home/edit')}<a class="aedit" href="{dr_url('saler/billedit',array('billId'=>$t.id,'salerId'=>$salerId))}" > <i class="fa fa-edit"></i> {fc_lang('修改')}</a>{/if}
 			</td>
 		</tr> 
 		{/loop}

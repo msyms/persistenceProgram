@@ -91,9 +91,9 @@ class Saler extends M_Controller {
 	 */
 	public function edit() {
 
-		$uid = (int)$this->input->get('id');
+		$salerId = (int)$this->input->get('$salerId');
 		$page = (int)$this->input->get('page');
-		$data = $this->saler_model->get_saler($uid);
+		$data = $this->saler_model->get_saler($salerId);
 
 		!$data && $this->admin_msg(fc_lang('对不起，数据被删除或者查询不存在'));
 
@@ -113,7 +113,7 @@ class Saler extends M_Controller {
 				);
 
 
-				$this->db->where('id', $uid)->update('saler', $update);
+				$this->db->where('id', $salerId)->update('saler', $update);
 
 				$this->admin_msg(fc_lang('操作成功，正在刷新...'), dr_url('saler/edit', array('id' => $uid, 'page' => $page)), 1);
 			}
@@ -198,6 +198,44 @@ class Saler extends M_Controller {
 		$this->template->assign('data', $data);
 		$this->template->assign('time', time());
 		$this->template->display('salerfuel_add.html');
+	}
+
+	public function fueledit() {
+		$salerId = (int)$this->input->get('$salerId');
+		$page = (int)$this->input->get('page');
+		$data = $this->saler_model->get_saler_fuel($salerId);
+
+		!$data && $this->admin_msg(fc_lang('对不起，数据被删除或者查询不存在'));
+
+		$field = array();
+
+		if (IS_POST) {
+			$edit = $this->input->post('member');
+			$page = (int)$this->input->post('page');
+			$post = $this->validate_filter($field, $data);
+			if (isset($post['error'])) {
+				$error = $post['msg'];
+			} else {
+				$update = array(
+					'name' => $edit['name'],
+					'phone' => $edit['phone'],
+					'carNo' => $edit['carNo'],
+				);
+
+
+				$this->db->where('id', $salerId)->update('saler', $update);
+
+				$this->admin_msg(fc_lang('操作成功，正在刷新...'), dr_url('saler/edit', array('id' => $uid, 'page' => $page)), 1);
+			}
+			$this->admin_msg($error, dr_url('saler/edit', array('id' => $uid, 'page' => $page)));
+		}
+
+		$this->template->assign(array(
+			'data' => $data,
+			'page' => $page,
+			'myfield' => $this->field_input($field, $data, TRUE),
+		));
+		$this->template->display('saler_edit.html');
 	}
 	/**
 	 * 首页
@@ -284,82 +322,40 @@ class Saler extends M_Controller {
 	 */
 	public function billedit() {
 
-		$id = (int)$this->input->get('id');
-		$cid = (int)$this->input->get('catid');
-		$data = $this->content_model->get($id);
-		$catid = $cid ? $cid : $data['catid'];
-		$error = $myflag = array();
-		unset($cid);
+		$billId = (int)$this->input->get('billId');
+		$salerId = (int)$this->input->get('salerId');
+		$data = $this->saler_model->get_saler_bill($billId);
 
-		// 数据判断
 		!$data && $this->admin_msg(fc_lang('对不起，数据被删除或者查询不存在'));
 
-
-		// 栏目缓存
-		$category = $this->get_cache('category-'.SITE_ID);
-
+		$field = array();
 
 		if (IS_POST) {
-			$cid = (int)$this->input->post('catid');
-			$catid = $cid;
-			unset($cid);
-			// 设置uid便于校验处理
-			$uid = $this->input->post('data[author]') ? get_member_id($this->input->post('data[author]')) : 0;
-			$_POST['data']['id'] = $id;
-			$_POST['data']['uid'] = $uid;
-			// 获取字段
-			$myfield = array_merge($this->_get_field(), $this->sysfield);
-			$post = $this->validate_filter($myfield, $data);
-			if (isset($post['error'])) {
-				$error = $post;
-			} elseif (!$catid) {
-				$error = array('error' => 'catid', 'msg' => fc_lang('还没有选择栏目'));
-			} else {
-				$post[1]['uid'] = $uid;
-				$post[1]['catid'] = $catid;
-				$post[1]['updatetime'] = $this->input->post('no_time') ? $data['updatetime'] : $post[1]['updatetime'];
-
-				// 正常保存
-				$this->content_model->edit($data, $post);
-				// 执行提交后的脚本
-				$this->validate_table($id, $myfield, $post);
-				// 操作成功处理附件
-				$this->attachment_handle($post[1]['uid'], $this->content_model->prefix.'-'.$id, $myfield, $data);
-
-				$this->system_log('修改 站点【#'.SITE_ID.'】模型 内容【#'.$id.'】'); // 记录日志
-
-				//exit;
-				$this->admin_msg(
-					fc_lang('操作成功，正在刷新...'),
-					$this->_get_back_url('content/index', array('mid' => $this->mid)),
-					1,
-					1
-				);
-			}
-			$data = $this->input->post('data', TRUE);
-		} else {
+			$edit = $this->input->post('data');
+			$update = array(
+				'salerName' => $edit['salerName'],
+				'bucketNum' => $edit['bucketNum'],
+				'bottleNum' => $edit['bottleNum'],
+				'checker' => $edit['checker'],
+				'saleTime' => date('Y-m-d',$edit['time']),
+				'remark' => $edit['remark'],
+			);
+			$this->db->where('id', $billId)->update('saler_bill', $update);
+			$this->admin_msg(
+				fc_lang('操作成功，正在刷新...'),
+				$this->_get_back_url('saler/bill', array('salerId' =>$salerId)),
+				1,
+				1
+			);
 
 		}
-
-
-		// 可用字段
-		$myfield = $this->_get_field($catid);
-
-		$data['updatetime'] = SYS_TIME;
+		var_dump(strtotime($data['saleTime']));
 		$this->template->assign(array(
+			'time' => strtotime($data['saleTime']) ,
 			'data' => $data,
-			'menu' => $this->get_menu_v3(array(
-				fc_lang('返回') => array('admin/content/index/mid/'.$this->mid, 'reply'),
-				fc_lang('发布') => array('/admin/content/add/mid/'.$this->mid, 'plus')
-			)),
-			'catid' => $catid,
-			'error' => $error,
-			'select' => $this->select_category($category, $catid, 'id=\'dr_catid\' name=\'catid\' onChange="show_category_field(this.value)"', '', 1, 1),
-			'myfield' => $this->new_field_input($myfield, $data, TRUE),
-			'sysfield' => $this->new_field_input($this->sysfield, $data, TRUE, '', '<div class="form-group" id="dr_row_{name}"><label class="col-sm-12">{text}</label><div class="col-sm-12">{value}</div></div>'),
-
+			'myfield' => $this->field_input($field, $data, TRUE),
 		));
-		$this->template->display('content_add.html');
+		$this->template->display('salerbill_add.html');
 	}
 
 	/**
@@ -442,6 +438,50 @@ class Saler extends M_Controller {
 		$this->template->display('billdetail_add.html');
 	}
 
+
+	public function billdetailedit() {
+		$id = $_GET['billId'];
+
+
+		if (IS_POST) {
+
+			$data = $this->input->post( 'data' );
+			$info = $this->input->post( 'info' );
+			$customerId = $this->customer_model->get_customer_name($data['cname']);
+			// 单个添加
+			$uid = $this->saler_model->editBillDetail($id, [
+				'billId'   => $data['billId'],
+				'customerId'   => $customerId,
+				'priceId'   => $data['priceId'],
+				'bucketNum'  => $data['bucketNum'],
+				'bottleNum'  => $data['bottleNum'],
+				'backBucketNum'  => $data['backBucketNum'],
+				'knot'  => $data['knot'],
+				'debt'  => $data['debt'],
+				'depositBucket'  => $data['depositBucket'],
+				'debtBucket' => $data['debtBucket'],
+				'remark' => $info?:'',
+			] );
+
+			exit( dr_json( 1, fc_lang( '操作成功，正在刷新...' ) ) );
+//			$this->admin_msg(
+//				fc_lang('操作成功，正在刷新...'),
+//				$this->_get_back_url('saler/bill', array('id' =>$id)),
+//				1,
+//				1
+//			);
+		}
+		$url = 'admin/saler/billdetail/billId/'.$id;
+		$this->template->assign('menubill', $this->get_menu_v3(array(
+			fc_lang('返回') => array($url, 'reply')
+		)));
+		$customer = $this->customer_model->get_all_customer();
+		$this->template->assign('customer',$customer);
+		$data = $this->saler_model->get_saler();
+		$this->template->assign('billId', $id);
+		$this->template->assign('time', time());
+		$this->template->display('billdetail_add.html');
+	}
 
 	public function exportFuel() {
 		$salerId = $_GET['salerId'];

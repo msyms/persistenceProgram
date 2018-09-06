@@ -37,7 +37,7 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label"><?php echo fc_lang('姓名'); ?>：</label>
                             <div class="col-md-9">
-                                <label><input class="form-control" type="text" name="member[name]" value="<?php echo $data['name']; ?>" ></label>
+                                <label><input class="form-control" type="text" name="member[name]" value="<?php echo $data['cname']; ?>" ></label>
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -49,9 +49,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label"><?php echo fc_lang('车牌号'); ?>：</label>
+                            <label class="col-md-2 control-label"><?php echo fc_lang('地址'); ?>：</label>
                             <div class="col-md-9">
-                                <label><input class="form-control"  type="text" name="member[carNo]" value="<?php echo $data['carNo']; ?>" ></label>
+                                <label><input class="form-control"  type="text" name="member[carNo]" value="<?php echo $data['address']; ?>" ></label>
                                 <span class="help-block" id="dr_email_tips"></span>
                             </div>
                         </div>

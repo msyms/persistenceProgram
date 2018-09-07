@@ -130,7 +130,17 @@ class Saler extends M_Controller {
 
 
 	public function fuel() {
+		$search = [];
 		$salerId = $_GET['salerId'];
+		$time  =  isset($_POST['data']['time']) && $_POST['data']['time'] ? (int)$_POST['data']['time'] : (int)$this->input->get('time');
+		if($time) {
+			$search['start'] = date('Y-m-d',$_POST['data']['time']);
+			$time1 = $search['end'] = date('Y-m-d',$_POST['data']['time1'] );
+		}
+		$time =  $time ? $time : SYS_TIME;
+		if(!$time1) {
+			$time1 = $time;
+		}
 	    // 重置页数和统计
 	    IS_POST && $_GET['page'] = $_GET['total'] = 0;
 
@@ -139,7 +149,7 @@ class Saler extends M_Controller {
 	    unset($param['s'], $param['c'], $param['m'], $param['d'], $param['page']);
 
 	    // 数据库中分页查询
-	    list($data, $param) = $this->saler_model->get_saler_fuel($salerId, max((int)$_GET['page'], 1), (int)$_GET['total']);
+	    list($data, $param) = $this->saler_model->get_saler_fuel($salerId, max((int)$_GET['page'], 1), (int)$_GET['total'], $search);
 
 	    $field = $this->get_cache('member', 'field');
 	    $field = array(
@@ -159,6 +169,8 @@ class Saler extends M_Controller {
 	    $this->template->assign('salerId',$salerId);
 	    $this->template->assign('salerInfo',$salerInfo);
 	    $this->template->assign(array(
+		    'time' => $time,
+		    'time1' => $time1,
 		    'list' => $data,
 		    'field' => $field,
 		    'param'	=> $param,
@@ -202,8 +214,8 @@ class Saler extends M_Controller {
 
 	public function fueledit() {
 		$salerId = (int)$this->input->get('$salerId');
-		$page = (int)$this->input->get('page');
-		$data = $this->saler_model->get_saler_fuel($salerId);
+		$fuelId = (int)$this->input->get('fuelId');
+		$data = $this->saler_model->get_fuel_detail($fuelId);
 
 		!$data && $this->admin_msg(fc_lang('对不起，数据被删除或者查询不存在'));
 
@@ -211,15 +223,14 @@ class Saler extends M_Controller {
 
 		if (IS_POST) {
 			$edit = $this->input->post('member');
-			$page = (int)$this->input->post('page');
-			$post = $this->validate_filter($field, $data);
 			if (isset($post['error'])) {
 				$error = $post['msg'];
 			} else {
 				$update = array(
-					'name' => $edit['name'],
-					'phone' => $edit['phone'],
-					'carNo' => $edit['carNo'],
+					'rise' => $edit['rise'],
+					'money' => $edit['money'],
+					'date' => $edit['date'],
+					'remark' => $edit['remark'],
 				);
 
 
@@ -349,7 +360,12 @@ class Saler extends M_Controller {
 			);
 
 		}
-		var_dump(strtotime($data['saleTime']));
+		$url = 'admin/saler/billdetailadd/billId/'.$billId;
+		// 存储当前页URL
+		$this->template->assign('menubill', $this->get_menu_v3(array(
+			fc_lang('返回') => array('admin/saler/bill/salerId/'.$salerId, 'reply'),
+
+		)));
 		$this->template->assign(array(
 			'time' => strtotime($data['saleTime']) ,
 			'data' => $data,

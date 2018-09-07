@@ -3,16 +3,16 @@
 
 <form class="form-horizontal" action="" method="post" id="myform" name="myform">
     <input name="page" id="page" type="hidden" value="<?php echo $page; ?>" />
-    <div class="page-bar">
-        <ul class="page-breadcrumb mylink">
-            <?php echo $menu['link']; ?>
+    <!--<div class="page-bar">-->
+        <!--<ul class="page-breadcrumb mylink">-->
+            <!--<?php echo $menu['link']; ?>-->
 
-        </ul>
-        <ul class="page-breadcrumb myname">
-            <?php echo $menu['name']; ?>
-        </ul>
+        <!--</ul>-->
+        <!--<ul class="page-breadcrumb myname">-->
+            <!--<?php echo $menu['name']; ?>-->
+        <!--</ul>-->
 
-    </div>
+    <!--</div>-->
     <h3 class="page-title">
         <small></small>
     </h3>

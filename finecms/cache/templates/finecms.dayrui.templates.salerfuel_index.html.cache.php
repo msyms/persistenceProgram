@@ -12,7 +12,15 @@
 	</div>
 </div>
 
-
+<div class="mytopsearch">
+	<form method="post" action="" name="searchform" id="searchform">
+		<label><?php echo fc_lang('开始'); ?> ：</label>
+		<label style="margin-right: 10px;"><?php echo dr_field_input('time', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>120)), (int)$time); ?></label>
+		<label><?php echo fc_lang('结束'); ?> ：</label>
+		<label style="margin-right: 10px;"><?php echo dr_field_input('time1', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>120)), (int)$time1); ?></label>
+		<label style="margin-right: 10px;"><button type="submit" class="btn green btn-sm" name="submit" > <i class="fa fa-search"></i> <?php echo fc_lang('搜索'); ?></button></label>
+	</form>
+</div>
 
 <form action="" method="post" name="myform" id="myform">
 	<input name="action" id="action" type="hidden" value="del" />
@@ -31,6 +39,7 @@
 			<th class="<?php echo ns_sorting('name'); ?>" name="bottleNum" ><?php echo fc_lang('金额'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="saleTime" ><?php echo fc_lang('时间'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="remark" ><?php echo fc_lang('备注'); ?></th>
+			<th class="<?php echo ns_sorting('phone'); ?>" name="remark" ><?php echo fc_lang('操作'); ?></th>
 		</tr>
 		</thead>
 		<tbody>
@@ -43,6 +52,9 @@
 			<td><?php echo dr_keyword_highlight($t['money'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['date'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['remark'], $param['keyword']); ?></td>
+			<td class="dr_option">
+				<?php if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/fueldit',array('billId'=>$t['id'],'salerId'=>$salerId)); ?>" > <i class="fa fa-edit"></i> <?php echo fc_lang('修改'); ?></a><?php } ?>
+			</td>
 		</tr> 
 		<?php } } ?>
 		<!-- <tr class="mtable_bottom">

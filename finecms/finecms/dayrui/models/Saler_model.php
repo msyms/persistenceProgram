@@ -86,8 +86,8 @@ class Saler_model extends M_Model {
 
 		$data = $this->db
 			->limit(1)
-			->select('id,name,phone,carNo,remark')
-			->get('saler')
+			->select('id,rise,money,date,remark')
+			->get('saler_fuel')
 			->row_array();
 		if (!$data) {
 			return NULL;
@@ -110,12 +110,17 @@ class Saler_model extends M_Model {
 	}
 
 
-    public function get_saler_fuel($key, $page, $total) {
+    public function get_saler_fuel($key, $page, $total, $search) {
         $countInfo = $this->db->where('salerId',$key)
             ->select('count(*) as total')->get('saler_fuel')->row_array();
         $total = $countInfo['total'];
         $select = $this->db->limit(SITE_ADMIN_PAGESIZE, SITE_ADMIN_PAGESIZE * ($page - 1));
         $select->where('salerId',$key);
+	    var_dump($search);
+	    if(count($search)) {
+		    $select->where('date >= ', $search['start']);
+		    $select->where('date <= ', $search['end']);
+	    }
         $order = dr_get_order_string(isset($_GET['order']) && strpos($_GET['order'], "undefined") !== 0 ? $this->input->get('order', TRUE) : 'id desc', 'id desc');
         $data = $select->order_by($order)->get('saler_fuel')->result_array();
         $_param['total'] = $total;

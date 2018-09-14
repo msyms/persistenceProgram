@@ -37,14 +37,14 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label"><?php echo fc_lang('姓名'); ?>：</label>
                             <div class="col-md-9">
-                                <label><input class="form-control" type="text" name="data[name]" readonly value="<?php echo $data['name']; ?>" ></label>
+                                <label><input class="form-control" type="text" name="data[name]" readonly value="<?php echo $salerInfo['name']; ?>" ></label>
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 control-label"><?php echo fc_lang('车牌号'); ?>：</label>
                             <div class="col-md-9">
-                                <label><input class="form-control" type="text" name="data[carNo]" readonly value="<?php echo $data['carNo']; ?>" ></label>
+                                <label><input class="form-control" type="text" name="data[carNo]" readonly value="<?php echo $salerInfo['carNo']; ?>" ></label>
                                 <span class="help-block"></span>
                             </div>
                         </div>

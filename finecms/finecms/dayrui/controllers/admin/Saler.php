@@ -213,40 +213,40 @@ class Saler extends M_Controller {
 	}
 
 	public function fueledit() {
-		$salerId = (int)$this->input->get('$salerId');
+		$salerId = (int)$this->input->get('salerId');
+		$salerInfo = $this->saler_model->get_saler($salerId);
 		$fuelId = (int)$this->input->get('fuelId');
 		$data = $this->saler_model->get_fuel_detail($fuelId);
-
 		!$data && $this->admin_msg(fc_lang('对不起，数据被删除或者查询不存在'));
 
 		$field = array();
 
 		if (IS_POST) {
-			$edit = $this->input->post('member');
+			$edit = $this->input->post('data');
 			if (isset($post['error'])) {
 				$error = $post['msg'];
 			} else {
 				$update = array(
 					'rise' => $edit['rise'],
 					'money' => $edit['money'],
-					'date' => $edit['date'],
+					'date' => date('Y-m-d',$edit['time']),
 					'remark' => $edit['remark'],
 				);
 
+				$this->db->where('id', $fuelId)->update('saler_fuel', $update);
 
-				$this->db->where('id', $salerId)->update('saler', $update);
-
-				$this->admin_msg(fc_lang('操作成功，正在刷新...'), dr_url('saler/edit', array('id' => $uid, 'page' => $page)), 1);
+				$this->admin_msg(fc_lang('操作成功，正在刷新...'), dr_url('saler/fuel', array('salerId' => $salerId, 'page' => $page)), 1);
 			}
-			$this->admin_msg($error, dr_url('saler/edit', array('id' => $uid, 'page' => $page)));
 		}
 
 		$this->template->assign(array(
 			'data' => $data,
+			'time' => strtotime($data['date']),
+			'salerInfo' => $salerInfo,
 			'page' => $page,
 			'myfield' => $this->field_input($field, $data, TRUE),
 		));
-		$this->template->display('saler_edit.html');
+		$this->template->display('salerfuel_add.html');
 	}
 	/**
 	 * 首页
@@ -402,6 +402,8 @@ class Saler extends M_Controller {
 		)));
 
 		$this->template->assign(array(
+			'salerId' => $salerId,
+			'billId' => $billId,
 			'list' => $data,
 			'param'	=> $param,
 			'pages'	=> $this->get_pagination(dr_url('member/index', $param), $param['total']),
@@ -454,10 +456,27 @@ class Saler extends M_Controller {
 		$this->template->display('billdetail_add.html');
 	}
 
+	public function detaildel() {
+		$detailId = $_GET['detailId'];
+		$billId = $_GET['billId'];
+		$salerId = $_GET['salerId'];
+		$id = $this->saler_model->delBillDetail($detailId);
+		$this->admin_msg(
+				fc_lang('操作成功，正在刷新...'),
+				$this->_get_back_url('saler/billdetail', array('billId' =>$billId,'salerId'=>$salerId)),
+				1,
+				1
+			);
+
+
+	}
+
 
 	public function billdetailedit() {
-		$id = $_GET['billId'];
-
+		$detailId = $_GET['detailId'];
+		$data = $this->saler_model->get_bill_detail($detailId);
+		$customerId = $data['customerId'];
+		$priceInfo = $this->customer_model->get_customer_price($customerId);
 
 		if (IS_POST) {
 
@@ -493,6 +512,7 @@ class Saler extends M_Controller {
 		)));
 		$customer = $this->customer_model->get_all_customer();
 		$this->template->assign('customer',$customer);
+		$this->template->assign('priceInfo',$priceInfo);
 		$data = $this->saler_model->get_saler();
 		$this->template->assign('billId', $id);
 		$this->template->assign('time', time());

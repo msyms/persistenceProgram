@@ -36,6 +36,7 @@
 			<th class="<?php echo ns_sorting('phone'); ?>" name="remark" ><?php echo fc_lang('押桶'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="remark" ><?php echo fc_lang('时间'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="remark" ><?php echo fc_lang('备注'); ?></th>
+			<th class="<?php echo ns_sorting('phone'); ?>" name="remark" ><?php echo fc_lang('操作'); ?></th>
 		</tr>
 		</thead>
 		<tbody>
@@ -53,6 +54,9 @@
 			<td><?php echo dr_keyword_highlight($t['depositBucket'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['saleTime'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['remark'], $param['keyword']); ?></td>
+			<td class="dr_option">
+				<a class="adel" href="<?php echo dr_url('saler/detaildel',array('salerId'=>$salerId,'billId'=>$billId,'detailId'=>$t['id'])); ?>"> <i class="fa fa-trash"></i> <?php echo fc_lang('删除'); ?></a>
+			</td>
 		</tr>
 		<?php } } ?>
 		<!--<tr class="mtable_bottom">-->

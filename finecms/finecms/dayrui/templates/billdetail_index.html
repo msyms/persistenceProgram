@@ -37,6 +37,7 @@
 			<th class="{ns_sorting('phone')}" name="remark" >{fc_lang('押桶')}</th>
 			<th class="{ns_sorting('phone')}" name="remark" >{fc_lang('时间')}</th>
 			<th class="{ns_sorting('phone')}" name="remark" >{fc_lang('备注')}</th>
+			<th class="{ns_sorting('phone')}" name="remark" >{fc_lang('操作')}</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -54,6 +55,9 @@
 			<td>{dr_keyword_highlight($t.depositBucket, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.saleTime, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.remark, $param.keyword)}</td>
+			<td class="dr_option">
+				<a class="adel" href="{dr_url('saler/detaildel',array('salerId'=>$salerId,'billId'=>$billId,'detailId'=>$t.id))}"> <i class="fa fa-trash"></i> {fc_lang('删除')}</a>
+			</td>
 		</tr>
 		{/loop}
 		<!--<tr class="mtable_bottom">-->

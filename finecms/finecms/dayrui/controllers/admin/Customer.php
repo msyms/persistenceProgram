@@ -169,6 +169,7 @@ class Customer extends M_Controller {
 
 		if (IS_POST) {
 			$edit = $this->input->post('member');
+			var_dump($edit);
 			$page = (int)$this->input->post('page');
 			if (isset($post['error'])) {
 				$error = $post['msg'];
@@ -181,7 +182,7 @@ class Customer extends M_Controller {
 					'remark' => $edit['remark'],
 				);
 				$this->db->where('id', $customerId)->update('customer', $update);
-				$this->admin_msg(fc_lang('操作成功，正在刷新...'), dr_url('customer/edit', array('uid' => $uid, 'page' => $page)), 1);
+				$this->admin_msg(fc_lang('操作成功，正在刷新...'), dr_url('customer/index', array( 'page' => $page)), 1);
 			}
 		}
 		

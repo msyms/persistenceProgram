@@ -40,21 +40,29 @@ function dr_form_check() {
         </div>
     </div>
     <div class="form-group dr_one">
-        <label class="col-md-3 control-label"><?php echo fc_lang('欠桶'); ?>：</label>
+        <label class="col-md-3 control-label"><?php echo fc_lang('欠款提醒'); ?>：</label>
         <div class="col-md-7">
-            <input class="form-control" type="text" name="data[debtBucket]" id="dr_debtBucket" value="<?php echo $data['address']; ?>" >
+            <input class="form-control" type="text" name="data[debtTime]" id="dr_debtBucket" value="<?php echo $data['address']; ?>" >
         </div>
     </div>
     <div class="form-group dr_one">
-        <label class="col-md-3 control-label"><?php echo fc_lang('欠款'); ?>：</label>
+        <label class="col-md-3 control-label"><?php echo fc_lang('到访提醒'); ?>：</label>
         <div class="col-md-7">
-            <input class="form-control" type="text" name="data[debtMoney]" id="dr_debtMoney" value="<?php echo $data['address']; ?>" >
+            <input class="form-control" type="text" name="data[meetTime]" id="dr_debtMoney" value="<?php echo $data['address']; ?>" >
         </div>
     </div>
     <div class="form-group dr_one">
-        <label class="col-md-3 control-label"><?php echo fc_lang('押桶'); ?>：</label>
+        <label class="col-md-3 control-label"><?php echo fc_lang('销售人员'); ?>：</label>
         <div class="col-md-7">
-            <input class="form-control" type="text" name="data[depositBucket]" id="dr_depositBucket" value="<?php echo $data['address']; ?>" >
+
+            <label>
+            <select name="data[salerId]" class="form-control" >
+                <?php if (is_array($saler)) { $count=count($saler);foreach ($saler as $t) { ?>
+
+                <option value="<?php echo $t['id']; ?>" <?php if ($t['id'] == $salerId) { ?> selected <?php } ?>><?php echo $t['name']; ?></option>
+                <?php } } ?>
+            </select>
+            </label>
         </div>
     </div>
 

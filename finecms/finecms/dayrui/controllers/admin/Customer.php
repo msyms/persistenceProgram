@@ -61,6 +61,7 @@ class Customer extends M_Controller {
      */
     public function add() {
 
+	    $saler = $this->db->select('*')->get('saler')->result_array();
 		if (IS_POST) {
 
 			$data = $this->input->post( 'data' );
@@ -70,9 +71,9 @@ class Customer extends M_Controller {
 				'cname'   => $data['cname'],
 				'address'  => $data['address'],
 				'phone'  => $data['phone'],
-				'debtBucket'  => $data['debtBucket'],
-				'debtMoney'  => $data['debtMoney'],
-				'depositBucket'  => $data['depositBucket'],
+				'salerId' => $data['salerId'],
+				'debtTime' => $data['debtTime'],
+				'meetTime' => $data['meetTime'],
 				'remark' => $info?:'',
 			] );
 
@@ -80,7 +81,7 @@ class Customer extends M_Controller {
 
 		}
 
-
+		$this->template->assign('saler',$saler);
 	    $this->template->display('customer_add.html');
     }
 
@@ -163,13 +164,13 @@ class Customer extends M_Controller {
 		$customerId = (int)$this->input->get('customerId');
 		$page = (int)$this->input->get('page');
 		$data = $this->customer_model->get_customer($customerId);
+	    $saler = $this->saler_model->get_all_saler();
         !$data && $this->admin_msg(fc_lang('对不起，数据被删除或者查询不存在'));
 
 		$field = array();
 
 		if (IS_POST) {
 			$edit = $this->input->post('member');
-			var_dump($edit);
 			$page = (int)$this->input->post('page');
 			if (isset($post['error'])) {
 				$error = $post['msg'];
@@ -179,6 +180,9 @@ class Customer extends M_Controller {
 					'cname' => $edit['cname'],
 					'phone' => $edit['phone'],
 					'address' => $edit['address'],
+					'salerId' => $edit['salerId'],
+					'debtTime' => $edit['debtTime'],
+					'meetTime' => $edit['meetTime'],
 					'remark' => $edit['remark'],
 				);
 				$this->db->where('id', $customerId)->update('customer', $update);
@@ -188,6 +192,8 @@ class Customer extends M_Controller {
 		
 		$this->template->assign(array(
 			'data' => $data,
+			'salerId' => $data['salerId'],
+			'saler' => $saler,
 			'page' => $page,
 			'myfield' => $this->field_input($field, $data, TRUE),
 		));

@@ -40,21 +40,29 @@ function dr_form_check() {
         </div>
     </div>
     <div class="form-group dr_one">
-        <label class="col-md-3 control-label">{fc_lang('欠桶')}：</label>
+        <label class="col-md-3 control-label">{fc_lang('欠款提醒')}：</label>
         <div class="col-md-7">
-            <input class="form-control" type="text" name="data[debtBucket]" id="dr_debtBucket" value="{$data.address}" >
+            <input class="form-control" type="text" name="data[debtTime]" id="dr_debtBucket" value="{$data.address}" >
         </div>
     </div>
     <div class="form-group dr_one">
-        <label class="col-md-3 control-label">{fc_lang('欠款')}：</label>
+        <label class="col-md-3 control-label">{fc_lang('到访提醒')}：</label>
         <div class="col-md-7">
-            <input class="form-control" type="text" name="data[debtMoney]" id="dr_debtMoney" value="{$data.address}" >
+            <input class="form-control" type="text" name="data[meetTime]" id="dr_debtMoney" value="{$data.address}" >
         </div>
     </div>
     <div class="form-group dr_one">
-        <label class="col-md-3 control-label">{fc_lang('押桶')}：</label>
+        <label class="col-md-3 control-label">{fc_lang('销售人员')}：</label>
         <div class="col-md-7">
-            <input class="form-control" type="text" name="data[depositBucket]" id="dr_depositBucket" value="{$data.address}" >
+
+            <label>
+            <select name="data[salerId]" class="form-control" >
+                {loop $saler $t}
+
+                <option value="{$t.id}" {if $t.id == $salerId } selected {/if}>{$t.name}</option>
+                {/loop}
+            </select>
+            </label>
         </div>
     </div>
 

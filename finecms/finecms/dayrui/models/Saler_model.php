@@ -72,7 +72,7 @@ class Saler_model extends M_Model {
 
 		$data = $this->db
 			->limit(1)
-			->select('id,name,phone,carNo,remark')
+			->select('id,name,phone,carNo,remark,type')
 			->get('saler')
 			->row_array();
 		if (!$data) {
@@ -151,6 +151,11 @@ class Saler_model extends M_Model {
         return $result;
     }
 
+    public function get_all_saler() {
+	    $data = $this->db->select('*')->get('saler')->result_array();
+	    return $data;
+    }
+
     /**
      * 条件查询
      */
@@ -212,10 +217,17 @@ class Saler_model extends M_Model {
             }
             $page = 1;
         }
+		$date = date('Y-m-d',time());
+        $sql = "select saler.*,sum(detail.knot) as allknot,sum(detail.bucketNum) as allbucket,
+				sum(detail.bottleNum) as allbottleNum,sum(detail.drinkNum) as alldrinkNum 
+ 				from fn_saler saler  
+				left join fn_saler_bill bill on bill.salerId = saler.id and saleTime = '$date'
+				left join fn_saler_bill_detail detail on detail.billId  = bill.id 
+				group by saler.id ";
         $select = $this->db->limit(SITE_ADMIN_PAGESIZE, SITE_ADMIN_PAGESIZE * ($page - 1));
         $_param = $this->_where($select, $param);
         $order = dr_get_order_string(isset($_GET['order']) && strpos($_GET['order'], "undefined") !== 0 ? $this->input->get('order', TRUE) : 'id desc', 'id desc');
-        $data = $select->order_by($order)->get('saler')->result_array();
+        $data = $this->db->query($sql)->result_array();
         $_param['total'] = $total;
         $_param['order'] = $order;
         return array($data, $_param);

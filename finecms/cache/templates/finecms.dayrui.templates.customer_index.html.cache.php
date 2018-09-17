@@ -44,6 +44,7 @@
 			<th class="<?php echo ns_sorting('cname'); ?>" name="cname" ><?php echo fc_lang('姓名'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="phone" ><?php echo fc_lang('电话'); ?></th>
 			<th class="<?php echo ns_sorting('address'); ?>" name="address" ><?php echo fc_lang('地址'); ?></th>
+			<th class="<?php echo ns_sorting('address'); ?>" name="address" ><?php echo fc_lang('销售人员'); ?></th>
 			<th class="<?php echo ns_sorting('debtBucket'); ?>" name="address" ><?php echo fc_lang('欠桶'); ?></th>
 			<th class="<?php echo ns_sorting('debtMoney'); ?>" name="address" ><?php echo fc_lang('欠款'); ?></th>
 			<th class="<?php echo ns_sorting('address'); ?>" name="address" ><?php echo fc_lang('押桶'); ?></th>
@@ -59,6 +60,7 @@
 			<td><?php echo dr_keyword_highlight($t['cname'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['phone'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['address'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['name'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['debtBucket'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['debtMoney'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['depositBucket'], $param['keyword']); ?></td>

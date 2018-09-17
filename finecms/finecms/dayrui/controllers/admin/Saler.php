@@ -58,8 +58,8 @@ class Saler extends M_Controller {
     }
 
 	/**
-	 * 添加
-	 */
+ * 添加
+ */
 	public function add() {
 
 		if (IS_POST) {
@@ -72,10 +72,10 @@ class Saler extends M_Controller {
 				'name'   => $data['name'],
 				'carNo'  => $data['carNo'],
 				'phone'  => $data['phone'],
+				'type'   => $data['type'],
 				'remark' => $info?:'',
 			] );
 
-			$this->system_log( '添加会员【#' . $uid . '】' . $data['name'] ); // 记录日志
 			exit( dr_json( 1, fc_lang( '操作成功，正在刷新...' ) ) );
 
 		}
@@ -83,6 +83,7 @@ class Saler extends M_Controller {
 
 		$this->template->display('saler_add.html');
 	}
+
 
 
 
@@ -115,9 +116,9 @@ class Saler extends M_Controller {
 
 				$this->db->where('id', $salerId)->update('saler', $update);
 
-				$this->admin_msg(fc_lang('操作成功，正在刷新...'), dr_url('saler/edit', array('id' => $uid, 'page' => $page)), 1);
+				$this->admin_msg(fc_lang('操作成功，正在刷新...'), dr_url('saler/index', array( 'page' => $page)), 1);
 			}
-			$this->admin_msg($error, dr_url('saler/edit', array('id' => $uid, 'page' => $page)));
+			$this->admin_msg($error, dr_url('saler/index', array( 'page' => $page)));
 		}
 
 		$this->template->assign(array(
@@ -306,6 +307,7 @@ class Saler extends M_Controller {
 				'salerName'   => $data['salerName'],
 				'bucketNum'  => $data['bucketNum'],
 				'bottleNum'  => $data['bottleNum'],
+				'drinkNum'   => $data['drinkNum'],
 				'checker' => $data['checker'],
 				'saleTime' => $data['saleTime']?:date('Y-m-d'),
 				'remark' => $info?:'',

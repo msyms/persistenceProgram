@@ -45,6 +45,7 @@
 			<th class="{ns_sorting('cname')}" name="cname" >{fc_lang('姓名')}</th>
 			<th class="{ns_sorting('phone')}" name="phone" >{fc_lang('电话')}</th>
 			<th class="{ns_sorting('address')}" name="address" >{fc_lang('地址')}</th>
+			<th class="{ns_sorting('address')}" name="address" >{fc_lang('销售人员')}</th>
 			<th class="{ns_sorting('debtBucket')}" name="address" >{fc_lang('欠桶')}</th>
 			<th class="{ns_sorting('debtMoney')}" name="address" >{fc_lang('欠款')}</th>
 			<th class="{ns_sorting('address')}" name="address" >{fc_lang('押桶')}</th>
@@ -60,6 +61,7 @@
 			<td>{dr_keyword_highlight($t.cname, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.phone, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.address, $param.keyword)}</td>
+			<td>{dr_keyword_highlight($t.name, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.debtBucket, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.debtMoney, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.depositBucket, $param.keyword)}</td>

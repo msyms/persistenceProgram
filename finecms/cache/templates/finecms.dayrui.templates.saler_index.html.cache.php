@@ -28,6 +28,12 @@
 			<th class="<?php echo ns_sorting('name'); ?>" name="name" ><?php echo fc_lang('姓名'); ?></th>
 			<th class="<?php echo ns_sorting('name'); ?>" name="name" ><?php echo fc_lang('车牌号'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="phone" ><?php echo fc_lang('电话'); ?></th>
+			<th class="<?php echo ns_sorting('phone'); ?>" name="phone" ><?php echo fc_lang('公司'); ?></th>
+			<th class="<?php echo ns_sorting('phone'); ?>" name="phone" ><?php echo fc_lang('结款'); ?></th>
+			<th class="<?php echo ns_sorting('phone'); ?>" name="bucket" ><?php echo fc_lang('桶装水'); ?></th>
+			<th class="<?php echo ns_sorting('phone'); ?>" name="bucket" ><?php echo fc_lang('饮料'); ?></th>
+			<th class="<?php echo ns_sorting('phone'); ?>" name="bucket" ><?php echo fc_lang('瓶装水'); ?></th>
+
 			<th class="dr_option"><?php echo fc_lang('操作'); ?></th>
 		</tr>
 		</thead>
@@ -38,8 +44,13 @@
 			<td><?php echo dr_keyword_highlight($t['name'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['carNo'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['phone'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['typename'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['allknot'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['allbucket'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['allbottleNum'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['alldrinkNum'], $param['keyword']); ?></td>
 			<td class="dr_option">
-				<?php if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/bill',array('salerId'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('详情'); ?></a><?php }  if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/fuel',array('salerId'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('加油信息'); ?></a><?php } ?>
+				<?php if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/bill',array('salerId'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('详情'); ?></a><?php }  if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/fuel',array('salerId'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('加油信息'); ?></a><?php }  if ($this->ci->is_auth('member/admin/home/edit')) { ?><a class="aedit" href="<?php echo dr_url('saler/edit',array('salerId'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('修改'); ?></a><?php } ?>
 			</td>
 		</tr> 
 		<?php } } ?>

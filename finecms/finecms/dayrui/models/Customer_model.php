@@ -56,12 +56,11 @@ class Customer_model extends M_Model {
 	 */
 	public function get_customer($key, $type = 0) {
 
-
 		$this->db->where('id', (int)$key);
 
 		$data = $this->db
 			->limit(1)
-			->select('id,cname,phone,address,remark')
+			->select('id,cname,phone,address,debtTime,meetTime,salerId,remark')
 			->get('customer')
 			->row_array();
 		if (!$data) {
@@ -175,6 +174,22 @@ class Customer_model extends M_Model {
 
     public function get_markrule($uid) {
         return 0;
+    }
+
+	/**
+	 * @return mixed
+	 * 获取用户欠款到访时间
+	 */
+    public function getCustomerTime() {
+	    $sql = "select customer.*,detailG.saleTime,detailG.alldebt from fn_customer customer
+				left join (
+					SELECT detail.customerId,max(bill.saleTime) as saleTime ,sum(detail.debt) as alldebt
+					from fn_saler_bill_detail detail 
+					left join fn_saler_bill bill on detail.billId = bill.id
+					group by detail.customerId) detailG on detailG.customerId = customer.id
+				";
+	    $data = $this->db->query($sql)->result_array();
+	    return $data;
     }
 
 

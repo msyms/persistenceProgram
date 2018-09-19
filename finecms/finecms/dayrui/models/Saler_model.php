@@ -218,7 +218,8 @@ class Saler_model extends M_Model {
             $page = 1;
         }
 		$date = date('Y-m-d',time());
-        $sql = "select saler.*,sum(detail.knot) as allknot,sum(detail.bucketNum) as allbucket,
+        $sql = "select saler.*,
+				case saler.type when 1 then '绿矿' when 2 then '今麦郎' else '绿矿' end as typename ,sum(detail.knot) as allknot,sum(detail.bucketNum) as allbucket,
 				sum(detail.bottleNum) as allbottleNum,sum(detail.drinkNum) as alldrinkNum 
  				from fn_saler saler  
 				left join fn_saler_bill bill on bill.salerId = saler.id and saleTime = '$date'
@@ -248,7 +249,7 @@ class Saler_model extends M_Model {
 		return $data;
 	}
 
-    public function bill_limit_page($key, $page, $total) {
+    public function bill_limit_page($key, $page, $total,$search) {
 	    $countInfo = $this->db->where('salerId',$key)
 		    ->select('count(*) as total')->get('saler_bill')->row_array();
 	    $total = $countInfo['total'];
@@ -256,11 +257,15 @@ class Saler_model extends M_Model {
 	    $select->where('salerId',$key);
 	    $order = dr_get_order_string(isset($_GET['order']) && strpos($_GET['order'], "undefined") !== 0 ? $this->input->get('order', TRUE) : 'id desc', 'id desc');
 	    $data = $select->order_by($order)->get('saler_bill')->result_array();
+	    $condition = '';
+	    if(count($search)) {
+		    $condition = " and bill.saleTime >= '{$search['start']}' and bill.saleTime <= '{$search['end']}' ";
+	    }
 	    $sql = "select bill.*,detail.bucketTotal,detail.bottleTotal from fn_saler_bill bill
 				left join (select billId, sum(bucketNum) as bucketTotal,sum(bottleNum) as bottleTotal
 				 			from fn_saler_bill_detail GROUP BY billId ) detail 
 				on bill.id = detail.billId
-				where bill.salerId = $key order by bill.id desc ";
+				where bill.salerId = $key {$condition} order by bill.id desc ";
 	    $data = $this->db->query($sql)->result_array();
 	    $_param['total'] = $total;
 	    $_param['order'] = $order;

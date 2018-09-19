@@ -30,6 +30,7 @@ class Customer extends M_Controller {
         // 重置页数和统计
         IS_POST && $_GET['page'] = $_GET['total'] = 0;
 		$search = $_POST['search'];
+	    $param['saler'] = $_GET['salerId'];
 		// 根据参数筛选结果
         $param = $this->input->get(NULL, TRUE);
         unset($param['s'], $param['c'], $param['m'], $param['d'], $param['page']);
@@ -105,6 +106,7 @@ class Customer extends M_Controller {
             '姓名',
             '电话',
             '地址',
+	        '销售人员',
             '欠桶',
             '欠款',
             '押桶',
@@ -138,6 +140,7 @@ class Customer extends M_Controller {
             '姓名',
             '桶装水',
             '瓶装水',
+	        '饮料',
             '价格',
             '回桶',
             '结款',

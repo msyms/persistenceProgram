@@ -67,8 +67,8 @@
 			<td><?php echo dr_keyword_highlight($t['remark'], $param['keyword']); ?></td>
 
 			<td class="dr_option">
-				 <a class="aedit" href="<?php echo dr_url('customer/edit',array('customerId'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('修改'); ?></a>
-				<a class="aedit" href="<?php echo dr_url('customer/bill',array('customerId'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('明细'); ?></a>
+				 <a class="ago" href="<?php echo dr_url('customer/edit',array('customerId'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('修改'); ?></a>
+				<a class="aedit" href="<?php echo dr_url('customer/bill',array('customerId'=>$t['id'])); ?>"> <i class="fa fa-navicon"></i> <?php echo fc_lang('明细'); ?></a>
 				<a class="aedit" href="<?php echo dr_url('customer/price',array('customerId'=>$t['id'])); ?>"> <i class="fa fa-edit"></i> <?php echo fc_lang('价格'); ?></a>
 			</td>
 		</tr> 

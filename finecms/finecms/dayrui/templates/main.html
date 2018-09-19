@@ -1,5 +1,14 @@
 {template "nheader.html"}
 
+<style>
+
+    span{
+
+        color: red;
+
+    }
+
+</style>
 <!-- BEGIN PAGE BAR -->
 <div class="page-bar">
     <ul class="page-breadcrumb">
@@ -39,76 +48,68 @@
         <div class="portlet light ">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-cog font-red-sunglo" style="font-size: 20px;"></i>
-                    <span class="caption-subject font-red-sunglo">{fc_lang('系统')}</span>
+                    <i class="fa fa-user  font-red-sunglo" style="font-size: 20px;"></i>
+                    <span class="caption-subject font-red-sunglo">{fc_lang('长时间未访问客户')}</span>
                 </div>
             </div>
             <div class="portlet-body">
                 <div>
                     <table class="table table-light mtable">
+                        {loop $customerInfo $t}
                         <tr>
-                            <td width="160" class="mleft" align="right">{fc_lang('程序版本')}：</td>
-                            <td>&nbsp;<a href="{dr_url('upgrade/index')}">FineCMS&nbsp; v{DR_VERSION}</a></td>
+                            <td>&nbsp;<span color="red">{$t.cname}</span>&nbsp;上次访问时间为
+                                <span>{$t.saleTime}</span>，
+                                已经超过设置的&nbsp;<span>{$t.meetTime}</span>&nbsp;天访问期限</td>
                         </tr>
-                        <tr>
-                            <td class="mleft" align="right">{fc_lang('服务器IP')}：</td>
-                            <td>&nbsp;{$sip}</td>
-                        </tr>
-                        <tr>
-                            <td class="mleft" align="right">{fc_lang('服务器环境')}：</td>
-                            <td>&nbsp;{$server} </td>
-                        </tr>
-                        <tr>
-                            <td class="mleft" align="right">{fc_lang('PHP版本')}：</td>
-                            <td>&nbsp;PHP{PHP_VERSION}</td>
-                        </tr>
-                        <tr>
-                            <td class="mleft" align="right">{fc_lang('数据库版本')}：</td>
-                            <td>&nbsp;MySql{$sqlversion}</td>
-                        </tr>
-                        <tr>
-                            <td class="mleft" align="right">{fc_lang('上传最大值')}：</td>
-                            <td>&nbsp;{php echo @ini_get("upload_max_filesize");} </td>
-                        </tr>
-                        <tr>
-                            <td class="mleft" align="right">{fc_lang('POST最大值')}：</td>
-                            <td>&nbsp;{php echo @ini_get("post_max_size");}</td>
-                        </tr>
+                        {/loop}
                     </table>
                 </div>
             </div>
         </div>
     </div>
-   <!--  <div class="col-md-6 col-sm-6">
+     <div class="col-md-6 col-sm-6">
         <div class="portlet light ">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-user font-green-sharp" style="font-size: 20px;"></i>
-                    <span class="caption-subject font-green-sharp  ">{fc_lang('软件信息')}</span>
+                    <i class="fa fa-user font-red-sunglo" style="font-size: 20px;"></i>
+                    <span class="caption-subject font-red-sunglo  ">{fc_lang('长时间未结款客户')}</span>
                 </div>
             </div>
             <div class="portlet-body">
                 <div>
                     <table class="table table-light mtable">
+                        {loop $debtInfo $t}
                         <tr>
-                            <td class="mleft" align="right">{fc_lang('软件官网')}：</td>
-                            <td><a href="http://www.finecms.net/" target="_blank">www.finecms.net</a> </td>
+                            <td>&nbsp;<span color="red">{$t.cname}</span>&nbsp;上次访问时间为
+                                <span>{$t.saleTime}</span>，欠款为<span>￥{$t.allDebt}</span>元
+                                已经超过设置的&nbsp;<span>{$t.meetTime}</span>&nbsp;天欠款期限</td>
                         </tr>
-                        <tr>
-                            <td class="mleft" align="right">{fc_lang('使用手册')}：</td>
-                            <td><a href="http://www.finecms.net/#doc" target="_blank">www.finecms.net</a> </td>
-                        </tr>
-                        <tr>
-                            <td class="mleft" align="right">{fc_lang('开发手册')}：</td>
-                            <td><a href="https://codeigniter.org.cn/user_guide/" target="_blank">codeigniter.org.cn</a> </td>
-                        </tr>
+                        {/loop}
                     </table>
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 
 </div>
 
+<script type="text/javascript">
+    var countCustomer = {json_encode($customerInfo)};
+    var debtInfo = {json_encode($debtInfo)};
+    console.log(countCustomer);
+    var text = "客户";
+    $.each(countCustomer,function (index,value) {
+        text += '-' +value.cname + '-';
+    })
 
+    text += "据上次访问时间已超过设置时间";
+    alert(text);
+    var debtText = "客户";
+    $.each(debtInfo,function (index,value) {
+        debtText += '-' +value.cname + '-';
+    })
+
+    debtText += "欠款已超过设置时间";
+    alert(debtText);
+</script>
 {template "nfooter.html"}

@@ -12,7 +12,15 @@
 	</div>
 </div>
 
-
+<div class="mytopsearch">
+	<form method="post" action="" name="searchform" id="searchform">
+		<label><?php echo fc_lang('开始'); ?> ：</label>
+		<label style="margin-right: 10px;"><?php echo dr_field_input('time', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>120)), (int)$time); ?></label>
+		<label><?php echo fc_lang('结束'); ?> ：</label>
+		<label style="margin-right: 10px;"><?php echo dr_field_input('time1', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>120)), (int)$time1); ?></label>
+		<label style="margin-right: 10px;"><button type="submit" class="btn green btn-sm" name="submit" > <i class="fa fa-search"></i> <?php echo fc_lang('搜索'); ?></button></label>
+	</form>
+</div>
 
 <form action="" method="post" name="myform" id="myform">
 	<input name="action" id="action" type="hidden" value="del" />

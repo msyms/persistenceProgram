@@ -28,6 +28,7 @@
 			<th class="<?php echo ns_sorting('name'); ?>" name="salerName" ><?php echo fc_lang('客户名'); ?></th>
 			<th class="<?php echo ns_sorting('name'); ?>" name="bucketNum" ><?php echo fc_lang('桶装水'); ?></th>
 			<th class="<?php echo ns_sorting('name'); ?>" name="bottleNum" ><?php echo fc_lang('瓶装水'); ?></th>
+			<th class="<?php echo ns_sorting('drinkNum'); ?>" name="drinkNum" ><?php echo fc_lang('饮料'); ?></th>
 			<th class="<?php echo ns_sorting('name'); ?>" name="bottleNum" ><?php echo fc_lang('价格'); ?></th>
 			<th class="<?php echo ns_sorting('name'); ?>" name="backBucketNum" ><?php echo fc_lang('回桶'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="checker" ><?php echo fc_lang('结款'); ?></th>
@@ -46,6 +47,7 @@
 			<td><?php echo dr_keyword_highlight($t['cname'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['bucketNum'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['bottleNum'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['drinkNum'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['unit'].$t['price'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['backBucketNum'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['knot'], $param['keyword']); ?></td>

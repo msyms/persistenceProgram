@@ -187,7 +187,30 @@ class Home extends M_Controller {
             $this->cache();
             return;
         }
+		$data = $this->customer_model->getCustomerTime();
+	    $date = time();
+	    $customerInfo = [];
 
+	    foreach ( $data as $k => $v) {
+		    if($v['saleTime']) {
+			    $meet = ($date - strtotime($v['saleTime']))/(24*60*60);
+			    if($meet > $v['meetTime']) {
+				    $customerInfo[] = $v;
+			    }
+		    }
+
+	    }
+	    $debtData = $this->customer_model->getCustomerDebt();
+	    $debtInfo = [];
+	    foreach ( $debtData as $k => $v) {
+		    if($v['saleTime'] || $v['alldebt'] > 0) {
+			    $meet = ($date - strtotime($v['saleTime']))/(24*60*60);
+			    if($meet > $v['debtTime']) {
+				    $debtInfo[] = $v;
+			    }
+		    }
+
+	    }
         $server = @explode(' ', strtolower($_SERVER['SERVER_SOFTWARE']));
         if (isset($server[0]) && $server[0]) {
             $server = dr_strcut($server[0], 15);
@@ -198,6 +221,7 @@ class Home extends M_Controller {
         $this->template->assign(array(
             'sip' => $this->_get_server_ip(),
             'mymain' => 1,
+	        'customerInfo' => $customerInfo,
             'server' => ucfirst($server),
             'sqlversion' => $this->db->version(),
         ));

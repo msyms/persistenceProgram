@@ -92,10 +92,9 @@ class Saler extends M_Controller {
 	 */
 	public function edit() {
 
-		$salerId = (int)$this->input->get('$salerId');
+		$salerId = (int)$this->input->get('salerId');
 		$page = (int)$this->input->get('page');
 		$data = $this->saler_model->get_saler($salerId);
-
 		!$data && $this->admin_msg(fc_lang('对不起，数据被删除或者查询不存在'));
 
 		$field = array();
@@ -111,6 +110,7 @@ class Saler extends M_Controller {
 					'name' => $edit['name'],
 					'phone' => $edit['phone'],
 					'carNo' => $edit['carNo'],
+					'type' => $edit['type'],
 				);
 
 
@@ -136,7 +136,8 @@ class Saler extends M_Controller {
 		$time  =  isset($_POST['data']['time']) && $_POST['data']['time'] ? (int)$_POST['data']['time'] : (int)$this->input->get('time');
 		if($time) {
 			$search['start'] = date('Y-m-d',$_POST['data']['time']);
-			$time1 = $search['end'] = date('Y-m-d',$_POST['data']['time1'] );
+			$search['end'] = date('Y-m-d',$_POST['data']['time1'] );
+			$time1 = strtotime($search['end']);
 		}
 		$time =  $time ? $time : SYS_TIME;
 		if(!$time1) {
@@ -256,14 +257,23 @@ class Saler extends M_Controller {
 
 		// 重置页数和统计
 		IS_POST && $_GET['page'] = $_GET['total'] = 0;
-
+		$time  =  isset($_POST['data']['time']) && $_POST['data']['time'] ? (int)$_POST['data']['time'] : (int)$this->input->get('time');
+		if($time) {
+			$search['start'] = date('Y-m-d',$_POST['data']['time']);
+			$search['end'] = date('Y-m-d',$_POST['data']['time1'] );
+			$time1 = strtotime($search['end']);
+		}
+		$time =  $time ? $time : SYS_TIME;
+		if(!$time1) {
+			$time1 = $time;
+		}
 		// 根据参数筛选结果
 		$param = $this->input->get(NULL, TRUE);
 		unset($param['s'], $param['c'], $param['m'], $param['d'], $param['page']);
 
 		$salerId = $_GET['salerId'];
 		// 数据库中分页查询
-		list($data, $param) = $this->saler_model->bill_limit_page($salerId, max((int)$_GET['page'], 1), (int)$_GET['total']);
+		list($data, $param) = $this->saler_model->bill_limit_page($salerId, max((int)$_GET['page'], 1), (int)$_GET['total'], $search);
 
 
 
@@ -284,6 +294,8 @@ class Saler extends M_Controller {
 
 		)));
 		$this->template->assign(array(
+			'time' => $time,
+			'time1' => $time1,
 			'list' => $data,
 			'field' => $field,
 			'param'	=> $param,
@@ -430,6 +442,7 @@ class Saler extends M_Controller {
 				'priceId'   => $data['priceId'],
 				'bucketNum'  => $data['bucketNum'],
 				'bottleNum'  => $data['bottleNum'],
+				'drinkNum'  => $data['drinkNum'],
 				'backBucketNum'  => $data['backBucketNum'],
 				'knot'  => $data['knot'],
 				'debt'  => $data['debt'],

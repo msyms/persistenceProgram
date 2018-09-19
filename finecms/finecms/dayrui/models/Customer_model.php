@@ -41,10 +41,14 @@ class Customer_model extends M_Model {
 
     public function get_all_customer()
     {
+	    $sql = "select customer.cname,customer.phone,customer.address,saler.name,customer.debtBucket,
+	    customer.debtMoney,customer.depositBucket from fn_customer customer 
+	    left join fn_saler saler on customer.salerId = saler.id ";
 	    $data = $this->db
 		    ->select('cname,phone,address,debtBucket,debtMoney,depositBucket')
 		    ->get('customer')
 		    ->result_array();
+	    $data = $this->db->query($sql)->result_array();
 	    if (!$data) {
 		    return NULL;
 	    }
@@ -158,7 +162,7 @@ class Customer_model extends M_Model {
     }
 
     public function get_customer_bill_exp($customerId) {
-        $sql = "select customer.cname,detail.bucketNum,detail.bottleNum,
+        $sql = "select customer.cname,detail.bucketNum,detail.bottleNum,detail.drinkNum,
                 CONCAT(price.unit,price.price) as unitpirce,detail.backBucketNum,detail.knot,
                 detail.debt,detail.debtBucket,detail.depositBucket,
                 bill.saleTime,detail.remark 
@@ -186,6 +190,19 @@ class Customer_model extends M_Model {
 					SELECT detail.customerId,max(bill.saleTime) as saleTime ,sum(detail.debt) as alldebt
 					from fn_saler_bill_detail detail 
 					left join fn_saler_bill bill on detail.billId = bill.id
+					group by detail.customerId) detailG on detailG.customerId = customer.id
+				";
+	    $data = $this->db->query($sql)->result_array();
+	    return $data;
+    }
+
+    public function getCustomerDebt() {
+	    $sql = "select customer.*,detailG.saleTime,detailG.alldebt from fn_customer customer
+				left join (
+					SELECT detail.customerId,max(bill.saleTime) as saleTime ,sum(detail.debt) as alldebt
+					from fn_saler_bill_detail detail 
+					left join fn_saler_bill bill on detail.billId = bill.id 
+					where detail.debt != 0 
 					group by detail.customerId) detailG on detailG.customerId = customer.id
 				";
 	    $data = $this->db->query($sql)->result_array();
@@ -249,6 +266,26 @@ class Customer_model extends M_Model {
         $data = $select->order_by($order)->get('customer')->result_array();
         $_param['total'] = $total;
         $_param['order'] = $order;
+	    $search = $param['search'];
+	    $condition = 'where 1 = 1';
+	    if($search) {
+		    if($search == 'debtBucket') {
+			    //欠桶
+			    $condition .= ' and customer.debtBucket > 0 ';
+		    }
+		    if($search == 'debtMoney') {
+			    $condition .= ' and customer.debtMoney > 0 ';
+		    }
+	    }
+	    $salerId = $param['salerId'];
+	    if($salerId) {
+		    $condition .= " and customer.salerId = $salerId ";
+	    }
+	    $pagenow = SITE_ADMIN_PAGESIZE * ($page - 1);
+	    $sql = "select customer.*,saler.name from fn_customer customer 
+				left join fn_saler saler on customer.salerId = saler.id " .$condition
+	            ." limit $pagenow, " . SITE_ADMIN_PAGESIZE ;
+	    $data = $this->db->query($sql)->result_array();
 
         return array($data, $_param);
     }

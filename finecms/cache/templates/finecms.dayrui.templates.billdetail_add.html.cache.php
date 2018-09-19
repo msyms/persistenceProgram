@@ -34,6 +34,16 @@ $("input#dr_bucketnum").change(function(){
     $("input#dr_debtMoney").val(price[1] * $("input#dr_bucketnum").val());
 });
 
+$("input#dr_bottlenum").change(function(){
+    var price = ($("select#price option:selected").text()).split('￥');
+    $("input#dr_debtMoney").val(price[1] * $("input#dr_bottlenum").val());
+});
+
+$("input#dr_drinknum").change(function(){
+    var price = ($("select#price option:selected").text()).split('￥');
+    $("input#dr_debtMoney").val(price[1] * $("input#dr_drinknum").val());
+});
+
 
 $(function(){
 
@@ -141,6 +151,12 @@ function getPriceList(){
         <label class="col-md-3 control-label"><?php echo fc_lang('瓶装水数量'); ?>：</label>
         <div class="col-md-7">
             <input class="form-control" type="text" name="data[bottleNum]" id="dr_bottlenum" value="<?php echo $data['bottleNum']; ?>"  >
+        </div>
+    </div>
+    <div class="form-group dr_one">
+        <label class="col-md-3 control-label"><?php echo fc_lang('饮料数量'); ?>：</label>
+        <div class="col-md-7">
+            <input class="form-control" type="text" name="data[drinkNum]" id="dr_drinknum" value="<?php echo $data['drinkNum']; ?>"  >
         </div>
     </div>
     <div class="form-group dr_one">

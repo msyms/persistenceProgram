@@ -56,6 +56,18 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="col-md-2 control-label"><?php echo fc_lang('所属公司'); ?>：</label>
+                            <div class="col-md-7">
+
+                                <label>
+                                    <select name="member[type]" class="form-control" >
+                                        <option value="1">绿矿</option>
+                                        <option value="2" <?php if ($data['type'] == 2) { ?> selected <?php } ?>>今麦郎</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
 
                     </div>
                 </div>

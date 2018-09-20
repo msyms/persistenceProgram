@@ -261,8 +261,9 @@ class Saler_model extends M_Model {
 	    if(count($search)) {
 		    $condition = " and bill.saleTime >= '{$search['start']}' and bill.saleTime <= '{$search['end']}' ";
 	    }
-	    $sql = "select bill.*,detail.bucketTotal,detail.bottleTotal from fn_saler_bill bill
-				left join (select billId, sum(bucketNum) as bucketTotal,sum(bottleNum) as bottleTotal
+	    $sql = "select bill.*,detail.bucketTotal,detail.bottleTotal,detail.backNumTotal from fn_saler_bill bill
+				left join (select billId, sum(bucketNum) as bucketTotal,sum(bottleNum) as bottleTotal,
+					  		sum(backBucketNum) as backNumTotal 
 				 			from fn_saler_bill_detail GROUP BY billId ) detail 
 				on bill.id = detail.billId
 				where bill.salerId = $key {$condition} order by bill.id desc ";

@@ -35,6 +35,7 @@
 			<!-- <th width="10"></th> -->
 			<th class="<?php echo ns_sorting('name'); ?>" name="salerName" ><?php echo fc_lang('销售人员'); ?></th>
 			<th class="<?php echo ns_sorting('name'); ?>" name="bucketNum" ><?php echo fc_lang('桶装水'); ?></th>
+			<th class="<?php echo ns_sorting('name'); ?>" name="bucketNum" ><?php echo fc_lang('回桶'); ?></th>
 			<th class="<?php echo ns_sorting('name'); ?>" name="bottleNum" ><?php echo fc_lang('瓶装水'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="checker" ><?php echo fc_lang('检核人'); ?></th>
 			<th class="<?php echo ns_sorting('phone'); ?>" name="saleTime" ><?php echo fc_lang('剩余桶装水'); ?></th>
@@ -50,6 +51,7 @@
 			<!-- <td><input name="ids[]" type="checkbox" class="dr_select toggle md-check" value="<?php echo $t['id']; ?>" /></td> -->
 			<td><?php echo dr_keyword_highlight($t['salerName'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['bucketNum'], $param['keyword']); ?></td>
+			<td><?php echo dr_keyword_highlight($t['backNumTotal'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['bottleNum'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['checker'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['bucketNum'] - $t['bucketTotal'], $param['keyword']); ?></td>

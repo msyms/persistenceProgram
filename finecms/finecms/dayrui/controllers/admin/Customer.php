@@ -326,6 +326,40 @@ class Customer extends M_Controller {
 		$this->template->display('customerprice_add.html');
 	}
 
+	public function meet() {
+		$data = $this->customer_model->getCustomerTime();
+		$date = time();
+		$debtInfo = [];
+		foreach ( $data as $k => $v) {
+			if($v['saleTime'] || $v['alldebt'] > 0) {
+				$meet = ($date - strtotime($v['saleTime']))/(24*60*60);
+				if($meet > $v['debtTime']) {
+					$debtInfo[] = $v;
+				}
+			}
+
+		}
+		$this->template->assign('list',$debtInfo);
+		$this->template->display('customer_meet.html');
+	}
+
+	public function debt() {
+		$data = $this->customer_model->getCustomerDebt();
+		$date = time();
+		$debtInfo = [];
+		foreach ( $data as $k => $v) {
+			if($v['saleTime'] || $v['alldebt'] > 0) {
+				$meet = ($date - strtotime($v['saleTime']))/(24*60*60);
+				if($meet > $v['debtTime']) {
+					$debtInfo[] = $v;
+				}
+			}
+
+		}
+		$this->template->assign('list',$debtInfo);
+		$this->template->display('customer_debt.html');
+	}
+
 
 
 }

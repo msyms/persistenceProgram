@@ -185,25 +185,27 @@ class Customer_model extends M_Model {
 	 * 获取用户欠款到访时间
 	 */
     public function getCustomerTime() {
-	    $sql = "select customer.*,detailG.saleTime,detailG.alldebt from fn_customer customer
+	    $sql = "select customer.*,detailG.saleTime,detailG.alldebt,saler.name  from fn_customer customer
 				left join (
 					SELECT detail.customerId,max(bill.saleTime) as saleTime ,sum(detail.debt) as alldebt
 					from fn_saler_bill_detail detail 
 					left join fn_saler_bill bill on detail.billId = bill.id
 					group by detail.customerId) detailG on detailG.customerId = customer.id
+				left join fn_saler saler on customer.salerId = saler.id 
 				";
 	    $data = $this->db->query($sql)->result_array();
 	    return $data;
     }
 
     public function getCustomerDebt() {
-	    $sql = "select customer.*,detailG.saleTime,detailG.alldebt from fn_customer customer
+	    $sql = "select customer.*,detailG.saleTime,detailG.alldebt,saler.name from fn_customer customer
 				left join (
 					SELECT detail.customerId,max(bill.saleTime) as saleTime ,sum(detail.debt) as alldebt
 					from fn_saler_bill_detail detail 
 					left join fn_saler_bill bill on detail.billId = bill.id 
 					where detail.debt != 0 
 					group by detail.customerId) detailG on detailG.customerId = customer.id
+					left join fn_saler saler on customer.salerId = saler.id 
 				";
 	    $data = $this->db->query($sql)->result_array();
 	    return $data;

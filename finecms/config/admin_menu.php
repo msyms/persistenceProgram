@@ -32,12 +32,22 @@ return array(
                     array(
                         'name' => '销售人员',
                         'uri' => 'saler/index',
-                        'icon' => 'fa fa-bug',
+                        'icon' => 'fa fa-user',
                     ),
 	                array(
 		                'name' => '客户信息',
 		                'uri' => 'customer/index',
 		                'icon' => 'fa fa-calendar',
+	                ),
+	                array(
+		                'name' => '超时访问客户',
+		                'uri' => 'customer/meet',
+		                'icon' => 'fa fa-bug',
+	                ),
+	                array(
+		                'name' => '超时欠款客户',
+		                'uri' => 'customer/debt',
+		                'icon' => 'fa fa-bug',
 	                ),
 	                /*array(
 						'name' => '客户信息',

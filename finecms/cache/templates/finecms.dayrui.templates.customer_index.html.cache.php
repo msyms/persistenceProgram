@@ -16,6 +16,7 @@
 		<div class="col-md-12">
 			<label style="padding-right: 5px;"><?php echo $select2; ?></label>
 			<label style="padding-right: 10px;"><i class="fa"></i></label>
+			<label > <input type="text" name="sname" class="form-control" placeholder="用户名"></label>
 			<label>
 				<select name="search" class="form-control">
 					<option value="" >请选择</option>
@@ -23,6 +24,7 @@
 					<option value="debtMoney" <?php if ($search=='debtMoney') { ?>selected<?php } ?> >欠款</option>
 				</select>
 			</label>
+
 			<label><button type="submit" class="btn green btn-sm" name="submit" > <i class="fa fa-search"></i> <?php echo fc_lang('搜索'); ?></button></label>
 
 		</div>

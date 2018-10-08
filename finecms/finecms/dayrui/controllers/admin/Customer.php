@@ -30,11 +30,13 @@ class Customer extends M_Controller {
         // 重置页数和统计
         IS_POST && $_GET['page'] = $_GET['total'] = 0;
 		$search = $_POST['search'];
+        $sname = $_POST['sname'];
 	    $param['saler'] = $_GET['salerId'];
 		// 根据参数筛选结果
         $param = $this->input->get(NULL, TRUE);
         unset($param['s'], $param['c'], $param['m'], $param['d'], $param['page']);
 		$param['search'] = $search;
+        $param['sname'] = $sname;
 		// 数据库中分页查询
 		list($data, $param) = $this->customer_model->limit_page($param, max((int)$_GET['page'], 1), (int)$_GET['total']);
 

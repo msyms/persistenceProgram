@@ -269,6 +269,7 @@ class Customer_model extends M_Model {
         $_param['total'] = $total;
         $_param['order'] = $order;
 	    $search = $param['search'];
+        $sname = $param['sname'];
 	    $condition = 'where 1 = 1';
 	    if($search) {
 		    if($search == 'debtBucket') {
@@ -279,6 +280,9 @@ class Customer_model extends M_Model {
 			    $condition .= ' and customer.debtMoney > 0 ';
 		    }
 	    }
+        if($sname) {
+            $condition .= " and customer.cname like '%{$sname}%' " ;
+        }
 	    $salerId = $param['salerId'];
 	    if($salerId) {
 		    $condition .= " and customer.salerId = $salerId ";

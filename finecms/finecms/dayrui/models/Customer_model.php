@@ -130,15 +130,13 @@ class Customer_model extends M_Model {
     public function get_customer_price($key, $type = 0) {
 
         $this->db->where('customerId', (int)$key);
-
         $data = $this->db
-                     ->select('unit,price')
+                     ->select('id,unit,price')
                      ->get('customer_price')
-                     ->row_array();
+                     ->result_array();
         if (!$data) {
             return NULL;
         }
-
         return $data;
     }
 

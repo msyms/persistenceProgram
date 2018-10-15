@@ -489,18 +489,16 @@ class Saler extends M_Controller {
 
 	public function billdetailedit() {
 		$detailId = $_GET['detailId'];
-		$data = $this->saler_model->get_bill_detail($detailId);
+		$data = $this->saler_model->get_bill_detail_info($detailId);
 		$customerId = $data['customerId'];
 		$priceInfo = $this->customer_model->get_customer_price($customerId);
-
 		if (IS_POST) {
 
 			$data = $this->input->post( 'data' );
 			$info = $this->input->post( 'info' );
 			$customerId = $this->customer_model->get_customer_name($data['cname']);
 			// 单个添加
-			$uid = $this->saler_model->editBillDetail($id, [
-				'billId'   => $data['billId'],
+			$uid = $this->saler_model->editBillDetail($detailId,$customerId, [
 				'customerId'   => $customerId,
 				'priceId'   => $data['priceId'],
 				'bucketNum'  => $data['bucketNum'],
@@ -527,6 +525,7 @@ class Saler extends M_Controller {
 		)));
 		$customer = $this->customer_model->get_all_customer();
 		$this->template->assign('customer',$customer);
+		$this->template->assign('data',$data);
 		$this->template->assign('priceInfo',$priceInfo);
 		$data = $this->saler_model->get_saler();
 		$this->template->assign('billId', $id);

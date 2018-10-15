@@ -56,9 +56,20 @@ class Saler_model extends M_Model {
                 depositBucket = depositBucket - $depositBucket,
                 debtBucket = debtBucket - $debtBucket
                 where id = $customerId";
-        var_dump($sql);
 		$this->db->query($sql);
 		$this->db->where('id', $id)->delete('saler_bill_detail');
+	}
+
+	public function editBillDetail($id,$customerId,$data) {
+		$detail = $this->db->where('id', $id)->select("*")->get('saler_bill_detail')->row_array();
+		$cust = $this->db->where('id',$customerId)->select("*")->get('customer')->row_array();
+		$customer['knot'] = $cust['knot'] + $data['knot'] - $detail['knot'];
+		$customer['debtBucket'] = $cust['debtBucket'] + $data['debtBucket'] - $detail['debtBucket'];
+		$customer['debtMoney'] = $cust['debtMoney'] +$data['debt'] - $detail['debt'];
+		$customer['depositBucket'] = $cust['depositBucket'] +$data['depositBucket'] - $detail['depositBucket'];
+		$this->db->where('id', $id)->update('saler_bill_detail', $data);
+		$this->db->where('id',$customerId)->update('customer',$customer);
+		return 1;
 	}
 
 
@@ -110,9 +121,13 @@ class Saler_model extends M_Model {
 	}
 
 	public function get_bill_detail_info($detailId) {
-		$this->db->where('id',$detailId);
-		$data = $this->db->limit(1)->select('*')->get('saler_bill_detail')->row_array();
-		return $data;
+		$sql = "select detail.*,customer.cname,price.unit,price.price from 
+				fn_saler_bill_detail detail
+				left join fn_customer customer on detail.customerId = customer.id 
+				left join fn_customer_price price on detail.priceId = price.id 
+				where detail.id = $detailId ";
+		$result = $this->db->query($sql)->row_array();
+        return $result;
 	}
 
 
@@ -261,8 +276,8 @@ class Saler_model extends M_Model {
 	    if(count($search)) {
 		    $condition = " and bill.saleTime >= '{$search['start']}' and bill.saleTime <= '{$search['end']}' ";
 	    }
-	    $sql = "select bill.*,detail.bucketTotal,detail.bottleTotal,detail.backNumTotal from fn_saler_bill bill
-				left join (select billId, sum(bucketNum) as bucketTotal,sum(bottleNum) as bottleTotal,
+	    $sql = "select bill.*,detail.bucketTotal,detail.knotTotal,detail.bottleTotal,detail.backNumTotal from fn_saler_bill bill
+				left join (select billId,sum(knot) as knotTotal, sum(bucketNum) as bucketTotal,sum(bottleNum) as bottleTotal,
 					  		sum(backBucketNum) as backNumTotal 
 				 			from fn_saler_bill_detail GROUP BY billId ) detail 
 				on bill.id = detail.billId

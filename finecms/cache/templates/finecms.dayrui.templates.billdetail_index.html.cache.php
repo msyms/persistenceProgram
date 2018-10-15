@@ -57,6 +57,7 @@
 			<td><?php echo dr_keyword_highlight($t['saleTime'], $param['keyword']); ?></td>
 			<td><?php echo dr_keyword_highlight($t['remark'], $param['keyword']); ?></td>
 			<td class="dr_option">
+				<a class="adel" href="javascript:dr_dialog('admin.php?c=saler&m=billdetailedit&detailId=<?php echo $t['id'];?>', 'add')"> <i class="fa fa-trash"></i> <?php echo fc_lang('修改'); ?></a>
 				<a class="adel" href="<?php echo dr_url('saler/detaildel',array('salerId'=>$salerId,'billId'=>$billId,'detailId'=>$t['id'])); ?>"> <i class="fa fa-trash"></i> <?php echo fc_lang('删除'); ?></a>
 			</td>
 		</tr>

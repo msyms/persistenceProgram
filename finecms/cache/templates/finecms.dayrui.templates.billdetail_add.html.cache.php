@@ -34,6 +34,14 @@ $("input#dr_bucketnum").change(function(){
     $("input#dr_debtMoney").val(price[1] * $("input#dr_bucketnum").val());
 });
 
+$("select#price").change(function(){
+    var price = ($("select#price option:selected").text()).split('￥');
+    var bucketnum = parseInt($("input#dr_bucketnum").val());
+    var bottlenum = parseInt($("input#dr_bottlenum").val()); 
+    var drinknum = parseInt($("input#dr_drinknum").val());
+
+    $("input#dr_debtMoney").val(price[1] * (bucketnum + bottlenum + drinknum));
+})
 $("input#dr_bottlenum").change(function(){
     var price = ($("select#price option:selected").text()).split('￥');
     $("input#dr_debtMoney").val(price[1] * $("input#dr_bottlenum").val());
@@ -63,59 +71,7 @@ $(function(){
 
 })
 
-function getPriceList(){    
 
-    var cname = $("input#dr_cname").val(); 
-
-    $("select[name=modelId]").empty();      //清空
-
-    $.ajax({url:'/admin.php?c=customer&m=billdetailadd',
-
-        type:"get",
-
-        data:{
-
-            cname : cname
-
-        },
-
-        cache: false,
-
-        error:function(){
-
-        }, 
-
-        success:function(data){
-
-            var modelList = data.modelList;
-
-            if(modelList && modelList.length != 0){
-
-                for(var i=0; i<modelList.length; i++){
-
-                    var option="<option value=\""+modelList[i].modelId+"\"";
-
-                    if(_LastModelId && _LastModelId==modelList[i].modelId){
-
-                        option += " selected=\"selected\" "; //默认选中
-
-                        _LastModelId=null;
-
-                    }
-
-                    option += ">"+modelList[i].modelName+"</option>";  //动态添加数据
-
-                    $("select[name=modelId]").append(option);
-
-                }
-
-        }
-
-        }
-
-    });
-
-}
 </script>
 <form style="width:450px;" class="form-horizontal" action="" method="post" id="myform" name="myform" onsubmit="return dr_form_check()">
 <input name="mark" id="mark" type="hidden" value="0">
@@ -125,7 +81,7 @@ function getPriceList(){
     <div class="form-group dr_one">
         <label class="col-md-3 control-label"><?php echo fc_lang('姓名'); ?>：</label>
         <div class="col-md-7">
-            <input class="form-control" type="text" id="dr_cname"  name="data[cname]" id="txt_ide" list="customer" />
+            <input class="form-control" type="text" id="dr_cname"  name="data[cname]" id="txt_ide" list="customer" value="<?php echo $data['cname']; ?>" />
             <datalist id="customer">
                 <?php if (is_array($customer)) { $count=count($customer);foreach ($customer as $t) { ?>
                 <option value="<?php echo $t['cname']; ?>" />
@@ -137,8 +93,20 @@ function getPriceList(){
     <div class="form-group dr_one">
         <label class="col-md-3 control-label"><?php echo fc_lang('价格'); ?>：</label>
         <div class="col-md-7">
-            <select name="data[priceId]" id="price"></select>
+            <select name="data[priceId]" id="price">
+            <?php if($priceInfo) {
+                foreach($priceInfo as $k => $v ) {
+                $id = $v['id'];
+                if($id == $data['priceId']) {
+                echo '<option value='.$id.' selected >'.$v['unit'].'：￥'.$v['price'].'</option>';
+                } else {
 
+                    echo '<option value='.$id.' >'.$v['unit'].'：￥'.$v['price'].'</option>';
+                }
+            }} 
+                ?>
+            
+            </select>
         </div>
     </div>
     <div class="form-group dr_one">
@@ -181,14 +149,14 @@ function getPriceList(){
     <div class="form-group dr_one">
         <label class="col-md-3 control-label"><?php echo fc_lang('欠桶'); ?>：</label>
         <div class="col-md-7">
-            <input class="form-control" type="text" name="data[debtBucket]" id="dr_debtBucket" value="<?php echo $data['address']; ?>" >
+            <input class="form-control" type="text" name="data[debtBucket]" id="dr_debtBucket" value="<?php echo $data['debtBucket']; ?>" >
         </div>
     </div>
 
     <div class="form-group dr_one">
         <label class="col-md-3 control-label"><?php echo fc_lang('押桶'); ?>：</label>
         <div class="col-md-7">
-            <input class="form-control" type="text" name="data[depositBucket]" id="dr_depositBucket" value="<?php echo $data['address']; ?>" >
+            <input class="form-control" type="text" name="data[depositBucket]" id="dr_depositBucket" value="<?php echo $data['depositBucket']; ?>" >
         </div>
     </div>
 

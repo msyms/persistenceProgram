@@ -26,15 +26,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="7560">
               <caret line="275" column="65" selection-start-line="275" selection-start-column="50" selection-end-line="275" selection-end-column="65" />
-              <folding>
-                <marker date="1539591276121" expanded="true" signature="141:159" ph=" 构造函数 ..." />
-                <marker date="1539591276121" expanded="true" signature="197:356" ph="..." />
-                <marker date="1539591276121" expanded="true" signature="255:349" ph="..." />
-                <marker date="1539591276121" expanded="true" signature="282:348" ph="..." />
-                <marker date="1539591276121" expanded="true" signature="288:347" ph="..." />
-                <marker date="1539591276121" expanded="true" signature="366:382" ph=" 首页 ..." />
-                <marker date="1539591276121" expanded="true" signature="414:1534" ph="..." />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -42,69 +34,19 @@
       <file leaf-file-name="Customer_model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/finecms/dayrui/models/Customer_model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5516">
+            <state relative-caret-position="5600">
               <caret line="200" column="4" selection-start-line="200" selection-start-column="4" selection-end-line="200" selection-end-column="4" />
               <folding>
-                <marker date="1539591351515" expanded="true" signature="84:174" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="211:307" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="317:337" ph=" 会员修改信息 ..." />
-                <marker date="1539591351515" expanded="true" signature="380:869" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="436:567" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="606:650" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="910:1420" ph="{...}" />
                 <marker date="1539591351515" expanded="true" signature="930:1150" ph="select custo... fn_customer" />
-                <marker date="1539591351515" expanded="true" signature="1192:1248" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="1262:1272" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="1369:1394" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="1426:1440" ph=" 会员基本信息 ..." />
-                <marker date="1539591351515" expanded="true" signature="1491:1728" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="1577:1634" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="1645:1655" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="1690:1709" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="1778:1915" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="1969:2367" ph="{...}" />
-                <marker date="1539591351515" expanded="true" signature="2200:2215" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="2235:2251" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="2304:2338" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="2414:2610" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="2492:2507" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="2518:2534" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="2572:2591" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="2620:2640" ph=" 会员基本信息 ..." />
-                <marker date="1539591351515" expanded="true" signature="2701:2968" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="2795:2826" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="2846:2856" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="2906:2940" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="2978:2998" ph=" 会员基本信息 ..." />
-                <marker date="1539591351515" expanded="true" signature="3058:3351" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="3412:4407" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="3489:3508" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="3515:3534" ph="..." />
                 <marker date="1539591351515" expanded="true" signature="3649:4066" ph="select detai... fn_saler_bill_detail" />
-                <marker date="1539591351515" expanded="true" signature="4466:5190" ph="..." />
                 <marker date="1539591351515" expanded="true" signature="4483:5084" ph="select custo... fn_saler_bill_detail" />
-                <marker date="1539591351515" expanded="true" signature="5233:5256" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="5263:5299" ph=" @return mixed ..." />
-                <marker date="1539591351515" expanded="true" signature="5341:5871" ph="..." />
                 <marker date="1539591351515" expanded="true" signature="5355:5726" ph="select custo... fn_customer" />
                 <marker date="1539591351515" expanded="true" signature="5355:5786" ph="select custo... fn_customer" />
                 <marker date="1539591351515" expanded="true" signature="5465:5681" ph="SELECT detai... fn_saler_bill_detail" />
-                <marker date="1539591351515" expanded="true" signature="5913:6473" ph="..." />
                 <marker date="1539591351515" expanded="true" signature="5927:6327" ph="select custo... fn_customer" />
                 <marker date="1539591351515" expanded="true" signature="5927:6388" ph="select custo... fn_customer" />
                 <marker date="1539591351515" expanded="true" signature="6036:6282" ph="SELECT detai... fn_saler_bill_detail" />
-                <marker date="1539591351515" expanded="true" signature="6490:6508" ph=" 条件查询 ..." />
-                <marker date="1539591351515" expanded="true" signature="6557:7011" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="6619:6981" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="6684:6958" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="6730:6827" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="6873:6944" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="7021:7041" ph=" 数据分页显示 ..." />
-                <marker date="1539591351515" expanded="true" signature="7099:8893" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="7134:7539" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="7407:7506" ph="..." />
                 <marker date="1539591351515" expanded="true" signature="8420:8424" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="8480:8543" ph="..." />
                 <marker date="1539591351515" expanded="true" signature="8609:8724" ph="select custo... fn_customer" />
                 <marker date="1539591351515" expanded="true" signature="8609:8725" ph="select custo... fn_customer" />
                 <marker date="1539591351515" expanded="true" signature="8609:8760" ph="select custo... fn_customer" />
@@ -113,11 +55,6 @@
                 <marker date="1539591351515" expanded="true" signature="8609:8771" ph="select custo... fn_customer" />
                 <marker date="1539591351515" expanded="true" signature="8609:8772" ph="select custo... fn_customer" />
                 <marker date="1539591351515" expanded="true" signature="8609:8794" ph="select custo... fn_customer" />
-                <marker date="1539591351515" expanded="true" signature="8904:8922" ph=" 会员删除 ..." />
-                <marker date="1539591351515" expanded="true" signature="8960:9720" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="9003:9037" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="9122:9714" ph="..." />
-                <marker date="1539591351515" expanded="true" signature="9151:9190" ph="..." />
               </folding>
             </state>
           </provider>
@@ -136,28 +73,9 @@
       <file leaf-file-name="customer_index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/customer_index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2492">
+            <state relative-caret-position="2520">
               <caret line="90" column="10" selection-start-line="90" selection-start-column="10" selection-end-line="90" selection-end-column="10" />
-              <folding>
-                <marker date="1538970265911" expanded="true" signature="67:194" ph="..." />
-                <marker date="1538970265911" expanded="true" signature="104:127" ph="..." />
-                <marker date="1538970265911" expanded="true" signature="164:186" ph="..." />
-                <marker date="1538970265911" expanded="true" signature="222:993" ph="..." />
-                <marker date="1538970265911" expanded="true" signature="300:985" ph="..." />
-                <marker date="1538970265911" expanded="true" signature="326:976" ph="..." />
-                <marker date="1538970265911" expanded="false" signature="345:364" ph="..." />
-                <marker date="1538970265911" expanded="false" signature="402:422" ph="..." />
-                <marker date="1538970265911" expanded="true" signature="1051:3758" ph="..." />
-                <marker date="1538970265911" expanded="true" signature="1148:3750" ph="..." />
-                <marker date="1538970265911" expanded="true" signature="1177:3743" ph="..." />
-                <marker date="1538970265911" expanded="true" signature="1211:3735" ph="..." />
-                <marker date="1538970265911" expanded="true" signature="1313:3725" ph="..." />
-                <marker date="1538970265911" expanded="true" signature="1324:2033" ph="..." />
-                <marker date="1538970265911" expanded="true" signature="1331:2022" ph="..." />
-                <marker date="1538970265911" expanded="true" signature="2043:3714" ph="..." />
-                <marker date="1538970265911" expanded="true" signature="2089:3139" ph="..." />
-                <marker date="1538970265911" expanded="true" signature="2732:3131" ph="..." />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -165,17 +83,9 @@
       <file leaf-file-name="Customer.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/finecms/dayrui/controllers/admin/Customer.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9436">
+            <state relative-caret-position="9492">
               <caret line="344" column="55" selection-start-line="344" selection-start-column="55" selection-end-line="344" selection-end-column="55" />
-              <folding>
-                <marker date="1538970590274" expanded="false" signature="11:70" ph=" FineCMS 公益软件 ..." />
-                <marker date="1538970590274" expanded="true" signature="111:10823" ph="..." />
-                <marker date="1538970590274" expanded="true" signature="144:162" ph=" 构造函数 ..." />
-                <marker date="1538970590274" expanded="true" signature="200:363" ph="..." />
-                <marker date="1538970590274" expanded="true" signature="258:355" ph="..." />
-                <marker date="1538970590274" expanded="true" signature="373:389" ph=" 首页 ..." />
-                <marker date="1538970590274" expanded="true" signature="421:1762" ph="..." />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -193,41 +103,9 @@
       <file leaf-file-name="Saler_model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/finecms/dayrui/models/Saler_model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6972">
-              <caret line="252" column="5" selection-start-line="252" selection-start-column="5" selection-end-line="252" selection-end-column="5" />
-              <folding>
-                <marker date="1539591259704" expanded="true" signature="78:165" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="206:298" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="342:455" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="497:1142" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="745:998" ph="update fn_cu... " />
-                <marker date="1539591259704" expanded="true" signature="1188:1921" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="1265:1312" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="1323:1342" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="1567:1820" ph="update fn_cu... " />
-                <marker date="1539591259704" expanded="true" signature="1929:1943" ph=" 会员基本信息 ..." />
-                <marker date="1539591259704" expanded="true" signature="1991:2202" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="2078:2111" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="2122:2129" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="2164:2183" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="2248:2459" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="2336:2363" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="2374:2386" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="2421:2440" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="2501:2740" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="2586:2644" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="2655:2667" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="2702:2721" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="2793:3144" ph="..." />
-                <marker date="1539591259704" expanded="true" signature="4069:4277" ph="select saler... fn_saler_fuel" />
-                <marker date="1539591259704" expanded="true" signature="4444:4557" ph="select saler... fn_saler_bill" />
-                <marker date="1539591259704" expanded="true" signature="7022:7408" ph="select detai... fn_saler_bill_detail" />
-                <marker date="1539591259704" expanded="true" signature="7022:7448" ph="select detai... fn_saler" />
-                <marker date="1539591259704" expanded="true" signature="7022:7465" ph="select saler... fn_saler" />
-                <marker date="1539591259704" expanded="true" signature="7998:8419" ph="select detai... fn_saler_bill_detail" />
-                <marker date="1539591259704" expanded="true" signature="9287:9714" ph="select bill.... fn_saler_bill" />
-                <marker date="1539591259704" expanded="true" signature="9451:9608" ph="select billI... fn_saler_bill_detail" />
-              </folding>
+            <state relative-caret-position="7056">
+              <caret line="252" column="0" selection-start-line="252" selection-start-column="0" selection-end-line="252" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -235,8 +113,8 @@
       <file leaf-file-name="salerbill_index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/salerbill_index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+            <state relative-caret-position="224">
+              <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -361,16 +239,16 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="Z:/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../java/testProject" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
   </component>
@@ -839,15 +717,16 @@
       <workItem from="1537321854868" duration="28104000" />
       <workItem from="1537838249483" duration="8589000" />
       <workItem from="1539226733801" duration="1214000" />
+      <workItem from="1539744322497" duration="1774000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="214710000" />
+    <option name="totallyTimeSpent" value="216484000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="1" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -855,8 +734,8 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1179,44 +1058,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/customer_index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2492">
+        <state relative-caret-position="2520">
           <caret line="90" column="10" selection-start-line="90" selection-start-column="10" selection-end-line="90" selection-end-column="10" />
-          <folding>
-            <marker date="1538970265911" expanded="true" signature="67:194" ph="..." />
-            <marker date="1538970265911" expanded="true" signature="104:127" ph="..." />
-            <marker date="1538970265911" expanded="true" signature="164:186" ph="..." />
-            <marker date="1538970265911" expanded="true" signature="222:993" ph="..." />
-            <marker date="1538970265911" expanded="true" signature="300:985" ph="..." />
-            <marker date="1538970265911" expanded="true" signature="326:976" ph="..." />
-            <marker date="1538970265911" expanded="false" signature="345:364" ph="..." />
-            <marker date="1538970265911" expanded="false" signature="402:422" ph="..." />
-            <marker date="1538970265911" expanded="true" signature="1051:3758" ph="..." />
-            <marker date="1538970265911" expanded="true" signature="1148:3750" ph="..." />
-            <marker date="1538970265911" expanded="true" signature="1177:3743" ph="..." />
-            <marker date="1538970265911" expanded="true" signature="1211:3735" ph="..." />
-            <marker date="1538970265911" expanded="true" signature="1313:3725" ph="..." />
-            <marker date="1538970265911" expanded="true" signature="1324:2033" ph="..." />
-            <marker date="1538970265911" expanded="true" signature="1331:2022" ph="..." />
-            <marker date="1538970265911" expanded="true" signature="2043:3714" ph="..." />
-            <marker date="1538970265911" expanded="true" signature="2089:3139" ph="..." />
-            <marker date="1538970265911" expanded="true" signature="2732:3131" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/finecms/dayrui/controllers/admin/Customer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9436">
+        <state relative-caret-position="9492">
           <caret line="344" column="55" selection-start-line="344" selection-start-column="55" selection-end-line="344" selection-end-column="55" />
-          <folding>
-            <marker date="1538970590274" expanded="false" signature="11:70" ph=" FineCMS 公益软件 ..." />
-            <marker date="1538970590274" expanded="true" signature="111:10823" ph="..." />
-            <marker date="1538970590274" expanded="true" signature="144:162" ph=" 构造函数 ..." />
-            <marker date="1538970590274" expanded="true" signature="200:363" ph="..." />
-            <marker date="1538970590274" expanded="true" signature="258:355" ph="..." />
-            <marker date="1538970590274" expanded="true" signature="373:389" ph=" 首页 ..." />
-            <marker date="1538970590274" expanded="true" signature="421:1762" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1238,69 +1090,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/finecms/dayrui/models/Customer_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5516">
+        <state relative-caret-position="5600">
           <caret line="200" column="4" selection-start-line="200" selection-start-column="4" selection-end-line="200" selection-end-column="4" />
           <folding>
-            <marker date="1539591351515" expanded="true" signature="84:174" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="211:307" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="317:337" ph=" 会员修改信息 ..." />
-            <marker date="1539591351515" expanded="true" signature="380:869" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="436:567" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="606:650" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="910:1420" ph="{...}" />
             <marker date="1539591351515" expanded="true" signature="930:1150" ph="select custo... fn_customer" />
-            <marker date="1539591351515" expanded="true" signature="1192:1248" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="1262:1272" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="1369:1394" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="1426:1440" ph=" 会员基本信息 ..." />
-            <marker date="1539591351515" expanded="true" signature="1491:1728" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="1577:1634" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="1645:1655" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="1690:1709" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="1778:1915" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="1969:2367" ph="{...}" />
-            <marker date="1539591351515" expanded="true" signature="2200:2215" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="2235:2251" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="2304:2338" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="2414:2610" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="2492:2507" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="2518:2534" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="2572:2591" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="2620:2640" ph=" 会员基本信息 ..." />
-            <marker date="1539591351515" expanded="true" signature="2701:2968" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="2795:2826" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="2846:2856" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="2906:2940" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="2978:2998" ph=" 会员基本信息 ..." />
-            <marker date="1539591351515" expanded="true" signature="3058:3351" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="3412:4407" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="3489:3508" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="3515:3534" ph="..." />
             <marker date="1539591351515" expanded="true" signature="3649:4066" ph="select detai... fn_saler_bill_detail" />
-            <marker date="1539591351515" expanded="true" signature="4466:5190" ph="..." />
             <marker date="1539591351515" expanded="true" signature="4483:5084" ph="select custo... fn_saler_bill_detail" />
-            <marker date="1539591351515" expanded="true" signature="5233:5256" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="5263:5299" ph=" @return mixed ..." />
-            <marker date="1539591351515" expanded="true" signature="5341:5871" ph="..." />
             <marker date="1539591351515" expanded="true" signature="5355:5726" ph="select custo... fn_customer" />
             <marker date="1539591351515" expanded="true" signature="5355:5786" ph="select custo... fn_customer" />
             <marker date="1539591351515" expanded="true" signature="5465:5681" ph="SELECT detai... fn_saler_bill_detail" />
-            <marker date="1539591351515" expanded="true" signature="5913:6473" ph="..." />
             <marker date="1539591351515" expanded="true" signature="5927:6327" ph="select custo... fn_customer" />
             <marker date="1539591351515" expanded="true" signature="5927:6388" ph="select custo... fn_customer" />
             <marker date="1539591351515" expanded="true" signature="6036:6282" ph="SELECT detai... fn_saler_bill_detail" />
-            <marker date="1539591351515" expanded="true" signature="6490:6508" ph=" 条件查询 ..." />
-            <marker date="1539591351515" expanded="true" signature="6557:7011" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="6619:6981" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="6684:6958" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="6730:6827" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="6873:6944" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="7021:7041" ph=" 数据分页显示 ..." />
-            <marker date="1539591351515" expanded="true" signature="7099:8893" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="7134:7539" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="7407:7506" ph="..." />
             <marker date="1539591351515" expanded="true" signature="8420:8424" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="8480:8543" ph="..." />
             <marker date="1539591351515" expanded="true" signature="8609:8724" ph="select custo... fn_customer" />
             <marker date="1539591351515" expanded="true" signature="8609:8725" ph="select custo... fn_customer" />
             <marker date="1539591351515" expanded="true" signature="8609:8760" ph="select custo... fn_customer" />
@@ -1309,11 +1111,6 @@
             <marker date="1539591351515" expanded="true" signature="8609:8771" ph="select custo... fn_customer" />
             <marker date="1539591351515" expanded="true" signature="8609:8772" ph="select custo... fn_customer" />
             <marker date="1539591351515" expanded="true" signature="8609:8794" ph="select custo... fn_customer" />
-            <marker date="1539591351515" expanded="true" signature="8904:8922" ph=" 会员删除 ..." />
-            <marker date="1539591351515" expanded="true" signature="8960:9720" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="9003:9037" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="9122:9714" ph="..." />
-            <marker date="1539591351515" expanded="true" signature="9151:9190" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1338,62 +1135,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7560">
           <caret line="275" column="65" selection-start-line="275" selection-start-column="50" selection-end-line="275" selection-end-column="65" />
-          <folding>
-            <marker date="1539591276121" expanded="true" signature="141:159" ph=" 构造函数 ..." />
-            <marker date="1539591276121" expanded="true" signature="197:356" ph="..." />
-            <marker date="1539591276121" expanded="true" signature="255:349" ph="..." />
-            <marker date="1539591276121" expanded="true" signature="282:348" ph="..." />
-            <marker date="1539591276121" expanded="true" signature="288:347" ph="..." />
-            <marker date="1539591276121" expanded="true" signature="366:382" ph=" 首页 ..." />
-            <marker date="1539591276121" expanded="true" signature="414:1534" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/finecms/dayrui/models/Saler_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6972">
-          <caret line="252" column="5" selection-start-line="252" selection-start-column="5" selection-end-line="252" selection-end-column="5" />
-          <folding>
-            <marker date="1539591259704" expanded="true" signature="78:165" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="206:298" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="342:455" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="497:1142" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="745:998" ph="update fn_cu... " />
-            <marker date="1539591259704" expanded="true" signature="1188:1921" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="1265:1312" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="1323:1342" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="1567:1820" ph="update fn_cu... " />
-            <marker date="1539591259704" expanded="true" signature="1929:1943" ph=" 会员基本信息 ..." />
-            <marker date="1539591259704" expanded="true" signature="1991:2202" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="2078:2111" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="2122:2129" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="2164:2183" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="2248:2459" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="2336:2363" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="2374:2386" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="2421:2440" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="2501:2740" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="2586:2644" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="2655:2667" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="2702:2721" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="2793:3144" ph="..." />
-            <marker date="1539591259704" expanded="true" signature="4069:4277" ph="select saler... fn_saler_fuel" />
-            <marker date="1539591259704" expanded="true" signature="4444:4557" ph="select saler... fn_saler_bill" />
-            <marker date="1539591259704" expanded="true" signature="7022:7408" ph="select detai... fn_saler_bill_detail" />
-            <marker date="1539591259704" expanded="true" signature="7022:7448" ph="select detai... fn_saler" />
-            <marker date="1539591259704" expanded="true" signature="7022:7465" ph="select saler... fn_saler" />
-            <marker date="1539591259704" expanded="true" signature="7998:8419" ph="select detai... fn_saler_bill_detail" />
-            <marker date="1539591259704" expanded="true" signature="9287:9714" ph="select bill.... fn_saler_bill" />
-            <marker date="1539591259704" expanded="true" signature="9451:9608" ph="select billI... fn_saler_bill_detail" />
-          </folding>
+        <state relative-caret-position="7056">
+          <caret line="252" column="0" selection-start-line="252" selection-start-column="0" selection-end-line="252" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/finecms/dayrui/templates/salerbill_index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+        <state relative-caret-position="224">
+          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
           <folding />
         </state>
       </provider>

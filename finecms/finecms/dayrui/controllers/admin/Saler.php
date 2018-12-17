@@ -47,7 +47,12 @@ class Saler extends M_Controller {
 
         // 存储当前页URL
         $this->_set_back_url('member/index', $param);
-
+        foreach ($data as $k => $v) {
+        	$sum['allknot'] += $v['allknot'];
+        	$sum['allbucket'] += $v['allbucket'];
+        	$sum['allbottleNum'] += $v['allbottleNum'];
+        	$sum['alldrinkNum'] += $v['alldrinkNum'];
+        }
 		$this->template->assign(array(
 			'list' => $data,
             'field' => $field,
@@ -531,6 +536,36 @@ class Saler extends M_Controller {
 		$this->template->assign('billId', $id);
 		$this->template->assign('time', time());
 		$this->template->display('billdetail_add.html');
+	}
+
+	//欠款列表
+	public function debtlist() {
+		$salerId = $_GET['salerId'];
+		list($data, $param)  = $this->saler_model->getdebtlist($salerId);
+		$this->template->assign('menubill', $this->get_menu_v3(array(
+			fc_lang('返回') => array('admin/saler/index', 'reply')
+		)));
+		$this->template->assign(array(
+			'list' => $data,
+            'field' => $field,
+			'param'	=> $param,
+		));
+		$this->template->display('saler_debtlist.html');
+
+	}
+
+	public function displaywater()  {
+		$salerId = $_GET['salerId'];
+		list($data, $param)  = $this->saler_model->getdebtlist($salerId);
+		$this->template->assign('menubill', $this->get_menu_v3(array(
+			fc_lang('返回') => array('admin/saler/index', 'reply')
+		)));
+		$this->template->assign(array(
+			'list' => $data,
+            'field' => $field,
+			'param'	=> $param,
+		));
+		$this->template->display('saler_debtlist.html');
 	}
 
 	public function exportFuel() {

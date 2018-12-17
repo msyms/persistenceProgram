@@ -150,6 +150,18 @@ class Saler_model extends M_Model {
         return array($data, $_param);
     }
 
+    //获取欠款人员
+   	public function getdebtlist($salerId,$page = 1) 
+	{
+		$where = $this->db->where('salerId',$salerId)->where('debtMoney > 0 ');
+		$total = $where->select('count(*) as total')->get('customer')->row_array();
+		$data = $this->db->where('salerId',$salerId)->where('debtMoney > 0 ')
+				->select("cname,phone,debtMoney")->get('customer')->result_array();
+		$_param['total'] = $total['total'];
+		$_param['page'] = $page;
+		return array($data, $_param);
+	}
+
     public function get_fuel_exp($salerId) {
         $sql = "select saler.name,saler.carNo,fuel.rise,fuel.money,fuel.date
                 from fn_saler_fuel fuel 
@@ -297,5 +309,7 @@ class Saler_model extends M_Model {
 		$_param['order'] = $order;
 		return array($data, $_param);
 	}
+
+
 
 }

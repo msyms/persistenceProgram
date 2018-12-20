@@ -8,6 +8,21 @@ class Saler_model extends M_Model {
 		return $uid;
 	}
 
+	public function adddisplayDetail($data) {
+		$this->db->insert('saler_display_detail', $data);
+		$id = $this->db->insert_id();
+		return $id;
+	}
+
+	public function getdisplaylist($salerId) {
+		$sql = " select customer.cname,display.* from 
+				fn_saler_display_detail display 
+				left join fn_customer customer on display.customerId = customer.id 
+				where display.salerId = {$salerId}";
+		$result = $this->db->query($sql)->row_array();
+        return $result;	
+	}
+
 	public function addSalerBill($data) {
 		$this->db->insert('saler_bill', $data);
 		$uid = $this->db->insert_id();
@@ -119,6 +134,8 @@ class Saler_model extends M_Model {
 		}
 		return $data;
 	}
+
+
 
 	public function get_bill_detail_info($detailId) {
 		$sql = "select detail.*,customer.cname,price.unit,price.price from 

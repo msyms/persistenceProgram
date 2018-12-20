@@ -56,10 +56,21 @@
 				<a class="ago" href="{dr_url('saler/edit',array('salerId'=>$t.id))}"> <i class="fa fa-edit"></i> {fc_lang('修改')}</a>
 				<a class="alist" href="{dr_url('customer/index',array('salerId'=>$t.id))}"> <i class="fa fa-user"></i> {fc_lang('客户')}</a>
 				<a class="alist" href="{dr_url('saler/debtlist',array('salerId'=>$t.id))}"> <i class="fa fa-user"></i> {fc_lang('欠款')}</a>
-				<a class="alist" href="{dr_url('customer/display',array('salerId'=>$t.id))}"> <i class="fa fa-user"></i> {fc_lang('陈列')}</a>
+				<a class="alist" href="{dr_url('saler/displaywater',array('salerId'=>$t.id))}"> <i class="fa fa-user"></i> {fc_lang('陈列')}</a>
 			</td>
 		</tr> 
 		{/loop}
+		<tr>
+			<td>当日合计</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>{$sum['allknot']}</td>
+			<td>{$sum['allbucket']}</td>
+			<td>{$sum['allbottleNum']}</td>
+			<td>{$sum['alldrinkNum']}</td>
+			<td></td>
+		</tr>
 <!-- 		<tr class="mtable_bottom">
         	<th width="20"  ><input name="dr_select" class="toggle md-check" id="dr_select" type="checkbox" onClick="dr_selected()" /></th>
 			<td colspan="10"  >

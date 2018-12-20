@@ -53,6 +53,7 @@ class Saler extends M_Controller {
         	$sum['allbottleNum'] += $v['allbottleNum'];
         	$sum['alldrinkNum'] += $v['alldrinkNum'];
         }
+        $this->template->assign('sum',$sum);
 		$this->template->assign(array(
 			'list' => $data,
             'field' => $field,
@@ -288,6 +289,7 @@ class Saler extends M_Controller {
 				'name' => array('fieldname' => 'name','name' => fc_lang('姓名')),
 				'email' => array('fieldname' => 'email','name' => fc_lang('会员邮箱')),
 				'phone' => array('fieldname' => 'phone','name' => fc_lang('手机号码')),
+				''
 			) + ($field ? $field : array());
 		$url = "admin/saler/billadd/salerId/{$salerId}";
 		$this->template->assign('salerId',$salerId);
@@ -430,6 +432,8 @@ class Saler extends M_Controller {
 		$this->template->display('billdetail_index.html');
 	}
 
+	
+
 
 	public function billdetailadd() {
 		$id = $_GET['billId'];
@@ -554,11 +558,51 @@ class Saler extends M_Controller {
 
 	}
 
+	//陈列
+	public function displayadd(){
+		$salerId = $_GET['salerId'];
+		if (IS_POST) {
+			$data = $this->input->post( 'data' );
+			$info = $this->input->post( 'info' );
+			$customerId = $this->customer_model->get_customer_name($data['cname']);
+			// 单个添加
+			$uid = $this->saler_model->adddisplayDetail( [
+				'salerId'      => $salerId,
+				'customerId'   => $customerId,
+				'bucketNum'  => $data['bucketNum'],
+				'bottleNum'  => $data['bottleNum'],
+				'drinkNum'  => $data['drinkNum'],
+				'created'   => $data['time'],
+				'remark' => $info?:'',
+			] );
+
+			exit( dr_json( 1, fc_lang( '操作成功，正在刷新...' ) ) );
+//			$this->admin_msg(
+//				fc_lang('操作成功，正在刷新...'),
+//				$this->_get_back_url('saler/bill', array('id' =>$id)),
+//				1,
+//				1
+//			);
+		}
+		$url = 'admin/saler/displaywater/salerId/'.$salerId;
+		$this->template->assign('menubill', $this->get_menu_v3(array(
+			fc_lang('返回') => array($url, 'reply')
+		)));
+		$customer = $this->customer_model->get_all_customer();
+		$this->template->assign('customer',$customer);
+		$saler = $this->saler_model->get_saler($salerId);
+		$this->template->assign('saler',$saler);
+		$this->template->assign('time', time());
+		$this->template->display('display_add.html');
+	}
+
 	public function displaywater()  {
 		$salerId = $_GET['salerId'];
-		list($data, $param)  = $this->saler_model->getdebtlist($salerId);
+		list($data, $param)  = $this->saler_model->getdisplaylist($salerId);
+		$url = 'admin/saler/displayadd/salerId/'.$salerId;
 		$this->template->assign('menubill', $this->get_menu_v3(array(
-			fc_lang('返回') => array('admin/saler/index', 'reply')
+			fc_lang('返回') => array('admin/saler/index', 'reply'),
+			fc_lang('添加') => array($url.'_js', 'plus')
 		)));
 		$this->template->assign(array(
 			'list' => $data,

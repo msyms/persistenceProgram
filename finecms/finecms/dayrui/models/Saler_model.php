@@ -19,7 +19,7 @@ class Saler_model extends M_Model {
 				fn_saler_display_detail display 
 				left join fn_customer customer on display.customerId = customer.id 
 				where display.salerId = {$salerId}";
-		$result = $this->db->query($sql)->row_array();
+		$result = $this->db->query($sql)->result_array();
         return $result;	
 	}
 
@@ -189,8 +189,13 @@ class Saler_model extends M_Model {
     }
 
     public function get_saler_bill_exp($salerId) {
-        $sql = "select salerName,bucketNum,bottleNum,checker,saleTime,remark 
-                from fn_saler_bill where salerId = $salerId ";
+        $sql = "select bill.*,detail.bucketTotal,detail.knotTotal,detail.bottleTotal,detail.backNumTotal from fn_saler_bill bill
+				left join (select billId,sum(knot) as knotTotal, sum(bucketNum) as bucketTotal,sum(bottleNum) as bottleTotal,
+					  		sum(backBucketNum) as backNumTotal 
+				 			from fn_saler_bill_detail GROUP BY billId ) detail 
+				on bill.id = detail.billId
+				where bill.salerId = $salerId order by bill.id desc ";
+
         $result = $this->db->query($sql)->result_array();
         return $result;
     }

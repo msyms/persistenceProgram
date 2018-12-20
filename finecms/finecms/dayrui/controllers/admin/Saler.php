@@ -598,7 +598,9 @@ class Saler extends M_Controller {
 
 	public function displaywater()  {
 		$salerId = $_GET['salerId'];
-		list($data, $param)  = $this->saler_model->getdisplaylist($salerId);
+		$data  = $this->saler_model->getdisplaylist($salerId);
+		$saler = $this->saler_model->get_saler($salerId);
+		
 		$url = 'admin/saler/displayadd/salerId/'.$salerId;
 		$this->template->assign('menubill', $this->get_menu_v3(array(
 			fc_lang('返回') => array('admin/saler/index', 'reply'),
@@ -606,10 +608,10 @@ class Saler extends M_Controller {
 		)));
 		$this->template->assign(array(
 			'list' => $data,
-            'field' => $field,
+            'saler' => $saler,
 			'param'	=> $param,
 		));
-		$this->template->display('saler_debtlist.html');
+		$this->template->display('display_index.html');
 	}
 
 	public function exportFuel() {
@@ -671,6 +673,8 @@ class Saler extends M_Controller {
         echo iconv('utf-8', 'gbk', implode("\t", $title)) . "\n";
         $list = $this->saler_model->get_saler_bill_exp($salerId);
         foreach ($list as $key => $value) {
+        	unset($value['id']);
+        	unset($value['salerId']);
             echo iconv('utf-8', 'gbk', implode("\t", $value)) . "\n";
         }
         return false;

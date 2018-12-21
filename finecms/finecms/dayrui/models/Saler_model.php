@@ -189,7 +189,10 @@ class Saler_model extends M_Model {
     }
 
     public function get_saler_bill_exp($salerId) {
-        $sql = "select bill.*,detail.bucketTotal,detail.knotTotal,detail.bottleTotal,detail.backNumTotal from fn_saler_bill bill
+        $sql = "select bill.salerName,bill.bucketNum,knotTotal,backNumTotal,bill.bottleNum,bill.checker,
+        bill.bucketNum - detail.bucketTotal as bucketleft,
+        bill.bottleNum - detail.bottleTotal as bottleleft,
+        bill.saleTime,bill.remark from fn_saler_bill bill
 				left join (select billId,sum(knot) as knotTotal, sum(bucketNum) as bucketTotal,sum(bottleNum) as bottleTotal,
 					  		sum(backBucketNum) as backNumTotal 
 				 			from fn_saler_bill_detail GROUP BY billId ) detail 

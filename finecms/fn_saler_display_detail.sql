@@ -2,10 +2,10 @@
 -- version phpStudy 2014
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Sep 06, 2018 at 02:21 PM
--- Server version: 5.5.53
--- PHP Version: 5.6.27
+-- 主机: localhost
+-- 生成日期: 2018 �?12 �?24 �?06:49
+-- 服务器版本: 5.5.53
+-- PHP 版本: 5.6.27
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,31 +17,26 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `finecms`
+-- 数据库: `finecms`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fn_saler_fuel`
+-- 表的结构 `fn_saler_display_detail`
 --
 
-CREATE TABLE IF NOT EXISTS `fn_saler_fuel` (
+CREATE TABLE IF NOT EXISTS `fn_saler_display_detail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `salerId` int(11) NOT NULL,
-  `rise` int(11) NOT NULL COMMENT '加油量',
-  `money` decimal(10,2) NOT NULL COMMENT '金额',
-  `date` date NOT NULL,
-  `remark` varchar(100) NOT NULL COMMENT '备注',
+  `customerId` int(11) NOT NULL,
+  `bucketNum` int(11) NOT NULL,
+  `drinkNum` int(11) NOT NULL,
+  `bottleNum` int(11) NOT NULL,
+  `remark` varchar(50) NOT NULL,
+  `created` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `fn_saler_fuel`
---
-
-INSERT INTO `fn_saler_fuel` (`id`, `salerId`, `rise`, `money`, `date`, `remark`) VALUES
-(1, 1, 10, '100.00', '2018-09-02', '');
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

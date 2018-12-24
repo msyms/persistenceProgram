@@ -572,7 +572,7 @@ class Saler extends M_Controller {
 				'bucketNum'  => $data['bucketNum'],
 				'bottleNum'  => $data['bottleNum'],
 				'drinkNum'  => $data['drinkNum'],
-				'created'   => $data['time'],
+				'created'   => date('Y-m-d H:i:s',$data['time']),
 				'remark' => $info?:'',
 			] );
 
@@ -595,6 +595,51 @@ class Saler extends M_Controller {
 		$this->template->assign('time', time());
 		$this->template->display('display_add.html');
 	}
+
+	//陈列
+	public function displayedit(){
+		$id = $_GET['id'];
+		$data = $this->saler_model->get_display_info($id);
+		if (IS_POST) {
+			$data = $this->input->post( 'data' );
+			$info = $this->input->post( 'info' );
+			$customerId = $this->customer_model->get_customer_name($data['cname']);
+			// 单个添加
+			$uid = $this->saler_model->editdisplayDetail($id, [
+				'customerId'   => $customerId,
+				'bucketNum'  => $data['bucketNum'],
+				'bottleNum'  => $data['bottleNum'],
+				'drinkNum'  => $data['drinkNum'],
+				'created'   => date('Y-m-d H:i:s',$data['time']),
+				'remark' => $info?:'',
+			] );
+
+			exit( dr_json( 1, fc_lang( '操作成功，正在刷新...' ) ) );
+//			$this->admin_msg(
+//				fc_lang('操作成功，正在刷新...'),
+//				$this->_get_back_url('saler/bill', array('id' =>$id)),
+//				1,
+//				1
+//			);
+		}
+		$url = 'admin/saler/displaywater/salerId/'.$salerId;
+		$this->template->assign('menubill', $this->get_menu_v3(array(
+			fc_lang('返回') => array($url, 'reply')
+		)));
+		$customer = $this->customer_model->get_all_customer();
+		$this->template->assign('customer',$customer);
+		$saler = $this->saler_model->get_saler($salerId);
+		$this->template->assign('saler',$saler);
+		$this->template->assign('data',$data);
+		$this->template->assign('time', time());
+		$this->template->display('display_add.html');
+	}
+
+	public function displaydel() {
+		$id = $_GET['id'];
+		$this->saler_model->deldisplay();
+	}
+
 
 	public function displaywater()  {
 		$salerId = $_GET['salerId'];

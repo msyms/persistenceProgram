@@ -87,6 +87,11 @@ class Saler_model extends M_Model {
 		return 1;
 	}
 
+	public function editdisplayDetail($id,$data) {
+		$this->db->where('id',$id)->update('saler_display_detail',$data);
+		return 1;
+	}
+
 
 	/**
 	 * 会员基本信息
@@ -145,6 +150,14 @@ class Saler_model extends M_Model {
 				where detail.id = $detailId ";
 		$result = $this->db->query($sql)->row_array();
         return $result;
+	}
+
+	public function get_display_info($id) {
+		$sql = "select detail.*,customer.cname from fn_saler_display_detail detail
+				left join fn_customer customer on detail.customerId = customer.id 
+				 where detail.id = {$id}";
+		$result = $this->db->query($sql)->row_array();
+		return $result;
 	}
 
 

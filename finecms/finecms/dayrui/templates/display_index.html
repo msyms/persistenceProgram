@@ -33,6 +33,7 @@
 			<th class="{ns_sorting('drinkNum')}" name="drinkNum" >{fc_lang('饮料')}</th>
 			<th class="{ns_sorting('phone')}" name="remark" >{fc_lang('时间')}</th>
 			<th class="{ns_sorting('phone')}" name="remark" >{fc_lang('备注')}</th>
+			<th class="{ns_sorting('phone')}" name="remark" >{fc_lang('操作')}</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -46,6 +47,10 @@
 			<td>{dr_keyword_highlight($t.drinkNum, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.created, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.remark, $param.keyword)}</td>
+			<td class="dr_option">
+				<a class="aedit" href="javascript:dr_dialog('admin.php?c=saler&m=displayedit&id=<?php echo $t['id'];?>', 'add')"> <i class="fa fa fa-edit"></i> {fc_lang('修改')}</a>
+				<a class="adel" href="{dr_url('saler/displaydel',array('id'=>$t.id))}"> <i class="fa fa-trash"></i> {fc_lang('删除')}</a>
+
 		</tr>
 		{/loop}
 		<!--<tr class="mtable_bottom">-->

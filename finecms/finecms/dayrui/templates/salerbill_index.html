@@ -38,9 +38,11 @@
 			<th class="{ns_sorting('name')}" name="bucketNum" >{fc_lang('桶装水')}</th>
 			<th class="{ns_sorting('name')}" name="bucketNum" >{fc_lang('回桶')}</th>
 			<th class="{ns_sorting('name')}" name="bottleNum" >{fc_lang('瓶装水')}</th>
+			<th class="{ns_sorting('name')}" name="bottleNum" >{fc_lang('饮料')}</th>
 			<th class="{ns_sorting('phone')}" name="checker" >{fc_lang('检核人')}</th>
 			<th class="{ns_sorting('phone')}" name="saleTime" >{fc_lang('剩余桶装水')}</th>
 			<th class="{ns_sorting('phone')}" name="saleTime" >{fc_lang('剩余瓶装水')}</th>
+			<th class="{ns_sorting('phone')}" name="saleTime" >{fc_lang('剩余饮料')}</th>
 			<th class="{ns_sorting('name')}" name="bucketNum" >{fc_lang('回款')}</th>
 			<th class="{ns_sorting('phone')}" name="saleTime" >{fc_lang('时间')}</th>
 			<th class="{ns_sorting('phone')}" name="remark" >{fc_lang('备注')}</th>
@@ -55,9 +57,11 @@
 			<td>{dr_keyword_highlight($t.bucketNum, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.backNumTotal, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.bottleNum, $param.keyword)}</td>
+			<td>{dr_keyword_highlight($t.drinkNum, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.checker, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.bucketNum - $t.bucketTotal, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.bottleNum - $t.bottleTotal, $param.keyword)}</td>
+			<td>{dr_keyword_highlight($t.drinkNum - $t.drinkTotal, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.knotTotal, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.saleTime, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.remark, $param.keyword)}</td>
@@ -67,6 +71,19 @@
 			</td>
 		</tr> 
 		{/loop}
+				<tr style="background-color:#c3b7ac;">
+			<td>合计</td>
+			<td>{$sum['bucketNum']}</td>
+			<td>{$sum['backNumTotal']}</td>
+			<td>{$sum['bottleNum']}</td>
+			<td>{$sum['drinkNum']}</td>
+			<td></td>
+			<td>{$sum['bucketleft']}</td>
+			<td>{$sum['bottleleft']}</td>
+			<td>{$sum['drinkleft']}</td>
+			<td>{$sum['knotTotal']}</td>
+			<td></td>
+		</tr>
 		<!-- <tr class="mtable_bottom">
         	<th width="20"  ><input name="dr_select" class="toggle md-check" id="dr_select" type="checkbox" onClick="dr_selected()" /></th>
 			<td colspan="10"  >

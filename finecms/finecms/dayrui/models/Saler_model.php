@@ -92,6 +92,11 @@ class Saler_model extends M_Model {
 		return 1;
 	}
 
+	public function deldisplay($id) {
+		$this->db->where('id', $id)->delete('saler_display_detail');
+		return 1;
+	}
+
 
 	/**
 	 * 会员基本信息
@@ -138,6 +143,14 @@ class Saler_model extends M_Model {
 			return NULL;
 		}
 		return $data;
+	}
+
+	public function get_sumdetail($billId) {
+		$sql = "select billId,sum(knot) as knotTotal, sum(bucketNum) as bucketTotal,sum(bottleNum) as bottleTotal,
+					  		sum(backBucketNum) as backNumTotal 
+				 			from fn_saler_bill_detail where billId = {$billId} GROUP BY billId";
+		$result = $this->db->query($sql)->row_array();
+		return $result;
 	}
 
 
@@ -202,11 +215,12 @@ class Saler_model extends M_Model {
     }
 
     public function get_saler_bill_exp($salerId) {
-        $sql = "select bill.salerName,bill.bucketNum,backNumTotal,bill.bottleNum,bill.checker,
+        $sql = "select bill.salerName,bill.bucketNum,backNumTotal,bill.bottleNum,bill.drinkNum,bill.checker,
         bill.bucketNum - detail.bucketTotal as bucketleft,
-        bill.bottleNum - detail.bottleTotal as bottleleft,knotTotal,
-        bill.saleTime,bill.remark from fn_saler_bill bill
-				left join (select billId,sum(knot) as knotTotal, sum(bucketNum) as bucketTotal,sum(bottleNum) as bottleTotal,
+        bill.bottleNum - detail.bottleTotal as bottleleft,
+        bill.drinkNum - detail.drinkTotal as drinkleft,
+        knotTotal,bill.saleTime,bill.remark from fn_saler_bill bill
+				left join (select billId,sum(knot) as knotTotal, sum(bucketNum) as bucketTotal,sum(bottleNum) as bottleTotal,sum(drinkNum) as drinkTotal,
 					  		sum(backBucketNum) as backNumTotal 
 				 			from fn_saler_bill_detail GROUP BY billId ) detail 
 				on bill.id = detail.billId

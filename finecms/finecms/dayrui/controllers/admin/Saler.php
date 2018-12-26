@@ -300,11 +300,22 @@ class Saler extends M_Controller {
 			fc_lang('添加') => array($url, 'plus')
 
 		)));
+		foreach ($data as $k => $v) {
+        	$sum['bucketNum'] += $v['bucketNum'];
+        	$sum['backNumTotal'] += $v['backNumTotal'];
+        	$sum['bottleNum'] += $v['bottleNum'];
+        	$sum['drinkNum'] += $v['drinkNum'];
+        	$sum['bucketleft'] += $v['bucketNum'] - $v['bucketTotal'];
+        	$sum['bottleleft'] += $v['bottleNum'] - $v['bottleTotal'];
+        	$sum['drinkleft'] += $v['drinkNum'] - $v['drinkTotal'];
+        	$sum['knotTotal'] += $v['knotTotal'];
+        }
 		$this->template->assign(array(
 			'time' => $time,
 			'time1' => $time1,
 			'list' => $data,
 			'field' => $field,
+			'sum' => $sum,
 			'param'	=> $param,
 			'pages'	=> $this->get_pagination(dr_qxurl('saler/bill/salerId/'.$salerId, $param), $param['total']),
 		));
@@ -356,6 +367,7 @@ class Saler extends M_Controller {
 
 		$billId = (int)$this->input->get('billId');
 		$salerId = (int)$this->input->get('salerId');
+		$billInfo = $this->saler_model->get_sumdetail($billId);
 		$data = $this->saler_model->get_saler_bill($billId);
 
 		!$data && $this->admin_msg(fc_lang('对不起，数据被删除或者查询不存在'));
@@ -368,6 +380,7 @@ class Saler extends M_Controller {
 				'salerName' => $edit['salerName'],
 				'bucketNum' => $edit['bucketNum'],
 				'bottleNum' => $edit['bottleNum'],
+				'drinkNum' => $edit['drinkNum'],
 				'checker' => $edit['checker'],
 				'saleTime' => date('Y-m-d',$edit['time']),
 				'remark' => $edit['remark'],
@@ -390,6 +403,7 @@ class Saler extends M_Controller {
 		$this->template->assign(array(
 			'time' => strtotime($data['saleTime']) ,
 			'data' => $data,
+			'backNumTotal' => $billInfo['backNumTotal'],
 			'myfield' => $this->field_input($field, $data, TRUE),
 		));
 		$this->template->display('salerbill_add.html');
@@ -421,11 +435,22 @@ class Saler extends M_Controller {
 			fc_lang('添加') => array($url.'_js', 'plus')
 
 		)));
+		foreach ($data as $k => $v) {
+        	$sum['bucketNum'] += $v['bucketNum'];
+        	$sum['bottleNum'] += $v['bottleNum'];
+        	$sum['drinkNum'] += $v['drinkNum'];
+        	$sum['backBucketNum'] += $v['backBucketNum'];
+        	$sum['knot'] += $v['knot'];
+        	$sum['debt'] += $v['debt'];
+        	$sum['debtBucket'] += $v['debtBucket'];
+        	$sum['depositBucket'] += $v['depositBucket'];
+        }
 
 		$this->template->assign(array(
 			'salerId' => $salerId,
 			'billId' => $billId,
 			'list' => $data,
+			'sum' => $sum,
 			'param'	=> $param,
 			'pages'	=> $this->get_pagination(dr_url('member/index', $param), $param['total']),
 		));
@@ -637,7 +662,14 @@ class Saler extends M_Controller {
 
 	public function displaydel() {
 		$id = $_GET['id'];
-		$this->saler_model->deldisplay();
+		$salerId = $_GET['salerId'];
+		$this->saler_model->deldisplay($id);
+				$this->admin_msg(
+				fc_lang('操作成功，正在刷新...'),
+				$this->_get_back_url('saler/displaywater', array('salerId'=>$salerId)),
+				1,
+				1
+			);
 	}
 
 
@@ -653,6 +685,7 @@ class Saler extends M_Controller {
 		)));
 		$this->template->assign(array(
 			'list' => $data,
+			'salerId' => $salerId,
             'saler' => $saler,
 			'param'	=> $param,
 		));
@@ -712,9 +745,11 @@ class Saler extends M_Controller {
             '桶装水',
             '回桶',
             '瓶装水',
+            '饮料',
             '检核人',
             '剩余桶装水',
             '剩余瓶装水',
+            '剩余饮料',
             '回款',
             '时间',
             '备注'
@@ -722,8 +757,6 @@ class Saler extends M_Controller {
         echo iconv('utf-8', 'gbk', implode("\t", $title)) . "\n";
         $list = $this->saler_model->get_saler_bill_exp($salerId);
         foreach ($list as $key => $value) {
-        	unset($value['id']);
-        	unset($value['salerId']);
             echo iconv('utf-8', 'gbk', implode("\t", $value)) . "\n";
         }
         return false;

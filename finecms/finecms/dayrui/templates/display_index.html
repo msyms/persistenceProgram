@@ -49,7 +49,7 @@
 			<td>{dr_keyword_highlight($t.remark, $param.keyword)}</td>
 			<td class="dr_option">
 				<a class="aedit" href="javascript:dr_dialog('admin.php?c=saler&m=displayedit&id=<?php echo $t['id'];?>', 'add')"> <i class="fa fa fa-edit"></i> {fc_lang('修改')}</a>
-				<a class="adel" href="{dr_url('saler/displaydel',array('id'=>$t.id))}"> <i class="fa fa-trash"></i> {fc_lang('删除')}</a>
+				<a class="adel" href="{dr_url('saler/displaydel',array('id'=>$t.id,'salerId'=>$salerId))}"> <i class="fa fa-trash"></i> {fc_lang('删除')}</a>
 
 		</tr>
 		{/loop}

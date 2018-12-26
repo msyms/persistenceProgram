@@ -49,9 +49,16 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-2 control-label">{fc_lang('回桶')}：</label>
+                            <div class="col-md-9">
+                                <label><input class="form-control" type="text"  value="{$backNumTotal}" readonly ></label>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-2 control-label">{fc_lang('饮料')}：</label>
                             <div class="col-md-9">
-                                <label><input class="form-control" type="text" name="data[drinkNum]" value="{$data.bucketNum}" ></label>
+                                <label><input class="form-control" type="text" name="data[drinkNum]" value="{$data.drinkNum}" ></label>
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -69,6 +76,7 @@
                                 <span class="help-block" id="remark"></span>
                             </div>
                         </div>
+
 
                         <div class="form-group">
                             <label class="col-md-2 control-label">{fc_lang('时间')}：</label>

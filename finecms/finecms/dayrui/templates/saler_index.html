@@ -55,12 +55,12 @@
 				<a class="aedit" href="{dr_url('saler/fuel',array('salerId'=>$t.id))}"> <i class="fa fa-edit"></i> {fc_lang('加油信息')}</a>
 				<a class="ago" href="{dr_url('saler/edit',array('salerId'=>$t.id))}"> <i class="fa fa-edit"></i> {fc_lang('修改')}</a>
 				<a class="alist" href="{dr_url('customer/index',array('salerId'=>$t.id))}"> <i class="fa fa-user"></i> {fc_lang('客户')}</a>
-				<a class="alist" href="{dr_url('saler/debtlist',array('salerId'=>$t.id))}"> <i class="fa fa-user"></i> {fc_lang('欠款')}</a>
-				<a class="alist" href="{dr_url('saler/displaywater',array('salerId'=>$t.id))}"> <i class="fa fa-user"></i> {fc_lang('陈列')}</a>
+				<a class="adel" href="{dr_url('saler/debtlist',array('salerId'=>$t.id))}"> <i class="fa fa-navicon"></i> {fc_lang('欠款')}</a>
+				<a class="alist" href="{dr_url('saler/displaywater',array('salerId'=>$t.id))}"> <i class="fa fa-navicon"></i> {fc_lang('陈列')}</a>
 			</td>
 		</tr> 
 		{/loop}
-		<tr>
+		<tr style="background-color:#c3b7ac;">
 			<td>当日合计</td>
 			<td></td>
 			<td></td>

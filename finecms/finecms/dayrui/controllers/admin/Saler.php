@@ -63,6 +63,58 @@ class Saler extends M_Controller {
 		$this->template->display('saler_index.html');
     }
 
+    //销售导出
+    public function saler_exp()
+    {
+    	        // 重置页数和统计
+        IS_POST && $_GET['page'] = $_GET['total'] = 0;
+	
+		// 根据参数筛选结果
+        $param = $this->input->get(NULL, TRUE);
+        unset($param['s'], $param['c'], $param['m'], $param['d'], $param['page']);
+		
+    	$result = $this->saler_model->limit_page($param,1,100);
+    	$exp = array();
+    	foreach ($result as $k => $v) {
+    		$exp[$k]['name'] = $v['name'];
+    		$exp[$k]['carNo'] = $v['carNo'];
+    		$exp[$k]['phone'] = $v['phone'];
+    		$exp[$k]['typename'] = $v['typename'];
+    		$exp[$k]['allknot'] = $v['allknot'];
+    		$exp[$k]['allbucket'] = $v['allbucket'];
+    		$exp[$k]['allbottleNum'] = $v['allbottleNum'];
+    		$exp[$k]['alldrinkNum'] = $v['alldrinkNum'];
+    	}
+    	$date = date('Y-m-d');
+    	$filename = $date.'销售统计.xls';
+    	header('content-type:application/vnd.ms-excel;charset=UTF-8');
+        header('content-disposition:attachment;filename='.$filename);
+        header('Content-Transfer-Encoding: binary');
+        header('Pragma:no-cache');
+        header('Expires:0');
+        header("Pragma: public");
+        header("Cache-Control:must-revalidate, post-check=0, pre-check=0");
+        header("Content-Type:application/force-download");
+        header("Content-Type:application/octet-stream");
+        header("Content-Type:application/download");
+
+        $title = array(
+            '姓名',
+            '车牌号',
+            '电话',
+            '公司',
+            '结款',
+            '桶装水',
+            '饮料',
+            '瓶装水',
+        );
+        echo iconv('utf-8', 'gbk', implode("\t", $title)) . "\n";
+        foreach ($exp as $key => $value) {
+            echo iconv('utf-8', 'gbk', implode("\t", $value)) . "\n";
+        }
+        return false;
+    }
+
 	/**
  * 添加
  */
@@ -457,6 +509,69 @@ class Saler extends M_Controller {
 		$this->template->display('billdetail_index.html');
 	}
 
+	//明细导出
+	public function billdetail_exp() {
+		$billId = $_GET['billId'];
+		$salerId = $_GET['salerId'];
+
+		// 重置页数和统计
+		IS_POST && $_GET['page'] = $_GET['total'] = 0;
+
+		// 根据参数筛选结果
+		$param = $this->input->get(NULL, TRUE);
+		unset($param['s'], $param['c'], $param['m'], $param['d'], $param['page']);
+
+		// 数据库中分页查询
+		$data = $this->saler_model->get_bill_detail($billId);
+		$exp = array();
+		foreach ($data as $k => $v) {
+			$exp[$k]['cname'] = $v['cname'];
+			$exp[$k]['bucketNum'] = $v['bucketNum'];
+			$exp[$k]['bottleNum'] = $v['bottleNum'];
+			$exp[$k]['drinkNum'] = $v['drinkNum'];
+			$exp[$k]['bottleNum'] = $v['bottleNum'];
+			$exp[$k]['backBucketNum'] = $v['backBucketNum'];
+			$exp[$k]['knot'] = $v['knot'];
+			$exp[$k]['debt'] = $v['debt'];
+			$exp[$k]['debtBucket'] = $v['debtBucket'];
+			$exp[$k]['depositBucket'] = $v['depositBucket'];
+			$exp[$k]['saleTime'] = $v['saleTime'];
+			$exp[$k]['remark'] = $v['remark'];
+		}
+		$date = date('Y-m-d');
+    	$filename = $date.'订单明细.xls';
+    	header('content-type:application/vnd.ms-excel;charset=UTF-8');
+        header('content-disposition:attachment;filename='.$filename);
+        header('Content-Transfer-Encoding: binary');
+        header('Pragma:no-cache');
+        header('Expires:0');
+        header("Pragma: public");
+        header("Cache-Control:must-revalidate, post-check=0, pre-check=0");
+        header("Content-Type:application/force-download");
+        header("Content-Type:application/octet-stream");
+        header("Content-Type:application/download");
+
+        $title = array(
+            '客户姓名',
+            '桶装水',
+            '瓶装水',
+            '饮料',
+            '价格',
+            '回桶',
+            '结款',
+            '欠款',
+            '欠桶',
+            '押桶',
+            '时间',
+            '备注'
+        );
+        echo iconv('utf-8', 'gbk', implode("\t", $title)) . "\n";
+        foreach ($exp as $key => $value) {
+            echo iconv('utf-8', 'gbk', implode("\t", $value)) . "\n";
+        }
+        return false;
+	}
+
 	
 
 
@@ -583,6 +698,41 @@ class Saler extends M_Controller {
 
 	}
 
+	//欠款导出
+	public function debtlist_exp() {
+		$salerId = $_GET['salerId'];
+		list($data, $param)  = $this->saler_model->getdebtlist($salerId);
+		$exp = array();
+		foreach ($data as $k => $v) {
+			$exp[$k]['cname'] = $v['cname'];
+			$exp[$k]['phone'] = $v['phone'];
+			$exp[$k]['debtMoney'] = $v['debtMoney'];
+		}
+		$date = date('Y-m-d');
+    	$filename = $date.'欠款统计.xls';
+    	header('content-type:application/vnd.ms-excel;charset=UTF-8');
+        header('content-disposition:attachment;filename='.$filename);
+        header('Content-Transfer-Encoding: binary');
+        header('Pragma:no-cache');
+        header('Expires:0');
+        header("Pragma: public");
+        header("Cache-Control:must-revalidate, post-check=0, pre-check=0");
+        header("Content-Type:application/force-download");
+        header("Content-Type:application/octet-stream");
+        header("Content-Type:application/download");
+
+        $title = array(
+            '姓名',
+            '电话',
+            '欠款',
+        );
+        echo iconv('utf-8', 'gbk', implode("\t", $title)) . "\n";
+        foreach ($exp as $key => $value) {
+            echo iconv('utf-8', 'gbk', implode("\t", $value)) . "\n";
+        }
+        return false;
+	}
+
 	//陈列
 	public function displayadd(){
 		$salerId = $_GET['salerId'];
@@ -690,6 +840,52 @@ class Saler extends M_Controller {
 			'param'	=> $param,
 		));
 		$this->template->display('display_index.html');
+	}
+
+	//陈列导出
+	public function display_exp() {
+		$salerId = $_GET['salerId'];
+		$data  = $this->saler_model->getdisplaylist($salerId);
+		$saler = $this->saler_model->get_saler($salerId);
+		$exp = array();
+    	foreach ($data as $k => $v) {
+    		$exp[$k]['name'] = $v['name'];
+    		$exp[$k]['carNo'] = $v['carNo'];
+    		$exp[$k]['phone'] = $v['phone'];
+    		$exp[$k]['typename'] = $v['typename'];
+    		$exp[$k]['allknot'] = $v['allknot'];
+    		$exp[$k]['allbucket'] = $v['allbucket'];
+    		$exp[$k]['allbottleNum'] = $v['allbottleNum'];
+    		$exp[$k]['alldrinkNum'] = $v['alldrinkNum'];
+    	}
+    	$date = date('Y-m-d');
+    	$filename = $date.'陈列统计.xls';
+    	header('content-type:application/vnd.ms-excel;charset=UTF-8');
+        header('content-disposition:attachment;filename='.$filename);
+        header('Content-Transfer-Encoding: binary');
+        header('Pragma:no-cache');
+        header('Expires:0');
+        header("Pragma: public");
+        header("Cache-Control:must-revalidate, post-check=0, pre-check=0");
+        header("Content-Type:application/force-download");
+        header("Content-Type:application/octet-stream");
+        header("Content-Type:application/download");
+
+        $title = array(
+            '姓名',
+            '车牌号',
+            '电话',
+            '公司',
+            '结款',
+            '桶装水',
+            '饮料',
+            '瓶装水',
+        );
+        echo iconv('utf-8', 'gbk', implode("\t", $title)) . "\n";
+        foreach ($exp as $key => $value) {
+            echo iconv('utf-8', 'gbk', implode("\t", $value)) . "\n";
+        }
+        return false;
 	}
 
 	public function exportFuel() {

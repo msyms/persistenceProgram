@@ -73,9 +73,9 @@ class Saler extends M_Controller {
         $param = $this->input->get(NULL, TRUE);
         unset($param['s'], $param['c'], $param['m'], $param['d'], $param['page']);
 		
-    	$result = $this->saler_model->limit_page($param,1,100);
+    	list($data,$param) = $this->saler_model->limit_page($param,1,100);
     	$exp = array();
-    	foreach ($result as $k => $v) {
+    	foreach ($data as $k => $v) {
     		$exp[$k]['name'] = $v['name'];
     		$exp[$k]['carNo'] = $v['carNo'];
     		$exp[$k]['phone'] = $v['phone'];
@@ -85,8 +85,9 @@ class Saler extends M_Controller {
     		$exp[$k]['allbottleNum'] = $v['allbottleNum'];
     		$exp[$k]['alldrinkNum'] = $v['alldrinkNum'];
     	}
+
     	$date = date('Y-m-d');
-    	$filename = $date.'销售统计.xls';
+    	$filename = $date.'销售信息.xls';
     	header('content-type:application/vnd.ms-excel;charset=UTF-8');
         header('content-disposition:attachment;filename='.$filename);
         header('Content-Transfer-Encoding: binary');
@@ -529,7 +530,7 @@ class Saler extends M_Controller {
 			$exp[$k]['bucketNum'] = $v['bucketNum'];
 			$exp[$k]['bottleNum'] = $v['bottleNum'];
 			$exp[$k]['drinkNum'] = $v['drinkNum'];
-			$exp[$k]['bottleNum'] = $v['bottleNum'];
+			$exp[$k]['price'] = $v['price'];
 			$exp[$k]['backBucketNum'] = $v['backBucketNum'];
 			$exp[$k]['knot'] = $v['knot'];
 			$exp[$k]['debt'] = $v['debt'];
@@ -691,6 +692,7 @@ class Saler extends M_Controller {
 		)));
 		$this->template->assign(array(
 			'list' => $data,
+			'salerId' => $salerId,
             'field' => $field,
 			'param'	=> $param,
 		));
@@ -849,14 +851,13 @@ class Saler extends M_Controller {
 		$saler = $this->saler_model->get_saler($salerId);
 		$exp = array();
     	foreach ($data as $k => $v) {
-    		$exp[$k]['name'] = $v['name'];
-    		$exp[$k]['carNo'] = $v['carNo'];
-    		$exp[$k]['phone'] = $v['phone'];
-    		$exp[$k]['typename'] = $v['typename'];
-    		$exp[$k]['allknot'] = $v['allknot'];
-    		$exp[$k]['allbucket'] = $v['allbucket'];
-    		$exp[$k]['allbottleNum'] = $v['allbottleNum'];
-    		$exp[$k]['alldrinkNum'] = $v['alldrinkNum'];
+    		$exp[$k]['name'] = $saler['name'];
+    		$exp[$k]['cname'] = $v['cname'];
+    		$exp[$k]['bucketNum'] = $v['bucketNum'];
+    		$exp[$k]['bottleNum'] = $v['bottleNum'];
+    		$exp[$k]['drinkNum'] = $v['drinkNum'];
+    		$exp[$k]['created'] = $v['created'];
+    		$exp[$k]['remark'] = $v['remark'];
     	}
     	$date = date('Y-m-d');
     	$filename = $date.'陈列统计.xls';
@@ -872,14 +873,13 @@ class Saler extends M_Controller {
         header("Content-Type:application/download");
 
         $title = array(
-            '姓名',
-            '车牌号',
-            '电话',
-            '公司',
-            '结款',
+            '销售人员',
+            '客户名',
             '桶装水',
-            '饮料',
             '瓶装水',
+            '饮料',
+            '时间',
+            '备注',
         );
         echo iconv('utf-8', 'gbk', implode("\t", $title)) . "\n";
         foreach ($exp as $key => $value) {

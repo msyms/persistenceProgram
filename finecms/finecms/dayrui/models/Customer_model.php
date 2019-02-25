@@ -242,6 +242,22 @@ class Customer_model extends M_Model {
         return $data;
     }
 
+
+    //获取欠款人员
+    public function getdebtlist($customerId,$page = 1) 
+    {
+
+        $sql = "select detail.debt,customer.cname,customer.phone,bill.saleTime,bill.salerName from fn_saler_bill_detail detail 
+                left join fn_saler_bill bill on detail.billId = bill.id
+                left join fn_customer customer on customer.id = detail.customerId
+                where detail.customerId = $customerId and detail.debt != 0 ";
+        $data = $this->db->query($sql)->result_array();
+        return $data;
+        // $_param['total'] = $total['total'];
+        // $_param['page'] = $page;
+        // return array($data, $_param);
+    }
+
     /**
      * 数据分页显示
      */
@@ -288,7 +304,7 @@ class Customer_model extends M_Model {
 	    $pagenow = SITE_ADMIN_PAGESIZE * ($page - 1);
 	    $sql = "select customer.*,saler.name from fn_customer customer 
 				left join fn_saler saler on customer.salerId = saler.id " .$condition
-	            ." limit $pagenow, " . SITE_ADMIN_PAGESIZE ;
+	            ." order by customer.cname ASC limit $pagenow, " . SITE_ADMIN_PAGESIZE ;
 	    $data = $this->db->query($sql)->result_array();
 
         return array($data, $_param);

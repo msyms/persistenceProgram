@@ -123,6 +123,9 @@ class Customer extends M_Controller {
         }
     }
 
+
+
+
     public function exportCustomerBill() {
     	$customerId = $_GET['customerId'];
     	$date = date('Y-m-d');
@@ -361,6 +364,49 @@ class Customer extends M_Controller {
 		$this->template->assign('list',$debtInfo);
 		$this->template->display('customer_debt.html');
 	}
+
+	public function getDebtList()
+	{
+		$customerId = $_GET['customerId'];
+		$list = $this->customer_model->getdebtlist($customerId);
+		$this->template->assign('list',$list);
+		$this->template->assign('customerId',$customerId);
+		$this->template->display('customer_debtlist.html');
+
+	}
+
+	public function exportDebt() {
+    	ob_end_clean();
+		ob_start();
+		$customerId = $_GET['customerId'];
+    	$date = date('Y-m-d');
+    	$filename = $date.'欠款信息.xls';
+    	header('content-type:application/vnd.ms-excel;charset=UTF-8');
+        header('content-disposition:attachment;filename='.$filename);
+        header('Content-Transfer-Encoding: binary');
+        header('Pragma:no-cache');
+        header('Expires:0');
+        header("Pragma: public");
+        header("Cache-Control:must-revalidate, post-check=0, pre-check=0");
+        header("Content-Type:application/force-download");
+        header("Content-Type:application/octet-stream");
+        header("Content-Type:application/download");
+
+        $title = array(
+            '姓名',
+            '电话',
+            '金额',
+	        '销售人员',
+            '时间'
+        );
+        echo iconv('utf-8', 'gbk', implode("\t", $title)) . "\n";
+
+        $list = $this->customer_model->getdebtlist();
+
+        foreach ($list as $key => $value) {
+            echo iconv('utf-8', 'gbk', implode("\t", $value)) . "\n";
+        }
+    }
 
 
 

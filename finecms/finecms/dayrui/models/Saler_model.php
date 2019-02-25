@@ -328,7 +328,7 @@ class Saler_model extends M_Model {
 		return $data;
 	}
 
-    public function bill_limit_page($key, $page, $total,$search) {
+    public function getbillInfo($key, $page, $total,$search) {
 	    $countInfo = $this->db->where('salerId',$key)
 		    ->select('count(*) as total')->get('saler_bill')->row_array();
 	    $total = $countInfo['total'];
@@ -345,7 +345,30 @@ class Saler_model extends M_Model {
 					  		sum(backBucketNum) as backNumTotal 
 				 			from fn_saler_bill_detail GROUP BY billId ) detail 
 				on bill.id = detail.billId
-				where bill.salerId = $key {$condition} order by bill.id asc ";
+				where bill.salerId = $key {$condition} order by bill.saleTime asc ";
+	    $data = $this->db->query($sql)->result_array();
+	    $_param['total'] = $total;
+	    $_param['order'] = $order;
+	    return array($data, $_param);
+    }
+
+    public function bill_limit_page($key, $page, $total,$search) {
+	    $countInfo = $this->db->where('salerId',$key)
+		    ->select('count(*) as total')->get('saler_bill')->row_array();
+	    $total = $countInfo['total'];
+	    $page =SITE_ADMIN_PAGESIZE * ($page - 1);
+	   
+	    $order = dr_get_order_string(isset($_GET['order']) && strpos($_GET['order'], "undefined") !== 0 ? $this->input->get('order', TRUE) : 'id desc', 'id desc');
+	    $condition = '';
+	    if(count($search)) {
+		    $condition = " and bill.saleTime >= '{$search['start']}' and bill.saleTime <= '{$search['end']}' ";
+	    }
+	    $sql = "select bill.*,detail.bucketTotal,detail.knotTotal,detail.bottleTotal,detail.backNumTotal from fn_saler_bill bill
+				left join (select billId,sum(knot) as knotTotal, sum(bucketNum) as bucketTotal,sum(bottleNum) as bottleTotal,
+					  		sum(backBucketNum) as backNumTotal 
+				 			from fn_saler_bill_detail GROUP BY billId ) detail 
+				on bill.id = detail.billId
+				where bill.salerId = $key {$condition} order by bill.saleTime asc limit $page,".SITE_ADMIN_PAGESIZE;
 	    $data = $this->db->query($sql)->result_array();
 	    $_param['total'] = $total;
 	    $_param['order'] = $order;

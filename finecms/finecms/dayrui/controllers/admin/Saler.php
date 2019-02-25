@@ -322,6 +322,7 @@ class Saler extends M_Controller {
 			$search['end'] = date('Y-m-d',$_POST['data']['time1'] );
 			$time1 = strtotime($search['end']);
 		}
+		$page = $_GET['page']?:1;
 		$time =  $time ? $time : SYS_TIME;
 		if(!$time1) {
 			$time1 = $time;
@@ -335,6 +336,8 @@ class Saler extends M_Controller {
 		list($data, $param) = $this->saler_model->bill_limit_page($salerId, max((int)$_GET['page'], 1), (int)$_GET['total'], $search);
 
 
+
+		
 
 		$field = $this->get_cache('member', 'field');
 		$field = array(
@@ -370,6 +373,7 @@ class Saler extends M_Controller {
 			'field' => $field,
 			'sum' => $sum,
 			'param'	=> $param,
+			'page' => $page,
 			'pages'	=> $this->get_pagination(dr_qxurl('saler/bill/salerId/'.$salerId, $param), $param['total']),
 		));
 		$this->template->display('salerbill_index.html');
@@ -420,6 +424,7 @@ class Saler extends M_Controller {
 
 		$billId = (int)$this->input->get('billId');
 		$salerId = (int)$this->input->get('salerId');
+		$page = (int)$this->input->get('page');
 		$billInfo = $this->saler_model->get_sumdetail($billId);
 		$data = $this->saler_model->get_saler_bill($billId);
 
@@ -450,7 +455,7 @@ class Saler extends M_Controller {
 		$url = 'admin/saler/billdetailadd/billId/'.$billId;
 		// 存储当前页URL
 		$this->template->assign('menubill', $this->get_menu_v3(array(
-			fc_lang('返回') => array('admin/saler/bill/salerId/'.$salerId, 'reply'),
+			fc_lang('返回') => array('admin/saler/bill/salerId/'.$salerId.'/page/'.$page, 'reply'),
 
 		)));
 		$this->template->assign(array(
@@ -470,6 +475,7 @@ class Saler extends M_Controller {
 
 		$billId = $_GET['billId'];
 		$salerId = $_GET['salerId'];
+		$page = $_GET['page'];
 
 		// 重置页数和统计
 		IS_POST && $_GET['page'] = $_GET['total'] = 0;
@@ -484,7 +490,7 @@ class Saler extends M_Controller {
 		$url = 'admin/saler/billdetailadd/billId/'.$billId;
 		// 存储当前页URL
 		$this->template->assign('menubill', $this->get_menu_v3(array(
-			fc_lang('返回') => array('admin/saler/bill/salerId/'.$salerId, 'reply'),
+			fc_lang('返回') => array('admin/saler/bill/salerId/'.$salerId.'/page/'.$page, 'reply'),
 			fc_lang('添加') => array($url.'_js', 'plus')
 
 		)));

@@ -40,6 +40,21 @@ return array(
 		                'icon' => 'fa fa-calendar',
 	                ),
                     array(
+                        'name' => '库存信息',
+                        'uri' => 'stock/index',
+                        'icon' => 'fa fa-calendar',
+                    ),
+                    array(
+                        'name' => '收入',
+                        'uri' => 'money/income_index',
+                        'icon' => 'fa fa-calendar',
+                    ),
+                    array(
+                        'name' => '支出',
+                        'uri' => 'money/pay_index',
+                        'icon' => 'fa fa-calendar',
+                    ),
+                    array(
                         'name' => '超时访问客户',
                         'uri' => 'customer/meet',
                         'icon' => 'fa fa-bug',

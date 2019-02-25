@@ -66,8 +66,8 @@
 			<td>{dr_keyword_highlight($t.saleTime, $param.keyword)}</td>
 			<td>{dr_keyword_highlight($t.remark, $param.keyword)}</td>
 			<td class="dr_option">
-				{if $this->ci->is_auth('member/admin/home/edit')}<a class="aedit" href="{dr_url('saler/billdetail',array('billId'=>$t.id,'salerId'=>$salerId))}"> <i class="fa fa-edit"></i> {fc_lang('详情')}</a>{/if}
-				 {if $this->ci->is_auth('member/admin/home/edit')}<a class="aedit" href="{dr_url('saler/billedit',array('billId'=>$t.id,'salerId'=>$salerId))}" > <i class="fa fa-edit"></i> {fc_lang('修改')}</a>{/if}
+				{if $this->ci->is_auth('member/admin/home/edit')}<a class="aedit" href="{dr_url('saler/billdetail',array('billId'=>$t.id,'salerId'=>$salerId,'page'=>$page))}"> <i class="fa fa-edit"></i> {fc_lang('详情')}</a>{/if}
+				 {if $this->ci->is_auth('member/admin/home/edit')}<a class="aedit" href="{dr_url('saler/billedit',array('billId'=>$t.id,'salerId'=>$salerId,'page'=>$page))}" > <i class="fa fa-edit"></i> {fc_lang('修改')}</a>{/if}
 			</td>
 		</tr> 
 		{/loop}

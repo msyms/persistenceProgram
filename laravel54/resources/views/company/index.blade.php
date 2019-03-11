@@ -13,7 +13,8 @@
 	<!-- <div class="top2"><p>企业信息</p></div> -->
 	
 	<!--中部+版心开始-->
-	<form class="serach" action="/company/search" method="post">
+	<form class="serach" action="/api/company/search" method="post">
+		<!-- <input type="hidden" name="api_token" value="FrbIGV3a3druyOBUiu2Qug2chAmEnN7jL9RMzvVsMSwHKmb3ZNGb2U6EeKqJ"> -->
 		{{ csrf_field() }}
 		<input class="text" type="text" name="name" placeholder="请输入关键字进行搜索" />
 		<input class="sub" type="submit" value="搜索" name="" />

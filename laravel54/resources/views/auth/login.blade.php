@@ -17,7 +17,7 @@
         <img src="/images/logo.png" alt="" />
         <form action="{{ route('login') }}" method="POST">
             {{ csrf_field() }}
-            <input class="text1" type="text" name="email" value="1@qq.com" placeholder="请输入用户名" />
+            <input class="text1" type="text" name="name" value="" placeholder="请输入用户名" />
             <input class="text2" type="password" name="password" placeholder="请输入密码" />
             <input class="sub" type="submit" name="" />
         </form>

@@ -8,7 +8,8 @@ use App\Http\Requests\CompanyRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
-
+use App\Model\Comhealthofficer;
+use App\Model\Comsafeofficer;
 use App\Model\Company;
 
 class CompanyController extends Controller
@@ -25,6 +26,10 @@ class CompanyController extends Controller
     public function create(CompanyRequest $request)
     {
     	$company = $request->input('company');
+    	if(!$company['comName'])
+    	{
+    		return redirect('/company');
+    	}
     	if ($request->hasFile('photo')) {
 	        $picture = $request->file('photo');
 	        if (!$picture->isValid()) {
@@ -46,14 +51,39 @@ class CompanyController extends Controller
 		    $company['photo'] = $webPath;
 		}
 	    $id = Company::insertGetId($company);
+	    $healthInfo = $request->input('health');
+	    if($healthInfo['name'])
+	    {
+	    	$healthInfo['companyId'] = $id;
+	    	Comhealthofficer::insert($healthInfo);
+
+	    }
+    	$safeInfo = $request->input('safe');
+    	if($safeInfo['name'])
+    	{
+    		$safeInfo['companyId'] = $id;
+    		Comsafeofficer::insert($safeInfo);
+    	}
     	return redirect('check/choose/'.$id);
+    }
+
+    public function update(CompanyRequest $request)
+    {
+    	$company = $request->input('company');
+    	$id = $request->input('id');
     }
 
     public function search(CompanyRequest $quest)
     {
     	$name = $quest->input('name');
     	$companys = Company::where('comName','like','%'.$name.'%')->get();
-
+    	if($name) {
+    		foreach($companys as $k => $v) {
+				$companys[$k]->comName = preg_replace("/($name)/i", 
+								"<font color=red><b>\\1</b></font>", 
+								$v->comName); 
+	    	}
+    	}
     	return view('company/search')
     			->with('companys',$companys)
     			->with('name',$name);

@@ -23,8 +23,11 @@
 					<p>制度检查</p>
 				</dd>
 			</dl>
-			<a href="/check/show/{{$id}}">开始检查</a>
+			@if(!$checkId)
+			<a  href="/check/show/{{$id}}">开始检查</a>
+			@else
 			<img class="sy" style="display: block;" src="/images/sy.png" alt="" />
+			@endif
 		</div>
 		<div class="jc jcr">
 			<dl>
@@ -34,12 +37,15 @@
 					<p>设备设施检查</p>
 				</dd>
 			</dl>
-			<a href="/check/show/{{$id}}">开始检查</a>
-			<img class="sy" style="display: none;" src="/images/sy.png" alt="" />
+			@if(!$productCheckId)
+			<a href="/check/show/{{$id}}/group/2">开始检查</a>
+			@else
+			<img class="sy" style="display: block;" src="/images/sy.png" alt="" />
+			@endif
 		</div>
 		<div style="clear: both;"></div>
 	</div>
-	<a class="generate" href="">检查完成，生成报告</a>
+	<a class="generate" href="/check/exportWord1/{{$id}}">检查完成，生成报告</a>
 
 </body>
 </html>

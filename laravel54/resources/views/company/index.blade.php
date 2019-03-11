@@ -30,9 +30,6 @@
 			<li><p>行业类别</p>
 				<select name="company[category]">
 	  				<option value ="1">建筑行业</option>
-	 				<option value ="2">汽车行业</option>
-	  				<option value="3">服务行业</option>
-	  				<option value="4">信息行业</option>
 				</select>
 			</li>
 			<li><p>企业性质</p>
@@ -48,26 +45,26 @@
 		</ul>
 		<h2 style="text-align: center; font-size: 16px">安全管理人员</h2>
 		<ul class="ybzl" style="margin-bottom: 20px;">
-			<li><p>姓名</p><input type="text" value="" name="" placeholder="请填写姓名" /></li>
-			<li><p>联系方式</p><input type="text" value="" name="" placeholder="请填写联系方式" /></li>
-			<li><p>部门</p><input type="text" value="" name="" placeholder="请填写部门" /></li>
+			<li><p>姓名</p><input type="text" value="" name="safe[name]" placeholder="请填写姓名" /></li>
+			<li><p>联系方式</p><input type="text" value="" name="safe[phone]" placeholder="请填写联系方式" /></li>
+			<li><p>部门</p><input type="text" value="" name="safe[department]" placeholder="请填写部门" /></li>
 			<li><p>职业类别</p>
 				<label class="demo--label">
-	    			<input class="demo--radio" type="radio" name="demo-radio1">
+	    			<input class="demo--radio" type="radio" name="safe[position]" value="1">
 	    			<span class="demo--radioInput"></span>专职
 				</label>
 				<label class="demo--label">
-	    			<input class="demo--radio" type="radio" name="demo-radio1">
+	    			<input class="demo--radio" type="radio" name="safe[position]" value="2">
 	    			<span class="demo--radioInput"></span>兼职
 				</label>
 			</li>
 			<li><p>证书</p>
 				<label class="demo--label">
-	    			<input class="demo--radio" type="radio" name="demo-radio2">
+	    			<input class="demo--radio" type="radio" name="safe[certificate]" value="1">
 	    			<span class="demo--radioInput"></span>有
 				</label>
 				<label class="demo--label">
-	    			<input class="demo--radio" type="radio" name="demo-radio2">
+	    			<input class="demo--radio" type="radio" name="safe[certificate]" value="2">
 	    			<span class="demo--radioInput"></span>无
 				</label>
 			</li>
@@ -75,26 +72,26 @@
 		<div class="adds">+添加安全管理人员</div>
 		<h2 style="text-align: center; font-size: 16px">职业卫生管理人员</h2>
 		<ul class="ybzl" style="margin-bottom: 20px;">
-			<li><p>姓名</p><input type="text" value="" name="" placeholder="请填写姓名" /></li>
-			<li><p>联系方式</p><input type="text" value="" name="" placeholder="请填写联系方式" /></li>
-			<li><p>部门</p><input type="text" value="" name="" placeholder="请填写部门" /></li>
+			<li><p>姓名</p><input type="text" value="" name="health[name]" placeholder="请填写姓名" /></li>
+			<li><p>联系方式</p><input type="text" value="" name="health[phone]" placeholder="请填写联系方式" /></li>
+			<li><p>部门</p><input type="text" value="" name="health[department]" placeholder="请填写部门" /></li>
 			<li><p>职业类别</p>
 				<label class="demo--label">
-	    			<input class="demo--radio" type="radio" name="demo-radio3">
+	    			<input class="demo--radio" type="radio" name="health[position]" value="1">
 	    			<span class="demo--radioInput"></span>专职
 				</label>
 				<label class="demo--label">
-	    			<input class="demo--radio" type="radio" name="demo-radio3">
+	    			<input class="demo--radio" type="radio" name="health[position]" value="2">
 	    			<span class="demo--radioInput"></span>兼职
 				</label>
 			</li>
 			<li><p>证书</p>
 				<label class="demo--label">
-	    			<input class="demo--radio" type="radio" name="demo-radio4">
+	    			<input class="demo--radio" type="radio" name="health[certificate]" value="1">
 	    			<span class="demo--radioInput"></span>有
 				</label>
 				<label class="demo--label">
-	    			<input class="demo--radio" type="radio" name="demo-radio4">
+	    			<input class="demo--radio" type="radio" name="health[certificate]" value="2">
 	    			<span class="demo--radioInput"></span>无
 				</label>
 			</li>
@@ -191,10 +188,9 @@
 		</ul>
 		<!--<img style="width: 100%;box-shadow: 0px 0px 17px rgba(0,0,0,0.25);" src="images/4-1-f.jpg"/>-->
 	</div>
-	<input type="submit" name="提交" value="提交">
 	
 	<!--底部按钮开始-->
-	<a class="qrtj" href="inspect.html">开始检查</a>
+	<input type="submit" class="qrtj" value="提交">
 
 
 </form>

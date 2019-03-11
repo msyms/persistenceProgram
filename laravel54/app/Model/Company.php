@@ -9,7 +9,7 @@ class Company extends Model
 
     protected $table = 'company';
 
-
+    //获取基础管理类
 	public function getGroup()
 	{
 		return $this->belongsTo('App\Model\Checkgroup','category');

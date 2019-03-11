@@ -27,7 +27,7 @@ class UploadController extends Controller
         $folder = $request->get('folder');
         $data = $this->manager->folderInfo($folder);
 
-        return view('check.upload.index', $data);
+        return view('check.upload.index',$data);
     }
 
     /**
@@ -35,6 +35,7 @@ class UploadController extends Controller
 	 */
 	public function uploadExcel(UploadFileRequest $request)
 	{
+		set_time_limit(0);
 	    $file = $_FILES['file'];
 	    $fileName = $request->get('file_name');
 	    $fileName = $fileName ?: $file['name'];
@@ -42,8 +43,9 @@ class UploadController extends Controller
 	   	$data = [];
 	    $content = File::get($file['tmp_name']);
 	    $filePath = $file['tmp_name'];
+	    // $filePath = './public/word/test.xlsx';
 	    Excel::load($filePath, function($reader) {
-	        $sheet = $reader->getSheet(2);
+	        $sheet = $reader->getSheet(0);
 	        $highestRow=$sheet->getHighestRow();//取得总行数
 			$highestColumn=$sheet->getHighestColumn(); //取得总列数
 			//循环读取excel文件,读取一条,插入一条
@@ -61,13 +63,13 @@ class UploadController extends Controller
 					break;
 				}
 				$idno = substr($v['A'], 0, -1);
-				$entry = DB::table('checkentry')->where('idno', $idno)->get();
-				if(!$entry->isEmpty())
-				{
-					dump($entry);
-					continue;
-				}
-				echo '---------';
+				// $entry = DB::table('checkentry')->where('idno', $idno)->get();
+				// if(!$entry->isEmpty())
+				// {
+				// 	dump($entry);
+				// 	continue;
+				// }
+				// echo '---------';
 				if($k == 2) {
 					$check['entry'] = $v['B'];
 					$check['code'] = $v['C'];
@@ -94,7 +96,7 @@ class UploadController extends Controller
 				}
 				//负面清单
 				if($v['D']!='\\') {
-					DB::table('checklist')->insertGetId([
+					DB::table('checknegative')->insertGetId([
 						'entryId' => $entryId,
 						'content' => substr($v['D'], 0, -1)
 					]);
@@ -116,7 +118,6 @@ class UploadController extends Controller
 						'content' => substr($v['F'], 0, -1),
 					]);
 				}
-				
 				
 			}
 	    });

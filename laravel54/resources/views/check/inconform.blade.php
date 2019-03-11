@@ -18,19 +18,14 @@
 	<ul class="noaccord">
 		<li>
 			<span>{{$i}} {{$info->entry}}</span>
-			<a class="red" href="">删除</a>
+			<a class="red" href="/check/del/{{$info->detailId}}">删除</a>
 		</li>
 
 	</ul>
 	<?php $i++; ?>
 	@endforeach
-	<div class="qm">
-		<h2>排查人签字</h2>
-		<a href="javascript:void(0);">点击上传签名</a>
-	</div>
 
-	<a class="qrtj" href="inspect.html">确认提交</a>
-
+	<a class="qrtj" href="/check/choose/{{$companyId}}">确认提交</a>
 
 	<!-- 弹窗 -->
 	<div id="goodcover2"></div>
@@ -41,7 +36,6 @@
 			<input type="submit" name="" value="提交" />
 	    </form>
 	</div>
-
 
 	<script>
 		$(function() {

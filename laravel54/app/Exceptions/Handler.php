@@ -49,20 +49,25 @@ class Handler extends ExceptionHandler
             $error = $this->convertExceptionToResponse($exception);
             $response['status'] = $error->getStatusCode();
             $response['msg'] = 'something error';
+            if ($exception instanceof AuthenticationException) {
+                $response['msg'] = '用户未登陆';
+                return response()->json($response, $error->getStatusCode());
+            }
             if(config('app.debug')) {
                 $response['msg'] = empty($exception->getMessage()) ? 'something error' : $exception->getMessage();
-                if($error->getStatusCode() >= 500) {
-                    if(config('app.debug')) {
-                        $response['trace'] = $exception->getTraceAsString();
-                        $response['code'] = $exception->getCode();
-                    }
-                }
+                // if($error->getStatusCode() >= 500) {
+                //     if(config('app.debug')) {
+                //         $response['trace'] = $exception->getTraceAsString();
+                //         $response['code'] = $exception->getCode();
+                //     }
+                // }
             }
             $response['data'] = [];
             return response()->json($response, $error->getStatusCode());
         }else{
             return parent::render($request, $exception);
         }
+
     }
 
     /**

@@ -8,21 +8,33 @@ use App\Http\Requests\CompanyRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
+use Validator;
+
 use App\Model\Comhealthofficer;
 use App\Model\Comsafeofficer;
 use App\Model\Company;
 
 class CompanyController extends Controller
 {
-	
 
-    public function create(CompanyRequest $request)
+    public function create(Request $request)
     {
     	$company = $request->input('company');
-    	if(!$company['comName'])
-    	{
-    		return redirect('/company');
-    	}
+    	$rules = [
+            'company.comName' => 'required',
+        ];
+        $messages = [
+            'required' => ':attribute不能为空.',
+            'unique' => ':attribute已经存在.'
+        ];
+        $attributes  = [
+        	'company.comName' => '公司名称',
+        ];
+
+        $validator = Validator::make($request->all(),$rules,$messages,$attributes);
+        if ($validator->fails()) {
+            return response()->json(['data' => $validator->errors()->first()], 402);
+        }
     	if ($request->hasFile('photo')) {
 	        $picture = $request->file('photo');
 	        if (!$picture->isValid()) {
@@ -43,34 +55,42 @@ class CompanyController extends Controller
 
 		    $company['photo'] = $webPath;
 		}
-	    $id = Company::insertGetId($company);
-	    $healthInfo = $request->input('health');
-	    if($healthInfo['name'])
-	    {
-	    	$healthInfo['companyId'] = $id;
-	    	Comhealthofficer::insert($healthInfo);
-
-	    }
-    	$safeInfo = $request->input('safe');
-    	if($safeInfo['name'])
-    	{
-    		$safeInfo['companyId'] = $id;
-    		Comsafeofficer::insert($safeInfo);
-    	}
-    	return redirect('check/choose/'.$id);
+		try {
+			$id = Company::insertGetId($company);
+		    $healthInfo = $request->input('health');
+		    if($healthInfo['name'])
+		    {
+		    	$healthInfo['companyId'] = $id;
+		    	Comhealthofficer::insert($healthInfo);
+		    }
+	    	$safeInfo = $request->input('safe');
+	    	if($safeInfo['name'])
+	    	{
+	    		$safeInfo['companyId'] = $id;
+	    		Comsafeofficer::insert($safeInfo);
+	    	}
+	    	$data['id'] = $id;
+		} catch(\Exception $e) {
+			return response()->json(['data' => '插入失败',400],200);
+		}
+    	return response()->json(['data' => $data,'code' => 200], 200);
     }
 
     public function update(CompanyRequest $request)
     {
+
     	$company = $request->input('company');
     	$id = $request->input('id');
+    	$healthInfo = $request->input('health');
+    	$safeInfo = $request->input('safe');
+    	Company::where('id', '=', $id)->update($company);
     }
 
-    public function search(CompanyRequest $quest)
+    public function search(Request $quest)
     {
     	$name = $quest->input('name');
-    	$companys = Company::where('comName','like','%'.$name.'%')->get();
-    	return response()->json(['data' => $companys], 200);
+    	$companys = Company::where('comName','like','%'.$name.'%')->get(['id','comName']);
+    	return response()->json(['data' => $companys,'code' => 200], 200);
     }
 
     public function fileUpload(Request $request)

@@ -21,8 +21,7 @@ class Comcheckdetail extends Model
 
   	public function getInconform($id)
   	{
-      dd($id);
-  		$rs = DB::select("select checkentry.*,detail.id as detailId from comcheckdetail detail 
+  		$rs = DB::select("select checkentry.id as entryId,checkentry.entry,detail.id as detailId from comcheckdetail detail 
   						left join checkentry 
   						on checkentry.id = detail.entryId 
   						where detail.checkId = $id and detail.status = 2 ");

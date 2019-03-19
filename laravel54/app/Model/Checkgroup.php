@@ -18,7 +18,7 @@ class Checkgroup extends Model
     public function getEntry($ids)
     {
     	// $groupInfo = Checkgroup::find($groupId);
-    	$checkentry = DB::select("select * from checkentry where id in ( {$ids} ) order by id desc ");
+    	$checkentry = DB::select("select id,entry from checkentry where id in ( {$ids} ) order by id desc ");
     	return $checkentry;
     }
 }

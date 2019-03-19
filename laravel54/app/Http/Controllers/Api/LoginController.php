@@ -53,6 +53,7 @@ class LoginController extends Controller
 
             return response()->json([
                 'data' => $user->toArray(),
+                'code' => 200
             ]);
         }
 

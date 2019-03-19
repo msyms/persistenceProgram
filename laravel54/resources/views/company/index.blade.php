@@ -12,15 +12,24 @@
 
 	<!-- <div class="top2"><p>企业信息</p></div> -->
 	
+	<form class="serach" action="/api/upload/uploadimg" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="api_token" value="hN5INSmLqCDyMvChDBfEdUDmtL122si48GltUIqKo0aeyIOtsyjDYGoHdvL7">
+		{{ csrf_field() }}
+		<input type="file" name="fileImg">
+		<input class="sub" type="submit" value="搜索" name="" />
+		<div style="clear: both;"></div>
+	</form>
+
 	<!--中部+版心开始-->
-	<form class="serach" action="/api/company/search" method="post">
+	<form class="serach" action="/company/search" method="post">
 		<!-- <input type="hidden" name="api_token" value="FrbIGV3a3druyOBUiu2Qug2chAmEnN7jL9RMzvVsMSwHKmb3ZNGb2U6EeKqJ"> -->
 		{{ csrf_field() }}
 		<input class="text" type="text" name="name" placeholder="请输入关键字进行搜索" />
 		<input class="sub" type="submit" value="搜索" name="" />
 		<div style="clear: both;"></div>
 	</form>
-	<form action="/company/create" method="post" enctype="multipart/form-data">
+	<form action="/api/company/create" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="api_token" value="FrbIGV3a3druyOBUiu2Qug2chAmEnN7jL9RMzvVsMSwHKmb3ZNGb2U6EeKqJ">
 		{{ csrf_field() }}
 	<div class="bx zitidaxiao">		
 		<ul class="ybzl">

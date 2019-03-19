@@ -21,6 +21,7 @@ Auth::routes();
 	
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
+Route::post('upload/uploadImg','UploadController@uploadImg');
 //公司信息录入
 Route::get('company', 'Home\CompanyController@index')->name('company');
 Route::post('company/create', 'Home\CompanyController@create')->name('company/create');

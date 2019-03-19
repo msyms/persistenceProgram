@@ -25,7 +25,16 @@ class CompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            // 'company.comName' => 'required',
+            // 'company.address' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'company.comName.required' => '公司名称不能为空',
+            'company.address.required' => '公司地址不能为空'
         ];
     }
 }

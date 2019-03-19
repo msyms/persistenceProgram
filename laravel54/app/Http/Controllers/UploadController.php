@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UploadFileRequest;
 use Illuminate\Support\Facades\File;
 use App\Services\UploadsManager;
+use App\Services\UploadClass;
+
 use Excel;
 use DB;
 
@@ -122,6 +124,21 @@ class UploadController extends Controller
 			}
 	    });
 			
+	}
+
+	public function uploadImg(Request $request)
+	{
+		$upload = new UploadClass(); 
+
+		$upload->exts=array('jpg','png'); 
+
+		$upload->maxSize=5*1024*1024; 
+		$upload->savePath='storage/images'; 
+
+		$file = $request->file('fileImg'); 
+
+		$aa = $upload->upload($file); 
+		dd($aa);
 	}
 
 	/**

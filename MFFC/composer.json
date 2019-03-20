@@ -1,7 +1,8 @@
 {
   "require": {
   	"noahbuscher/macaw": "dev-master",
-  	"illuminate/database": "*"
+  	"illuminate/database": "*",
+    "pimple/pimple": "^3.0"
   },
    "autoload": {
     "classmap": [

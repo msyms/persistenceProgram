@@ -247,10 +247,10 @@ class Customer_model extends M_Model {
     public function getdebtlist($customerId,$page = 1) 
     {
 
-        $sql = "select detail.debt,customer.cname,customer.phone,bill.saleTime,bill.salerName from fn_saler_bill_detail detail 
+        $sql = "select customer.cname,customer.phone,detail.debt,bill.salerName,bill.saleTime from fn_saler_bill_detail detail 
                 left join fn_saler_bill bill on detail.billId = bill.id
                 left join fn_customer customer on customer.id = detail.customerId
-                where detail.customerId = $customerId and detail.debt != 0 ";
+                where detail.customerId = $customerId and detail.debt != 0 order by bill.saleTime DESC";
         $data = $this->db->query($sql)->result_array();
         return $data;
         // $_param['total'] = $total['total'];

@@ -376,8 +376,6 @@ class Customer extends M_Controller {
 	}
 
 	public function exportDebt() {
-    	ob_end_clean();
-		ob_start();
 		$customerId = $_GET['customerId'];
     	$date = date('Y-m-d');
     	$filename = $date.'欠款信息.xls';
@@ -393,7 +391,7 @@ class Customer extends M_Controller {
         header("Content-Type:application/download");
 
         $title = array(
-            '姓名',
+            '姓名',	
             '电话',
             '金额',
 	        '销售人员',
@@ -401,11 +399,12 @@ class Customer extends M_Controller {
         );
         echo iconv('utf-8', 'gbk', implode("\t", $title)) . "\n";
 
-        $list = $this->customer_model->getdebtlist();
+        $list = $this->customer_model->getdebtlist($customerId);
 
         foreach ($list as $key => $value) {
             echo iconv('utf-8', 'gbk', implode("\t", $value)) . "\n";
         }
+        return false;
     }
 
 

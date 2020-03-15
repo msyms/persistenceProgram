@@ -1,0 +1,123 @@
+{template nheader.html}
+
+
+<form class="form-horizontal" action="" method="post" id="myform" name="myform">
+    <input name="page" id="page" type="hidden" value="{$page}" />
+    <!--<div class="page-bar">-->
+        <!--<ul class="page-breadcrumb mylink">-->
+            <!--{$menu.link}-->
+
+        <!--</ul>-->
+        <!--<ul class="page-breadcrumb myname">-->
+            <!--{$menu.name}-->
+        <!--</ul>-->
+
+    <!--</div>-->
+    <h3 class="page-title">
+        <small></small>
+    </h3>
+
+    <div class="portlet light bordered myfbody">
+        <div class="portlet-title tabbable-line">
+            <ul class="nav nav-tabs" style="float:left;">
+                <li class="active">
+                    <a href="#tab_0" data-toggle="tab"> <i class="fa fa-user"></i> {fc_lang('基本资料')} </a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="portlet-body">
+            <div class="tab-content">
+
+
+                <div class="tab-pane active" id="tab_0">
+                    <div class="form-body">
+
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{fc_lang('姓名')}：</label>
+                            <div class="col-md-9">
+                                <label><input class="form-control" type="text" name="member[cname]" value="{$data.cname}" ></label>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{fc_lang('手机')}：</label>
+                            <div class="col-md-9">
+                                <label><input class="form-control" type="text" name="member[phone]" value="{$data.phone}" ></label>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{fc_lang('地址')}：</label>
+                            <div class="col-md-9">
+                                <label><input class="form-control"  type="text" name="member[address]" value="{$data.address}" ></label>
+                                <span class="help-block" id="dr_"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{fc_lang('欠款提醒')}：</label>
+                            <div class="col-md-9">
+                                <label><input class="form-control"  type="text" name="member[debtTime]" value="{$data.debtTime}" ></label>
+                                <span class="help-block" id="dr_email_meet"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{fc_lang('到访提醒')}：</label>
+                            <div class="col-md-9">
+                                <label><input class="form-control"  type="text" name="member[meetTime]" value="{$data.meetTime}" ></label>
+                                <span class="help-block" id="dr_email_tips"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{fc_lang('销售人员')}：</label>
+                            <div class="col-md-7">
+
+                                <label>
+                                    <select name="member[salerId]" class="form-control" >
+                                        {loop $saler $t}
+
+                                        <option value="{$t.id}" {if $t.id == $salerId } selected {/if}>{$t.name}</option>
+                                        {/loop}
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group dr_all">
+                            <label class="col-md-3 control-label">{fc_lang('备注')}：</label>
+                            <div class="col-md-9">
+                                <textarea class="form-control" style="width:260px;height:150px" name="info" />{$info}</textarea>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="myfooter">
+        <div class="row">
+            <div class="portlet-body form">
+                <div class="form-body">
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn green"> <i class="fa fa-save"></i> {fc_lang('保存')}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{template nfooter.html}

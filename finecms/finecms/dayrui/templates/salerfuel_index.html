@@ -1,0 +1,78 @@
+{template nheader.html}
+{php $_pages=$pages;}
+<div class="page-bar">
+	<ul class="page-breadcrumb mylink">
+		{$menubill.link}
+
+	</ul>
+	<ul class="page-breadcrumb myname">
+		{$menubill.name}
+	</ul>
+	<div class="page-toolbar">
+
+	</div>
+</div>
+
+<div class="mytopsearch">
+	<form method="post" action="" name="searchform" id="searchform">
+		<label>{fc_lang('开始')} ：</label>
+		<label style="margin-right: 10px;">{dr_field_input('time', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>120)), (int)$time)}</label>
+		<label>{fc_lang('结束')} ：</label>
+		<label style="margin-right: 10px;">{dr_field_input('time1', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>120)), (int)$time1)}</label>
+		<label style="margin-right: 10px;"><button type="submit" class="btn green btn-sm" name="submit" > <i class="fa fa-search"></i> {fc_lang('搜索')}</button></label>
+	</form>
+</div>
+
+<form action="" method="post" name="myform" id="myform">
+	<input name="action" id="action" type="hidden" value="del" />
+	<div class="portlet mylistbody">
+		<div class="portlet-body">
+			<div class="table-scrollable">
+
+				<table class="mytable table table-striped table-bordered table-hover table-checkable dataTable">
+
+		<thead>
+		<tr>
+			<!-- <th width="10"></th> -->
+			<th class="{ns_sorting('name')}" name="salerName" >{fc_lang('销售人员')}</th>
+			<th class="{ns_sorting('name')}" name="salerName" >{fc_lang('车牌号')}</th>
+			<th class="{ns_sorting('name')}" name="bucketNum" >{fc_lang('加油量')}</th>
+			<th class="{ns_sorting('name')}" name="bottleNum" >{fc_lang('金额')}</th>
+			<th class="{ns_sorting('phone')}" name="saleTime" >{fc_lang('时间')}</th>
+			<th class="{ns_sorting('phone')}" name="remark" >{fc_lang('备注')}</th>
+			<th class="{ns_sorting('phone')}" name="remark" >{fc_lang('操作')}</th>
+		</tr>
+		</thead>
+		<tbody>
+		{loop $list $t}
+		<tr id="dr_row_{$t.uid}">
+			<!-- <td><input name="ids[]" type="checkbox" class="dr_select toggle md-check" value="{$t.id}" /></td> -->
+			<td>{dr_keyword_highlight($salerInfo.name, $param.keyword)}</td>
+			<td>{dr_keyword_highlight($salerInfo.carNo, $param.keyword)}</td>
+			<td>{dr_keyword_highlight($t.rise, $param.keyword)}</td>
+			<td>{dr_keyword_highlight($t.money, $param.keyword)}</td>
+			<td>{dr_keyword_highlight($t.date, $param.keyword)}</td>
+			<td>{dr_keyword_highlight($t.remark, $param.keyword)}</td>
+			<td class="dr_option">
+				{if $this->ci->is_auth('member/admin/home/edit')}<a class="aedit" href="{dr_url('saler/fueledit',array('fuelId'=>$t.id,'salerId'=>$salerId))}" > <i class="fa fa-edit"></i> {fc_lang('修改')}</a>{/if}
+			</td>
+		</tr> 
+		{/loop}
+		<!-- <tr class="mtable_bottom">
+        	<th width="20"  ><input name="dr_select" class="toggle md-check" id="dr_select" type="checkbox" onClick="dr_selected()" /></th>
+			<td colspan="10"  >
+            {if $this->ci->is_auth('member/admin/home/del')}
+				<label><button type="button" class="btn red btn-sm" name="option" onClick="$('#action').val('del');dr_confirm_set_all('{fc_lang('您确定要这样操作吗？')}')"><i class="fa fa-trash"></i> {fc_lang('删除')}</button></label>
+            {/if}
+
+			</td>
+		</tr> -->
+		</tbody>
+		</table>
+		</div>
+	</div>
+</div>
+</form>
+<div id="pages"><a>{fc_lang('共%s条', $param['total'])}</a>{$_pages}</div>
+<label><a href="{dr_url('saler/exportFuel',array('salerId'=>$salerId))}"><button type="submit" class="btn green btn-sm" > <i class="fa fa-search"></i> {fc_lang('导出')}</button></a></label>
+{template nfooter.html}

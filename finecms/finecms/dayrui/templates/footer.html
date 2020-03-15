@@ -1,0 +1,113 @@
+
+</body>
+
+</html>
+
+{template "nheader.html"}
+<form class="form-horizontal" action="" method="post" id="myform" name="myform">
+    <input name="page" id="page" type="hidden" value="{$page}" />
+    <input name="action" id="dr_action" type="hidden" value="back" />
+    <input name="dr_id" id="dr_id" type="hidden" value="{$data.id}" />
+    <input name="dr_module" id="dr_module" type="hidden" value="{APP_DIR}" />
+    <div class="page-bar">
+        <ul class="page-breadcrumb mylink">
+            {$menubill.link}
+        </ul>
+        <ul class="page-breadcrumb myname">
+            {$menubill.name}
+        </ul>
+    </div>
+
+    <div class="row" style="margin-top:20px;margin-bottom: 50px;">
+        <div class="col-md-9">
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <span class="caption-subject font-green sbold uppercase">{fc_lang('基本内容')}</span>
+                    </div>
+
+                </div>
+                <div class="portlet-body">
+                    <form style="width:450px;" class="form-horizontal" action="" method="post" id="myform" name="myform" onsubmit="return dr_form_check()">
+                        <input name="mark" id="mark" type="hidden" value="0">
+                        <div class="form-body">
+
+
+                            <div class="form-group dr_one">
+                                <label class="col-md-3 control-label">{fc_lang('姓名')}：</label>
+                                <div class="col-md-7">
+                                    <input class="form-control" type="text" name="data[name]" id="dr_username" value="{$data.username}" >
+                                </div>
+                            </div>
+
+                            <div class="form-group dr_one">
+                                <label class="col-md-3 control-label">{fc_lang('桶装水')}：</label>
+                                <div class="col-md-7">
+                                    <input class="form-control" type="text" name="data[bucketNum]" id="dr_email" value="{$data.bucketNum}" >
+                                </div>
+                            </div>
+                            <div class="form-group dr_one">
+                                <label class="col-md-3 control-label">{fc_lang('瓶装水')}：</label>
+                                <div class="col-md-7">
+                                    <input class="form-control" type="text" name="data[bottleNum]" id="dr_phone" value="{$data.bottleNum}" >
+                                </div>
+                            </div>
+                            <div class="form-group dr_all">
+                                <label class="col-md-3 control-label">{fc_lang('检核人')}：</label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" name="data[checker]" id="dr_checker" value="{$data.checker}" >
+                                </div>
+                            </div>
+                            <div class="form-group dr_all">
+                                <label class="col-md-3 control-label">{fc_lang('时间')}：</label>
+                                <div class="col-md-9">
+                                    <label style="margin-right: 10px;">{dr_field_input('time', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>120)), (int)$time)}</label>
+                                </div>
+                            </div>
+                            <div class="form-group dr_all">
+                                <label class="col-md-3 control-label">{fc_lang('备注')}：</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" style="width:260px;height:150px" name="info" />{$info}</textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-md-3">
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                    <div class="form-body">
+                        {$sysfield}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="myfooter">
+        <div class="row">
+            <div class="portlet-body form">
+                <div class="form-body">
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn green" onclick="$('#dr_action').val('back')"> <i class="fa fa-save"></i> {fc_lang('保存并返回')}</button>
+                                {if !$data.id}
+                                <button type="submit" class="btn default" onclick="$('#dr_action').val('continue')"> <i class="fa fa-save"></i> {fc_lang('保存并继续')}</button>
+                                {/if}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{template footer.html}

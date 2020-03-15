@@ -1,0 +1,171 @@
+<script type="text/javascript">
+//防止回车提交表单
+// $(function() {
+// 	document.onkeydown = function(e){ 
+// 		var ev = document.all ? window.event : e;
+// 		if (ev.keyCode==13) {
+// 			$("#mark").val("1"); // 标识不能提交表单
+// 		}
+// 	}
+// });
+// function dr_form_check() {
+// 	if ($("#mark").val() == 0) { 
+// 		return true;
+// 	} else {
+// 		return false;
+// 	}
+// }
+
+
+$(function(){
+
+    $('#accountReceivable').bind('input propertychange', function() {
+        var a = $('#accountReceivable').val();
+        var b = $('#vipdiscount').val();
+        var sum= a * b;
+
+        $('#dr_debtMoney').val(sum);
+    });
+
+})
+
+$("input#dr_bucketnum").change(function(){
+    var price = ($("select#price option:selected").text()).split('￥');
+    $("input#dr_debtMoney").val(price[1] * $("input#dr_bucketnum").val());
+});
+
+$("select#price").change(function(){
+    var price = ($("select#price option:selected").text()).split('￥');
+    var bucketnum = parseInt($("input#dr_bucketnum").val());
+    var bottlenum = parseInt($("input#dr_bottlenum").val()); 
+    var drinknum = parseInt($("input#dr_drinknum").val());
+
+    $("input#dr_debtMoney").val(price[1] * (bucketnum + bottlenum + drinknum));
+})
+$("input#dr_bottlenum").change(function(){
+    var price = ($("select#price option:selected").text()).split('￥');
+    $("input#dr_debtMoney").val(price[1] * $("input#dr_bottlenum").val());
+});
+
+$("input#dr_drinknum").change(function(){
+    var price = ($("select#price option:selected").text()).split('￥');
+    $("input#dr_debtMoney").val(price[1] * $("input#dr_drinknum").val());
+});
+
+
+$(function(){
+
+  $("input#dr_cname").blur(function(){
+    $.getJSON("/admin.php?c=customer&m=getprice",{cname: $(this).val()}, function(j){
+      var options = '';
+      for (var i = 0; i < j.length; i++) {
+
+        options += '<option value="' + j[i].id + '">' + j[i].unit+'：￥'+j[i].price + '</option>';
+      }
+
+      $("select#price").html(options);
+
+    })
+
+  })
+
+})
+
+
+</script>
+<form style="width:450px;" class="form-horizontal" action="" method="post" id="myform" name="myform" >
+<input name="mark" id="mark" type="hidden" value="0">
+<div class="form-body">
+    <input class="form-control" type="hidden" name="data[billId]" value="{$billId}" >
+
+    <div class="form-group dr_one">
+        <label class="col-md-3 control-label">{fc_lang('姓名')}：</label>
+        <div class="col-md-7">
+            <input class="form-control" type="text" id="dr_cname"  name="data[cname]" id="txt_ide" list="customer" value="{$data['cname']}" />
+            <datalist id="customer">
+                {loop $customer $t}
+                <option value="{$t.cname}" />
+                {/loop}
+            </datalist>
+
+        </div>
+    </div>
+    <div class="form-group dr_one">
+        <label class="col-md-3 control-label">{fc_lang('价格')}：</label>
+        <div class="col-md-7">
+            <select name="data[priceId]" id="price">
+            <?php if($priceInfo) {
+                foreach($priceInfo as $k => $v ) {
+                $id = $v['id'];
+                if($id == $data['priceId']) {
+                echo '<option value='.$id.' selected >'.$v['unit'].'：￥'.$v['price'].'</option>';
+                } else {
+
+                    echo '<option value='.$id.' >'.$v['unit'].'：￥'.$v['price'].'</option>';
+                }
+            }} 
+                ?>
+            
+            </select>
+        </div>
+    </div>
+    <div class="form-group dr_one">
+        <label class="col-md-3 control-label">{fc_lang('桶装水数量')}：</label>
+        <div class="col-md-7">
+            <input class="form-control" type="text" name="data[bucketNum]" id="dr_bucketnum" value="{$data.bucketNum}"  >
+        </div>
+    </div>
+    <div class="form-group dr_one">
+        <label class="col-md-3 control-label">{fc_lang('瓶装水数量')}：</label>
+        <div class="col-md-7">
+            <input class="form-control" type="text" name="data[bottleNum]" id="dr_bottlenum" value="{$data.bottleNum}"  >
+        </div>
+    </div>
+    <div class="form-group dr_one">
+        <label class="col-md-3 control-label">{fc_lang('饮料数量')}：</label>
+        <div class="col-md-7">
+            <input class="form-control" type="text" name="data[drinkNum]" id="dr_drinknum" value="{$data.drinkNum}"  >
+        </div>
+    </div>
+    <div class="form-group dr_one">
+        <label class="col-md-3 control-label">{fc_lang('回桶')}：</label>
+        <div class="col-md-7">
+            <input class="form-control" type="text" name="data[backBucketNum]" id="dr_backBucketNum" value="{$data.backBucketNum}" >
+        </div>
+    </div>
+    <div class="form-group dr_one">
+        <label class="col-md-3 control-label">{fc_lang('结款')}：</label>
+        <div class="col-md-7">
+            <input class="form-control" type="text" name="data[knot]" id="dr_debtMoney" value="{$data.knot}" >
+        </div>
+    </div>
+    <div class="form-group dr_one">
+        <label class="col-md-3 control-label">{fc_lang('欠款')}：</label>
+        <div class="col-md-7">
+            <input class="form-control" type="text" name="data[debt]" id="dr_debt" value="{$data.debt}" >
+        </div>
+    </div>
+
+    <div class="form-group dr_one">
+        <label class="col-md-3 control-label">{fc_lang('欠桶')}：</label>
+        <div class="col-md-7">
+            <input class="form-control" type="text" name="data[debtBucket]" id="dr_debtBucket" value="{$data.debtBucket}" >
+        </div>
+    </div>
+
+    <div class="form-group dr_one">
+        <label class="col-md-3 control-label">{fc_lang('押桶')}：</label>
+        <div class="col-md-7">
+            <input class="form-control" type="text" name="data[depositBucket]" id="dr_depositBucket" value="{$data.depositBucket}" >
+        </div>
+    </div>
+
+    <div class="form-group dr_all">
+        <label class="col-md-3 control-label">{fc_lang('备注')}：</label>
+        <div class="col-md-9">
+            <textarea class="form-control" style="width:260px;height:150px" name="info" />{$info}</textarea>
+        </div>
+    </div>
+
+</div>
+</form>
